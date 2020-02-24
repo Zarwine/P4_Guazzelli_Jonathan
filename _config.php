@@ -1,12 +1,12 @@
 <?php
 ini_set('display_errors','on');
-errror_reporting(E_ALL);
+error_reporting(E_ALL);
 
 $root = $_SERVER['DOCUMENT_ROOT'];
 $host = $_SERVER['HTTP_HOST'];
 
-define('HOST', 'https://'.$host.'/jf_article/');
-define('ROOT', $root.'jf_article/');
+define('HOST', 'https://'.$host.'/forteroche/');
+define('ROOT', $root.'/forteroche/');
 
 define("CONTROLLER", ROOT.'controller/');
 define("VIEW", ROOT."view/");

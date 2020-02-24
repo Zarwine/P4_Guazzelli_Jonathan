@@ -10,12 +10,12 @@ class Home
         $req->execute();
         while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
         
-            $jf_article['id']          = $row['id']
-            $jf_article['name']        = $row['name']
-            $jf_article['content']     = $row['content']
-            $jf_article['created_at']  = $row['created_at']
+            $jf_article['id']          = $row['id'];
+            $jf_article['name']        = $row['name'];
+            $jf_article['content']     = $row['content'];
+            $jf_article['created_at']  = $row['created_at'];
         
-            $jf_articles[] = $jf_article
+            $jf_articles[] = $jf_article;
         };
         
         include(VIEW.'home.php');

@@ -34,7 +34,7 @@ if(isset($_GET['id'])) {
 
         <form action="update.php" method="post">
 
-            <?php if($jf_article['id']);?>
+            <?php if($jf_article['id']):?>
                 <input type="hidden" name="values[id]" value="<?php echo $jf_article['id'];?>"/>
             <?php endif;?>
 

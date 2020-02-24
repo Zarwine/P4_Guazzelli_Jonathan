@@ -1,5 +1,5 @@
 <?php 
-include__once('_config.php');
+include_once('_config.php');
 
 $request = $_GET['r'];
 
