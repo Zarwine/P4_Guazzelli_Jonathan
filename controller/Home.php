@@ -2,7 +2,7 @@
 
 class Home 
 {
-    public function showHome()
+    public function showHome($params)
     {
 
         $manager = new Jf_articleManager();
@@ -15,13 +15,12 @@ class Home
         
     }
 
-    public function createArticle()
+    public function createArticle($params)
     {
-        if(isset($_GET['id'])) {
+        extract($params);
+        if(isset($id)) {
 
-            $id = $_GET['id'];
-
-            $manager = new Jf_article();
+            $manager = new Jf_articleManager();
             $jf_article = $manager->find($id);
 
         } else {
@@ -31,6 +30,29 @@ class Home
         $myView = new View('edit');
         $myView->render(array('$jf_article' => $jf_article));
         
+    }
+
+    public function addArticle($params)
+    {
+        $values = $_POST['values'];
+
+        $manager = new Jf_articleManager();
+        $manager->create($values);
+
+        $myView = new View();
+        $myView->redirect('home.html');
+    }
+
+    public function delArticle($params)
+    {
+        extract($params);
+
+        $manager = new Jf_articleManager();
+        $manager->delete($id);
+
+        $myView = new View();
+        $myView->redirect('home.html');
+
     }
 }
 

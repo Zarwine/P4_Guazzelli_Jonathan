@@ -1,7 +1,7 @@
 <div id="container">
     <h2>Ajouter un article</h2>
 
-    <form action="update.php" method="post">
+    <form action="<?php echo HOST;?>ajout.html" method="post">
 
         <?php if($jf_article->getId()):?>
             <input type="hidden" name="values[id]" value="<?php echo $jf_article->getId();?>"/>

@@ -30,7 +30,7 @@
     </nav>
 </header>
 
-<?php echo $contentPage ;?>
+<?php echo $contentPage; ?>
 
 </body>
 </html>

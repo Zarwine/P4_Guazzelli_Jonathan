@@ -35,6 +35,7 @@ class Jf_articleManager
 
     public function find($id)
     {
+        $bdd = $this->bdd;
         
    
         
@@ -53,5 +54,31 @@ class Jf_articleManager
 
         return $jf_article;
     
+    }
+
+    public function create($values)
+    {
+        $bdd = $this->bdd;       
+      
+        $query = "INSERT INTO jf_article (id, name, content, created_at)
+        VALUES (NULL, :name, :content, NULL);";
+
+        $req = $bdd->prepare($query);
+
+        $req->bindValue(":name", $values["name"], PDO::PARAM_STR);
+        $req->bindValue(":content", $values['content'], PDO::PARAM_STR);
+
+        $req->execute();
+    }
+
+    public function delete($id)
+    {
+        $bdd = $this->bdd;
+        $query = "DELETE FROM jf_article WHERE id = :id";
+
+        $req = $bdd->prepare($query);
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+
+        $req->execute();
     }
 }
