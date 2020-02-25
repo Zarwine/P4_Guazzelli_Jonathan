@@ -4,21 +4,32 @@ class Home
 {
     public function showHome()
     {
-        $query = "SELECT * FROM jf_article";
-        $bdd = new PDO("mysql:host=jogufrdkog533.mysql.db:3306;dbname=jogufrdkog533;charset=utf8", "jogufrdkog533", "MaBDD550");
-        $req = $bdd->prepare($query);
-        $req->execute();
-        while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+
+        $manager = new Jf_articleManager();
+        $jf_articles = $manager->findAll();        
+
+        $myView = new View('home');
+        $myView->render(array('jf_articles' => $jf_articles));
         
-            $jf_article['id']          = $row['id'];
-            $jf_article['name']        = $row['name'];
-            $jf_article['content']     = $row['content'];
-            $jf_article['created_at']  = $row['created_at'];
+        //include(VIEW.'home.php');
         
-            $jf_articles[] = $jf_article;
-        };
-        
-        include(VIEW.'home.php');
+    }
+
+    public function createArticle()
+    {
+        if(isset($_GET['id'])) {
+
+            $id = $_GET['id'];
+
+            $manager = new Jf_article();
+            $jf_article = $manager->find($id);
+
+        } else {
+            $jf_article = new Jf_article();
+        }
+
+        $myView = new View('edit');
+        $myView->render(array('$jf_article' => $jf_article));
         
     }
 }

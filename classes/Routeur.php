@@ -1,14 +1,13 @@
 <?php
 
-include_once(CONTROLLER.'Home.php');
-
 class Routeur
 {
     private $request;
 
     private $routes = [
                         "home.html" => ["controller" => "Home", "method" => "showHome"],
-                    ];
+                        "create-article.html" => ["controller" => "Home", "method" => "createArticle"],
+                      ];
 
     public function __construct($request)
     {

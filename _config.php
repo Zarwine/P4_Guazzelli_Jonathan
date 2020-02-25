@@ -2,15 +2,38 @@
 ini_set('display_errors','on');
 error_reporting(E_ALL);
 
-$root = $_SERVER['DOCUMENT_ROOT'];
-$host = $_SERVER['HTTP_HOST'];
+class MyAutoLoad
+{
+    public static function start()
+    {
 
-define('HOST', 'https://'.$host.'/forteroche/');
-define('ROOT', $root.'/forteroche/');
+        spl_autoload_register(array(__CLASS__, 'autoload'));
 
-define("CONTROLLER", ROOT.'controller/');
-define("VIEW", ROOT."view/");
-define("MODEL", ROOT."model/");
-define("CLASSES", ROOT.'classes/');
+        $root = $_SERVER['DOCUMENT_ROOT'];
+        $host = $_SERVER['HTTP_HOST'];
+        
+        define('HOST', 'https://'.$host.'/forteroche/');
+        define('ROOT', $root.'/forteroche/');
+        
+        define("CONTROLLER", ROOT.'controller/');
+        define("VIEW", ROOT."view/");
+        define("MODEL", ROOT."model/");
+        define("CLASSES", ROOT.'classes/');
+        
+        define("ASSETS", HOST."assets/");
+    }
 
-define("ASSETS", HOST."assets/");
+    public static function autoload($class)
+    {
+        if(file_exists(MODEL.$class.'.php'))
+        {
+            include_once (MODEL.$class.'.php');
+        } else if (file_exists(CLASSES.$class.'.php'))
+        {
+            include_once (CLASSES.$class.'.php');
+        } else if (file_exists(CONTROLLER.$class.'.php'))
+        {
+            include_once (CONTROLLER.$class.'.php');
+        };
+    }
+}
