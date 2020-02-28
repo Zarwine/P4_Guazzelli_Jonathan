@@ -2,6 +2,7 @@
     <?php foreach($jf_articles as $jf_article): ?>
         <div class="article_content">
             <h3><?php echo $jf_article->getName();?></h3>
+            <p>id = <?php echo $jf_article->getId();?></p><br/>
             <?php echo $jf_article->getContent();?>
             <hr/>
             <button>

@@ -23,9 +23,9 @@ class Jf_articleManager
 
             $jf_article = new Jf_article();
             $jf_article->setId($row['id']);
-            $jf_article->setName(['name']);
-            $jf_article->setContent(['content']);
-            $jf_article->setCreated_at(['created_at']);
+            $jf_article->setName($row['name']);
+            $jf_article->setContent($row['content']);
+            $jf_article->setCreated_at($row['created_at']);
 
             $jf_articles[] = $jf_article;
         };
@@ -48,9 +48,9 @@ class Jf_articleManager
 
         $jf_article = new Jf_article();
         $jf_article->setId($row['id']);
-        $jf_article->setName(['name']);
-        $jf_article->setContent(['content']);
-        $jf_article->setCreated_at(['created_at']);
+        $jf_article->setName($row['name']);
+        $jf_article->setContent($row['content']);
+        $jf_article->setCreated_at($row['created_at']);
 
         return $jf_article;
     
@@ -58,16 +58,28 @@ class Jf_articleManager
 
     public function create($values)
     {
-        $bdd = $this->bdd;       
+        $bdd = $this->bdd;
+        //echo '<pre>'; print_r($bdd); exit;       
       
         $query = "INSERT INTO jf_article (id, name, content, created_at)
-        VALUES (NULL, :name, :content, NULL);";
+        VALUES (NULL, :name, :content, CURRENT_TIMESTAMP);";
 
         $req = $bdd->prepare($query);
-
-        $req->bindValue(":name", $values["name"], PDO::PARAM_STR);
-        $req->bindValue(":content", $values['content'], PDO::PARAM_STR);
-
+        //echo '<pre>'; print_r($query);
+        //echo '<pre>'; print_r($bdd);
+        //echo '<pre>'; print_r($values);
+        //echo '<pre>'; print_r($req);
+        // exit;
+        $req->bindValue(':name', $values['name'], PDO::PARAM_STR);
+        $req->bindValue(':content', $values['content'], PDO::PARAM_STR);
+        //echo '<pre>'; print_r($req); exit;
+        /*
+        PDOStatement Object
+        (
+            [queryString] => INSERT INTO jf_article (id, name, content, created_at) VALUES (NULL, :name, :content, NULL);
+        )
+        */
+        //INSERT INTO `jf_article` (`id`, `name`, `content`, `created_at`) VALUES (NULL, 'Test req', 'La requete SQL', CURRENT_TIMESTAMP);
         $req->execute();
     }
 

@@ -11,36 +11,44 @@ class Home
         $myView = new View('home');
         $myView->render(array('jf_articles' => $jf_articles));
         
-        //include(VIEW.'home.php');
-        
     }
 
     public function createArticle($params)
-    {
+    {        
+        //echo '<pre>'; print_r($params); exit;
         extract($params);
+        //echo '<pre>'; print_r($params);
+        //echo '<pre>'; print_r($jf_article);
+        //echo '<pre>'; print_r($id);
+        //exit;
+        
         if(isset($id)) {
-
+            //echo '<pre>'; print_r($jf_article); exit;
             $manager = new Jf_articleManager();
             $jf_article = $manager->find($id);
+            //echo '<pre>'; print_r($jf_article); exit;
 
         } else {
             $jf_article = new Jf_article();
         }
 
         $myView = new View('edit');
-        $myView->render(array('$jf_article' => $jf_article));
+        $myView->render(array('jf_article' => $jf_article));
         
     }
 
     public function addArticle($params)
     {
+        //echo '<pre>'; print_r($params); exit;
         $values = $_POST['values'];
+
+        //echo '<pre>'; print_r($values); exit;
 
         $manager = new Jf_articleManager();
         $manager->create($values);
 
         $myView = new View();
-        $myView->redirect('home.html');
+        $myView->redirect('home');
     }
 
     public function delArticle($params)
@@ -51,7 +59,7 @@ class Home
         $manager->delete($id);
 
         $myView = new View();
-        $myView->redirect('home.html');
+        $myView->redirect('home');
 
     }
 }

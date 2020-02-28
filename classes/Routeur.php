@@ -5,11 +5,11 @@ class Routeur
     private $request;
 
     private $routes = [
-                        "home.html" => ["controller" => "Home", "method" => "showHome"],
-                        "create-article.html" => ["controller" => "Home", "method" => "createArticle"],
-                        "ajout.html" => ["controller" => "Home", "method" => "addArticle"],
-                        "delete" => ["controller" => "Home", "method" => "delArticle"],
-                        "modification" => ["controller" => "Home", "method" => "createArticle"],
+                        "home"             => ["controller" => "Home", "method" => "showHome"],
+                        "create-article"   => ["controller" => "Home", "method" => "createArticle"],
+                        "ajout"            => ["controller" => "Home", "method" => "addArticle"],
+                        "delete"           => ["controller" => "Home", "method" => "delArticle"],
+                        "modification"     => ["controller" => "Home", "method" => "createArticle"],
                       ];
 
     public function __construct($request)
@@ -39,12 +39,18 @@ class Routeur
 
         if($_POST)
         {
+            //echo '<pre>'; print_r($_POST); exit;
             foreach($_POST as $key => $val)
             {
+                //echo '<pre>'; print_r($key); 
+                //echo '<pre>'; print_r($params); exit;
+                //echo '<pre>'; print_r($params[$key]); exit;
                 $params[$key] = $val;
+                //echo '<pre>'; print_r($val);
+                //echo '<pre>'; print_r($params); exit;
             }
         }
-
+        //echo '<pre>'; print_r($params);
         return $params;
     }
 

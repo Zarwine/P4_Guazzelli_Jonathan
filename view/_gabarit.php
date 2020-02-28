@@ -22,7 +22,7 @@
         </div>
         <div class="nav-item end-row">
             <button>
-                <a href="<?php echo HOST;?>create-article.html">
+                <a href="<?php echo HOST;?>create-article">
                     Ajouter un article 
                 </a>
             </button>
