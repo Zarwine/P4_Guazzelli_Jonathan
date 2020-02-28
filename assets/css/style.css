@@ -1,3 +1,39 @@
 body {
-    color: blue;
+    margin: 0;
+}
+.article_container{
+    margin: 80px 5%;
+    background-color: lemonchiffon;
+    padding-bottom: 20px;
+}
+
+header nav{
+    position: fixed;
+    height: 80px;
+    background-color: darkslategray;
+    left: 0;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+header nav a{
+    text-decoration: none;
+    color: black;
+}
+header .end-row button a{
+    padding: 20px;
+    text-decoration: none;
+    color: grey;
+}
+header .end-row button{
+    background-color: firebrick;
+    border: none;
+}
+.article_content{
+    padding: 20px 2%;
+    margin: 30px 2%;
+    background-color: lightblue;
 }

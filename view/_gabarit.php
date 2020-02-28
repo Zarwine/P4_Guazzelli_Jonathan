@@ -13,12 +13,9 @@
 <header>
     <nav>
         <div class="nav-item">
-            <a href='#'>
+            <a href='https://jogu.fr/forteroche/home'>
                 <h1>Jean Forteroche</h1>
             </a>
-        </div>
-        <div class="nav-item">
-            <input id="input-search" type="text" placeholder="Rechercher"/>
         </div>
         <div class="nav-item end-row">
             <button>
@@ -29,8 +26,9 @@
         </div>
     </nav>
 </header>
-
+<div class="article_container">
 <?php echo $contentPage; ?>
+</div>
 
 </body>
 </html>
