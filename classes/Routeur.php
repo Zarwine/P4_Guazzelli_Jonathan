@@ -6,10 +6,11 @@ class Routeur
 
     private $routes = [
                         "home"             => ["controller" => "Home", "method" => "showHome"],
-                        "create-article"   => ["controller" => "Home", "method" => "createArticle"],
-                        "ajout"            => ["controller" => "Home", "method" => "addArticle"],
-                        "delete"           => ["controller" => "Home", "method" => "delArticle"],
+                        "create"           => ["controller" => "Home", "method" => "createArticle"],
                         "modification"     => ["controller" => "Home", "method" => "createArticle"],
+                        "delete"           => ["controller" => "Home", "method" => "delArticle"],        
+                        "edition"          => ["controller" => "Home", "method" => "editionArticle"],
+                        "add"              => ["controller" => "Home", "method" => "addArticle"],
                       ];
 
     public function __construct($request)

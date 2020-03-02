@@ -8,10 +8,13 @@
     <meta name="description" content="Blog de Jean Forteroche">
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo ASSETS;?>img/book-open-solid.svg">
     <link rel="stylesheet" href="<?php echo ASSETS;?>css/style.css">
+    <script src="https://cdn.tiny.cloud/1/rhmcwo4c3c04oqicyi140d661xaxcuor848zntmj4er65w6b/tinymce/5/tinymce.min.js"
+    referrerpolicy="origin"></script>
+    <link href="https://fonts.googleapis.com/css?family=Amita&display=swap" rel="stylesheet">
 </head>
 <body>
 <header>
-    <nav>
+    <nav class="navbar">
         <div class="nav-item">
             <a href='https://jogu.fr/forteroche/home'>
                 <h1>Jean Forteroche</h1>
@@ -19,8 +22,13 @@
         </div>
         <div class="nav-item end-row">
             <button>
-                <a href="<?php echo HOST;?>create-article">
+                <a href="<?php echo HOST;?>create">
                     Ajouter un article 
+                </a>
+            </button>
+            <button>
+                <a href="#">
+                    Se connecter
                 </a>
             </button>
         </div>

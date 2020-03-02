@@ -1,15 +1,14 @@
 <div id="container">
-    <h2>éditer un article</h2>
+    <h2>écrire un article</h2>
 
-    <form action="<?php echo HOST;?>edition" method="post">
+    <form action="<?php echo HOST;?>add" method="post">
 
         <?php if($jf_article->getId()):?>
             <input type="hidden" name="values[id]" value="<?php echo $jf_article->getId();?>"/>
         <?php endif;?>
-        Id : <?php echo $jf_article->getId();?><br/>
         Titre : <input type="text" name="values[name]" value="<?php echo $jf_article->getName();?>"/><br/>
         Article : <textarea name="values[content]" ><?php echo $jf_article->getContent();?></textarea><br/>
-        <input type="submit" value="éditer"/>
+        <input type="submit" value="ajouter"/>
     </form>
 </div>
 
@@ -22,7 +21,3 @@
             Hello, World!
         </textarea>
     </form>
-
-<!--
-    API key:
-rhmcwo4c3c04oqicyi140d661xaxcuor848zntmj4er65w6b -->

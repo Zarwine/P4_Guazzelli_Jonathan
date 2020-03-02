@@ -82,6 +82,37 @@ class Jf_articleManager
         //INSERT INTO `jf_article` (`id`, `name`, `content`, `created_at`) VALUES (NULL, 'Test req', 'La requete SQL', CURRENT_TIMESTAMP);
         $req->execute();
     }
+    public function edit($values)
+    {
+        $bdd = $this->bdd;
+        //echo '<pre>'; print_r($bdd); exit;       
+      
+        $query = "UPDATE jf_article SET `name` = :name, `content` = :content, `created_at` = :created_at WHERE `jf_article`.`id` = :id;";
+        //$query = "INSERT INTO jf_article (id, name, content, created_at)
+        //VALUES (NULL, :name, :content, CURRENT_TIMESTAMP);";
+        //UPDATE `jf_article` SET `content` = 'Le test édition de donné\r\nEdition faites' WHERE `jf_article`.`id` = 19;
+        //UPDATE `jf_article` SET `name` = 'Test edition 2', `content` = 'Le test édition de donné\r\nEdition faites 2' WHERE `jf_article`.`id` = 19;
+
+        $req = $bdd->prepare($query);
+        //echo '<pre>'; print_r($query);
+        //echo '<pre>'; print_r($bdd);
+        //echo '<pre>'; print_r($values);
+        //echo '<pre>'; print_r($req);
+        // exit;
+        $req->bindValue(':id', $values['id'], PDO::PARAM_INT);
+        $req->bindValue(':name', $values['name'], PDO::PARAM_STR);
+        $req->bindValue(':content', $values['content'], PDO::PARAM_STR);
+        $req->bindValue(':created_at', $values['created_at'], PDO::PARAM_STR);
+        //echo '<pre>'; print_r($req); exit;
+        /*
+        PDOStatement Object
+        (
+            [queryString] => INSERT INTO jf_article (id, name, content, created_at) VALUES (NULL, :name, :content, NULL);
+        )
+        */
+        //INSERT INTO `jf_article` (`id`, `name`, `content`, `created_at`) VALUES (NULL, 'Test req', 'La requete SQL', CURRENT_TIMESTAMP);
+        $req->execute();
+    }
 
     public function delete($id)
     {
