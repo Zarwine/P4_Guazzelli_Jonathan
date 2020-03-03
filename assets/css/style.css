@@ -18,38 +18,32 @@ body {
     justify-content: space-around;
     align-items: center;
 }
-header nav a{
+a{
     text-decoration: none;
     color: rgb(230,230,230);
 }
 header .end-row{
     display: inherit;
 }
-header .end-row button{
-    display: flex;
-    flex-flow: row wrap;
-    border: none;
-    background: none;
-    padding: 0;
-    overflow: hidden;
-}
-header .end-row button a::after{
+.button_header a::after{
     height: 3px;
     content: "";
     transition: all 0.4s ease;
-    transform: translateX(-100%);
-    background-color: rgba(2, 174, 108, 0);
-    position: absolute;
-    width: 50px;
+    transform: translateX(-210%);
+    background-color: rgb(2, 174, 108);
+    width: 50%;
 }
-header .end-row button a{
+.button_header a{
     padding: 20px;
     text-decoration: none;
     color: rgb(230,230,230);
+    display: flex;
+    flex-flow: column wrap;
+    overflow: hidden;
+    margin: 0 4px;
 }
-header .end-row button:hover a::after{
+.button_header:hover a::after{
     transform: translateX(0%);
-    background-color: rgba(2, 174, 108, 1);
 }
 .article_container{
     margin: 80px 5%;

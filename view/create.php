@@ -8,7 +8,7 @@
         <?php endif;?>
         Titre : <input type="text" name="values[name]" value="<?php echo $jf_article->getName();?>"/><br/>
         Article : <textarea name="values[content]" ><?php echo $jf_article->getContent();?></textarea><br/>
-        <input type="submit" value="ajouter"/>
+        <input class="button_edit" type="submit" value="ajouter"/>
     </form>
 </div>
 

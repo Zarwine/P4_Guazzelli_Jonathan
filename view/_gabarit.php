@@ -21,16 +21,16 @@
             </a>
         </div>
         <div class="nav-item end-row">
-            <button>
+            <div class="button_header">
                 <a href="<?php echo HOST;?>create">
                     Ajouter un article 
                 </a>
-            </button>
-            <button>
+            </div>
+            <div class="button_header">
                 <a href="#">
                     Se connecter
                 </a>
-            </button>
+            </div>
         </div>
     </nav>
 </header>

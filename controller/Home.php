@@ -15,18 +15,14 @@ class Home
 
     public function createArticle($params)
     {        
-        //echo '<pre>'; print_r($params); exit;
+
         extract($params);
-        //echo '<pre>'; print_r($params);
-        //echo '<pre>'; print_r($jf_article);
-        //echo '<pre>'; print_r($id);
-        //exit;
         
         if(isset($id)) {
-            //echo '<pre>'; print_r($jf_article); exit;
+
             $manager = new Jf_articleManager();
             $jf_article = $manager->find($id);
-            //echo '<pre>'; print_r($jf_article); exit;
+
             $myView = new View('edit');
             $myView->render(array('jf_article' => $jf_article));
         
@@ -42,10 +38,8 @@ class Home
 
     public function editionArticle($params)
     {
-        //echo '<pre>'; print_r($params); exit;
-        $values = $_POST['values'];
 
-        //echo '<pre>'; print_r($values); exit;
+        $values = $_POST['values'];
 
         $manager = new Jf_articleManager();
         $manager->edit($values);

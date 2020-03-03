@@ -94,23 +94,13 @@ class Jf_articleManager
         //UPDATE `jf_article` SET `name` = 'Test edition 2', `content` = 'Le test édition de donné\r\nEdition faites 2' WHERE `jf_article`.`id` = 19;
 
         $req = $bdd->prepare($query);
-        //echo '<pre>'; print_r($query);
-        //echo '<pre>'; print_r($bdd);
-        //echo '<pre>'; print_r($values);
-        //echo '<pre>'; print_r($req);
-        // exit;
+
         $req->bindValue(':id', $values['id'], PDO::PARAM_INT);
         $req->bindValue(':name', $values['name'], PDO::PARAM_STR);
         $req->bindValue(':content', $values['content'], PDO::PARAM_STR);
-        $req->bindValue(':created_at', $values['created_at'], PDO::PARAM_STR);
-        //echo '<pre>'; print_r($req); exit;
-        /*
-        PDOStatement Object
-        (
-            [queryString] => INSERT INTO jf_article (id, name, content, created_at) VALUES (NULL, :name, :content, NULL);
-        )
-        */
-        //INSERT INTO `jf_article` (`id`, `name`, `content`, `created_at`) VALUES (NULL, 'Test req', 'La requete SQL', CURRENT_TIMESTAMP);
+        //$req->bindValue(':created_at', $values['created_at'], PDO::PARAM_STR);
+        //$req->bindValue(':updated_at', $values['updated_at'], PDO::PARAM_STR); <- créer la ligne correspondante dans la base de donné
+
         $req->execute();
     }
 

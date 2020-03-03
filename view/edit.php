@@ -9,7 +9,7 @@
         Id : <?php echo $jf_article->getId();?><br/>
         Titre : <input type="text" name="values[name]" value="<?php echo $jf_article->getName();?>"/><br/>
         Article : <textarea name="values[content]" ><?php echo $jf_article->getContent();?></textarea><br/>
-        <input type="submit" value="éditer"/>
+        <input class="button_edit" type="submit" value="éditer"/>
     </form>
 </div>
 
@@ -25,4 +25,5 @@
 
 <!--
     API key:
-rhmcwo4c3c04oqicyi140d661xaxcuor848zntmj4er65w6b -->
+rhmcwo4c3c04oqicyi140d661xaxcuor848zntmj4er65w6b 
+-->
