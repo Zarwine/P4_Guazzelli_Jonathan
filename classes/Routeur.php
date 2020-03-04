@@ -5,12 +5,14 @@ class Routeur
     private $request;
 
     private $routes = [
-                        "home"             => ["controller" => "Home", "method" => "showHome"],
-                        "create"           => ["controller" => "Home", "method" => "createArticle"],
-                        "modification"     => ["controller" => "Home", "method" => "createArticle"],
-                        "delete"           => ["controller" => "Home", "method" => "delArticle"],        
-                        "edition"          => ["controller" => "Home", "method" => "editionArticle"],
-                        "add"              => ["controller" => "Home", "method" => "addArticle"],
+                        "home"             => ["controller" => "Home",   "method" => "showHome"],        //Rediction vers la HomePage
+                        "create"           => ["controller" => "Home",   "method" => "createArticle"],   //Début des redirections CRUD
+                        "modification"     => ["controller" => "Home",   "method" => "createArticle"],
+                        "delete"           => ["controller" => "Home",   "method" => "delArticle"],        
+                        "edition"          => ["controller" => "Home",   "method" => "editionArticle"],
+                        "add"              => ["controller" => "Home",   "method" => "addArticle"],      //Fin CRUD
+                        "register"         => ["controller" => "Member", "method" => "showRegister"],      //Début Espace membre
+                        "login"            => ["controller" => "Member", "method" => "showLogin"],
                       ];
 
     public function __construct($request)

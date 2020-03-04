@@ -1,3 +1,8 @@
+<?php
+if(session_status() == PHP_SESSION_NONE){
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +32,12 @@
                 </a>
             </div>
             <div class="button_header">
-                <a href="#">
+                <a href="<?php echo HOST;?>register">
+                    S'inscrire
+                </a>
+            </div>
+            <div class="button_header">
+                <a href="<?php echo HOST;?>login">
                     Se connecter
                 </a>
             </div>
@@ -35,6 +45,16 @@
     </nav>
 </header>
 <div class="article_container">
+
+    <?php if(isset($_SESSION['flash'])): ?>
+        <?php foreach($_SESSION['flash'] as $type => $message): ?>
+            <div class="alert alert-<?= $type; ?>">
+                <?= $message; ?>
+            </div>
+        <?php endforeach; ?>
+        <?php unset($_SESSION['flash']); ?>
+    <?php endif; ?>
+
 <?php echo $contentPage; ?>
 </div>
 
