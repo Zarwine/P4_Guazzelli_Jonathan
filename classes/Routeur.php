@@ -13,6 +13,8 @@ class Routeur
                         "add"              => ["controller" => "Home",   "method" => "addArticle"],      //Fin CRUD
                         "register"         => ["controller" => "Member", "method" => "showRegister"],      //Début Espace membre
                         "login"            => ["controller" => "Member", "method" => "showLogin"],
+                        "account"          => ["controller" => "Member", "method" => "showAccount"],
+                        "confirm.php"      => ["controller" => "Member", "method" => "showLogin"],
                       ];
 
     public function __construct($request)
@@ -45,15 +47,9 @@ class Routeur
             //echo '<pre>'; print_r($_POST); exit;
             foreach($_POST as $key => $val)
             {
-                //echo '<pre>'; print_r($key); 
-                //echo '<pre>'; print_r($params); exit;
-                //echo '<pre>'; print_r($params[$key]); exit;
-                $params[$key] = $val;
-                //echo '<pre>'; print_r($val);
-                //echo '<pre>'; print_r($params); exit;
+                $params[$key] = $val;                
             }
         }
-        //echo '<pre>'; print_r($params);
         return $params;
     }
 
@@ -71,7 +67,11 @@ class Routeur
             $currentController = new $controller();
             $currentController->$method($params);
         } else {
-            echo '404';
+            echo '404 Page non trouvée';
+            echo '<pre>'; print_r($params); // params = NULL 
+            echo '<pre>'; print_r($route); // = config.php
+            //echo '<pre>'; print_r($_SESSION);             
+            exit;
         }
     }
 }

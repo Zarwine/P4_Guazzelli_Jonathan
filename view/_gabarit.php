@@ -26,24 +26,24 @@ if(session_status() == PHP_SESSION_NONE){
             </a>
         </div>
         <ul class="nav-item end-row">
-            <li class="button_header">
+            <li class="link_jf">
                 <a href="<?php echo HOST;?>create">
                     Ajouter un article 
                 </a>
             </li>
             <?php if (isset($_SESSION['auth'])): ?>
-                <li class="button_header">
+                <li class="link_jf">
                     <a href="logout.php">
                         Se déconnecter
                     </a>
                 </li>
             <?php else: ?>
-                <li class="button_header">
+                <li class="link_jf">
                     <a href="<?php echo HOST;?>register">
                         S'inscrire
                     </a>
                 </li>
-                <li class="button_header">
+                <li class="link_jf">
                     <a href="<?php echo HOST;?>login">
                         Se connecter
                     </a>

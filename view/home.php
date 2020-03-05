@@ -6,12 +6,12 @@
             <?php echo $jf_article->getContent();?>
             <br/>
             <div class="button_container">
-                <div class="button_header">
+                <div class="link_jf">
                     <a href="<?php echo HOST;?>modification/id/<?php echo $jf_article->getId();?>">
                     éditer
                     </a>
                 </div>
-                <div class="button_header">
+                <div class="link_jf">
                     <a href="<?php echo HOST;?>delete/id/<?php echo $jf_article->getId();?>">
                     effacer
                     </a>

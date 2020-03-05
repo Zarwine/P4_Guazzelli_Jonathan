@@ -10,7 +10,7 @@ if(!empty($_POST)){
     if(empty($_POST['username']) || !preg_match('/^[a-zA-Z0-9_]+$/', $_POST['username'])) {
         $errors['username'] = "Votre pseudo n'est pas valide";
     } else {
-        $req = $pdo->prepare('SELECT id FROM users WHERE username =?');
+        $req = $pdo->prepare('SELECT id FROM jf_users WHERE username =?');
         $req->execute([$_POST['username']]);
         $user = $req->fetch();
         if($user){
@@ -21,7 +21,7 @@ if(!empty($_POST)){
     if(empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         $errors['email'] = "Votre email n'est pas valide";
     } else {
-        $req = $pdo->prepare('SELECT id FROM users WHERE email =?');
+        $req = $pdo->prepare('SELECT id FROM jf_users WHERE email =?');
         $req->execute([$_POST['email']]);
         $user = $req->fetch();
         if($user){
@@ -37,19 +37,21 @@ if(!empty($_POST)){
     if(empty($error)){
     $req = $pdo->prepare("INSERT INTO jf_users SET username = ?, password = ?, email = ?, confirmation_token = ?");
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-
-    $member = new Member;
+//try {
+    $member = new Member();
+//} catch (Exception $e) { echo "l'erreur est ici";
+//exit();}
     $token = $member->str_random(60);
 
     $req->execute([$_POST['username'], $password, $_POST['email'], $token]);
 
     $user_id = $pdo->lastInsertId();
 
-    mail($POST['email'], 'Confirmation de votre compte', "Afin de valider votre compte, merci de cliquer sur ce lien\n\nhttps://jogu.fr/forteroche/confirm.php?id=$user_id&token=$token");
+    mail($_POST['email'], 'Confirmation de votre compte', "Afin de valider votre compte, merci de cliquer sur ce lien\n\nhttps://jogu.fr/forteroche/confirm.php?id=$user_id&token=$token");
     
     $_SESSION['flash']['success'] = 'un email de confirmation vous a été envoyé pour valider votre compte';
 
-    header('Location: login.php');
+    header('Location: login');
     exit();
     }
 
@@ -71,7 +73,7 @@ if(!empty($_POST)){
     </div>
 <?php endif; ?>
 
-<form action="" method="POST">
+<form class="jf_form" action="" method="POST">
     <div class="form-group">
         <label for="">Pseudo</label>
         <input type="text" name="username" required/>
@@ -89,6 +91,6 @@ if(!empty($_POST)){
         <input type="password" name="password_confirm" required/>
     </div>
 
-    <button type="submit" class="btn btn-primary">S'inscrire</button>
+    <button type="submit" class="button_jf">S'inscrire</button>
 
 </form>

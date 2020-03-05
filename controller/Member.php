@@ -12,6 +12,11 @@ class Member
         $myView = new View('login');
         $myView->render();
     }
+    public function showAccount($params)
+    {
+        $myView = new View('account');
+        $myView->render();
+    }
     public function debug($variable){
         echo '<pre>' . print_r($variable, true) . '</pre>';
     }
