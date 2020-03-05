@@ -25,23 +25,31 @@ if(session_status() == PHP_SESSION_NONE){
                 <h1>Jean Forteroche</h1>
             </a>
         </div>
-        <div class="nav-item end-row">
-            <div class="button_header">
+        <ul class="nav-item end-row">
+            <li class="button_header">
                 <a href="<?php echo HOST;?>create">
                     Ajouter un article 
                 </a>
-            </div>
-            <div class="button_header">
-                <a href="<?php echo HOST;?>register">
-                    S'inscrire
-                </a>
-            </div>
-            <div class="button_header">
-                <a href="<?php echo HOST;?>login">
-                    Se connecter
-                </a>
-            </div>
-        </div>
+            </li>
+            <?php if (isset($_SESSION['auth'])): ?>
+                <li class="button_header">
+                    <a href="logout.php">
+                        Se déconnecter
+                    </a>
+                </li>
+            <?php else: ?>
+                <li class="button_header">
+                    <a href="<?php echo HOST;?>register">
+                        S'inscrire
+                    </a>
+                </li>
+                <li class="button_header">
+                    <a href="<?php echo HOST;?>login">
+                        Se connecter
+                    </a>
+                </li>
+            <?php endif; ?>
+        </ul>
     </nav>
 </header>
 <div class="article_container">
