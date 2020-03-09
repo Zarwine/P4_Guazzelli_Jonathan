@@ -17,6 +17,16 @@ class Member
         $myView = new View('account');
         $myView->render();
     }
+    public function registerConfirm($params)
+    {
+        $myView = new View('confirm');
+        $myView->render();
+    }
+    public function showLogout($params)
+    {
+        $myView = new View('logout');
+        $myView->render();
+    }
     public function debug($variable){
         echo '<pre>' . print_r($variable, true) . '</pre>';
     }

@@ -11,10 +11,12 @@ class Routeur
                         "delete"           => ["controller" => "Home",   "method" => "delArticle"],        
                         "edition"          => ["controller" => "Home",   "method" => "editionArticle"],
                         "add"              => ["controller" => "Home",   "method" => "addArticle"],      //Fin CRUD
+
                         "register"         => ["controller" => "Member", "method" => "showRegister"],      //Début Espace membre
                         "login"            => ["controller" => "Member", "method" => "showLogin"],
                         "account"          => ["controller" => "Member", "method" => "showAccount"],
-                        "confirm.php"      => ["controller" => "Member", "method" => "showLogin"],
+                        "confirm"          => ["controller" => "Member", "method" => "registerConfirm"],
+                        "logout"           => ["controller" => "Member", "method" => "showLogout"],
                       ];
 
     public function __construct($request)

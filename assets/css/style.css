@@ -41,47 +41,21 @@ header .end-row{
     background-color: rgb(2, 174, 108);
     width: 50%;
 }
-.button_jf{
-    border: none;
-    margin: 0;
-    padding: 0;
-    width: auto;
-    display: flex;
-    flex-flow: column wrap;
-    overflow: hidden;
-    cursor: pointer;
-
-    background: transparent;
-
-    /* inherit font & color from ancestor */
-    color: inherit;
-    font: inherit;
-
-    /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
-    line-height: normal;
-
-    /* Corrects font smoothing for webkit */
-    -webkit-font-smoothing: inherit;
-    -moz-osx-font-smoothing: inherit;
-
-    /* Corrects inability to style clickable `input` types in iOS */
-    -webkit-appearance: none;
-
-}
-.button_jf:hover::after{
-    transform: translateX(0%);
-}
 .link_jf a{
     padding: 20px;
     text-decoration: none;
-    color: rgb(230,230,230);
+    color: rgb(2, 174, 108);
     display: flex;
     flex-flow: column wrap;
     overflow: hidden;
     margin: 0 4px;
+    transition: all 0.4s ease;
 }
 .link_jf:hover a::after{
     transform: translateX(0%);
+}
+.link_jf:hover a {
+    color: rgb(230,230,230);
 }
 /* ________________________________________________________________________________________________________________________________*/
 /* ________________________________________________________________________________________________________________________________*/
@@ -104,26 +78,34 @@ h2 {
     display: flex;
     justify-content: flex-end;
 }
-.jf_button{
+.button_jf{
     border: none;
-    background: none;
+    margin: 0;
     padding: 0;
-    margin: 20px 5px;
+    width: auto;
+    display: flex;
+    flex-flow: column wrap;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    background: transparent;
+    color: rgb(2, 174, 108);
+
+    /* inherit font & color from ancestor */
+    font: inherit;
+    /* Normalize `line-height`. Cannot be changed from `normal` in Firefox 4+. */
+    line-height: normal;
+    /* Corrects font smoothing for webkit */
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+    /* Corrects inability to style clickable `input` types in iOS */
+    -webkit-appearance: none;
 }
-.jf_button a{
-    background-color: rgba(2, 174, 108, 0.4);
-    border: 2px solid rgba(2, 174, 108, 1);
-    border-radius: 5px;
+.button_jf:hover::after{
+    transform: translateX(0%);
+}
+.button_jf:hover {
     color: rgb(230,230,230);
-    padding: 5px 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    transition: all 0.3s ease;
-}
-.jf_button a:hover{
-    background-color: rgba(50,50,50,0);
 }
 /*=================================================================================================================================*/
 /*========================================================FORMULAIRE===============================================================*/
@@ -137,6 +119,14 @@ h2 {
 .jf_form label{
     float: left;
     margin-left: -305px;
+}
+.jf_form .button_jf{
+    margin-left: 300px;
+}
+.jf_form .form-group a{
+    color: inherit;
+    font-size: 0.8em;
+    text-decoration: none;
 }
 .remember_me{
     margin-left: -305px;
