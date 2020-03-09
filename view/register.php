@@ -6,15 +6,14 @@ if(!empty($_POST)){
 
     $errors = array();
     require_once (MODEL.'Jf_userManager.php');
-    //$pdo = new PDO("mysql:host=jogufrdkog533.mysql.db:3306;dbname=jogufrdkog533;charset=utf8", "*******", "******");
-    //$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-
+    $bdd = new PDO("mysql:host=jogufrdkog533.mysql.db:3306;dbname=jogufrdkog533;charset=utf8", "jogufrdkog533", "MaBDD550");
+    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $bdd->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);    
 
     if(empty($_POST['username']) || !preg_match('/^[a-zA-Z0-9_]+$/', $_POST['username'])) {
         $errors['username'] = "Votre pseudo n'est pas valide";
     } else {
-        $req = $pdo->prepare('SELECT id FROM jf_users WHERE username =?');
+        $req = $bdd->prepare('SELECT id FROM jf_users WHERE username =?');
         $req->execute([$_POST['username']]);
         $user = $req->fetch();
         if($user){
@@ -25,7 +24,7 @@ if(!empty($_POST)){
     if(empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         $errors['email'] = "Votre email n'est pas valide";
     } else {
-        $req = $pdo->prepare('SELECT id FROM jf_users WHERE email =?');
+        $req = $bdd->prepare('SELECT id FROM jf_users WHERE email =?');
         $req->execute([$_POST['email']]);
         $user = $req->fetch();
         if($user){
@@ -39,7 +38,7 @@ if(!empty($_POST)){
 
 
     if(empty($errors)){
-    $req = $pdo->prepare("INSERT INTO jf_users SET username = ?, password = ?, email = ?, confirmation_token = ?");
+    $req = $bdd->prepare("INSERT INTO jf_users SET username = ?, password = ?, email = ?, confirmation_token = ?");
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
     $member = new Member();
@@ -48,9 +47,9 @@ if(!empty($_POST)){
 
     $req->execute([$_POST['username'], $password, $_POST['email'], $token]);
 
-    $user_id = $pdo->lastInsertId();
+    $user_id = $bdd->lastInsertId();
 
-    mail($_POST['email'], 'Confirmation de votre compte', "Afin de valider votre compte, merci de cliquer sur ce lien\n\nhttps://jogu.fr/forteroche/view/confirm.php?id=$user_id&token=$token");
+    mail($_POST['email'], 'Confirmation de votre compte', "Afin de valider votre compte, merci de cliquer sur ce lien\n\nhttps://jogu.fr/forteroche/confirm/id/$user_id/token/$token");
     
     $_SESSION['flash']['success'] = 'un email de confirmation vous a été envoyé pour valider votre compte';
 

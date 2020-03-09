@@ -11,7 +11,11 @@ if(isset($_SESSION['auth'])){
 if(!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])) {
 
     require_once (MODEL.'Jf_userManager.php');
-    $req = $pdo->prepare('SELECT * FROM jf_users WHERE (username = :username OR email = :username) AND confirmed_at IS NOT NULL');
+    $bdd = new PDO("mysql:host=jogufrdkog533.mysql.db:3306;dbname=jogufrdkog533;charset=utf8", "jogufrdkog533", "MaBDD550");
+    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $bdd->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);   
+    
+    $req = $bdd->prepare('SELECT * FROM jf_users WHERE (username = :username OR email = :username) AND confirmed_at IS NOT NULL');
     $req->execute(['username' => $_POST['username']]);
     $user = $req->fetch();
     if(password_verify($_POST['password'], $user->password)){
@@ -21,7 +25,7 @@ if(!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])) {
             require_once (CONTROLLER.'Member.php');
             $mbr = new Member();
             $remember_token = $mbr->str_random(250);
-            $pdo->prepare('UPDATE jf_users SET remember_token = ? WHERE id = ?')->execute([$remember_token, $user->id]);
+            $bdd->prepare('UPDATE jf_users SET remember_token = ? WHERE id = ?')->execute([$remember_token, $user->id]);
             setcookie('remember', $user->id . '==' . $remember_token . sha1($user->id . 'clefarbitraire'), time() + 60 * 60 * 24 * 7);            
         }
         header('Location: account');

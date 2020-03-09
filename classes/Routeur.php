@@ -16,7 +16,7 @@ class Routeur
                         "login"            => ["controller" => "Member", "method" => "showLogin"],
                         "account"          => ["controller" => "Member", "method" => "showAccount"],
                         "confirm"          => ["controller" => "Member", "method" => "registerConfirm"],
-                        "logout"           => ["controller" => "Member", "method" => "showLogout"],
+                        "logout"           => ["controller" => "Member", "method" => "logout"],
                       ];
 
     public function __construct($request)

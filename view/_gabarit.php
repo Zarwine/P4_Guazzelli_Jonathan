@@ -25,15 +25,20 @@ if(session_status() == PHP_SESSION_NONE){
                 <h1>Jean Forteroche</h1>
             </a>
         </div>
-        <ul class="nav-item end-row">
-            <li class="link_jf">
-                <a href="<?php echo HOST;?>create">
-                    Ajouter un article 
-                </a>
-            </li>
+        <ul class="nav-item end-row">            
             <?php if (isset($_SESSION['auth'])): ?>
                 <li class="link_jf">
-                    <a href="logout.php">
+                    <a href="<?php echo HOST;?>create">
+                        Ajouter un article 
+                    </a>
+                </li>
+                <li class="link_jf">
+                    <a href="account">
+                        Mon compte
+                    </a>
+                </li>
+                <li class="link_jf">
+                    <a href="logout">
                         Se déconnecter
                     </a>
                 </li>

@@ -1,14 +1,14 @@
 <?php
 if(isset($_GET['id']) && isset($_GET['token'])){
     require_once (MODEL.'Jf_userManager.php');
-    $req = $pdo->prepare('SELECT * FROM jf_users WHERE id = ? AND reset_token IS NOT NULL AND token = ? AND reset_at > DATE_SUB(NOW(), INTERVAL 30 MINUTE)');
+    $req = $bdd->prepare('SELECT * FROM jf_users WHERE id = ? AND reset_token IS NOT NULL AND token = ? AND reset_at > DATE_SUB(NOW(), INTERVAL 30 MINUTE)');
     $req->execute([$_GET['id'], $_GET['token']]);
     $user = $req->fetch();
     if($user){
         if(!empty($_POST)){
             if(!empty($_POST['password']) && $_POST['password_confirm']){
                 $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-                $pdo->prepare('UPDATE jf_users SET password = ?, reset_at = NULL, reset_token = NULL')->execute([$password]);
+                $bdd->prepare('UPDATE jf_users SET password = ?, reset_at = NULL, reset_token = NULL')->execute([$password]);
                 session_start();
                 $_SESSION['flash']['success'] = "Votre mot de passe a bien été modifié";
                 $_SESSION['auth'] = $user;
