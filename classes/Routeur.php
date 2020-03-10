@@ -14,8 +14,10 @@ class Routeur
 
                         "register"         => ["controller" => "Member", "method" => "showRegister"],      //Début Espace membre
                         "login"            => ["controller" => "Member", "method" => "showLogin"],
+                        "forget"           => ["controller" => "Member", "method" => "showForget"],
                         "account"          => ["controller" => "Member", "method" => "showAccount"],
                         "confirm"          => ["controller" => "Member", "method" => "registerConfirm"],
+                        "reset"            => ["controller" => "Member", "method" => "resetPassword"],
                         "logout"           => ["controller" => "Member", "method" => "logout"],
                       ];
 

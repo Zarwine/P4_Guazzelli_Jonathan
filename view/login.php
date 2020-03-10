@@ -9,31 +9,10 @@ if(isset($_SESSION['auth'])){
 }
 
 if(!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])) {
-
-    require_once (MODEL.'Jf_userManager.php');
-    $bdd = new PDO("mysql:host=jogufrdkog533.mysql.db:3306;dbname=jogufrdkog533;charset=utf8", "jogufrdkog533", "MaBDD550");
-    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $bdd->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);   
-    
-    $req = $bdd->prepare('SELECT * FROM jf_users WHERE (username = :username OR email = :username) AND confirmed_at IS NOT NULL');
-    $req->execute(['username' => $_POST['username']]);
-    $user = $req->fetch();
-    if(password_verify($_POST['password'], $user->password)){
-        $_SESSION['auth'] = $user;
-        $_SESSION['flash']['success'] = 'Vous êtes maintenant connecté';
-        if($_POST['remember']){
-            require_once (CONTROLLER.'Member.php');
-            $mbr = new Member();
-            $remember_token = $mbr->str_random(250);
-            $bdd->prepare('UPDATE jf_users SET remember_token = ? WHERE id = ?')->execute([$remember_token, $user->id]);
-            setcookie('remember', $user->id . '==' . $remember_token . sha1($user->id . 'clefarbitraire'), time() + 60 * 60 * 24 * 7);            
-        }
-        header('Location: account');
-        exit();
-    } else {
-        $_SESSION['flash']['danger'] = 'Identifiant ou mot de passe incorrecte';
-    }
-
+    $userData = $_POST;
+    require_once (CONTROLLER.'Member.php');
+    $member = new Member();
+    $member->login($userData);   
 }
 ?>
 <h2>Se connecter</h2>
@@ -44,7 +23,7 @@ if(!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])) {
         <input type="text" name="username" required/>
     </div>
     <div class="form-group">
-        <label for="">Mot de passe <a href="forget.php">(Mot de passe oublié ?)</a></label>
+        <label for="">Mot de passe <a href="<?php echo HOST;?>forget">(Mot de passe oublié ?)</a></label>
         <input type="password" name="password" required/>
     </div>
     <div class="form-group">

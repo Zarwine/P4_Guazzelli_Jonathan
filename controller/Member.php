@@ -12,6 +12,11 @@ class Member
         $myView = new View('login');
         $myView->render();
     }
+    public function showForget()
+    {
+        $myView = new View('forget');
+        $myView->render();
+    }
     public function showAccount()
     {
         $myView = new View('account');
@@ -19,53 +24,83 @@ class Member
     }
     public function registerConfirm($params)
     {
-        //$myView = new View('confirm');
-        //$myView->render();
-        
-        $user_id = $params["id"];
-        $token = $params["token"];
-
         require (MODEL.'Jf_userManager.php');
-        $bdd = new PDO("mysql:host=jogufrdkog533.mysql.db:3306;dbname=jogufrdkog533;charset=utf8", "jogufrdkog533", "MaBDD550");
-        $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $bdd->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+        $userManager = new Jf_userManager();
 
-        $req = $bdd->prepare('SELECT * FROM jf_users WHERE id = ?');
-
-        $req->execute([$user_id]);
-
-        $user = $req->fetch();
-
-        session_start(); 
-
-        if($user && $user->confirmation_token == $token) {
-                
-            $bdd->prepare('UPDATE jf_users SET confirmation_token = NULL, confirmed_at = NOW() WHERE id =?')->execute([$user_id]);
+        $validation = $userManager->verifToken($params);
+        
+        if($validation === true){
             $_SESSION['flash']['success'] = 'Votre compte a bien été validé';
-            $_SESSION['auth'] = $user;
-
-            //$this->showAccount();
             header('Location: https://jogu.fr/forteroche/home');
-        } else {
+            //$myView = new View('home');
+            //$myView->render();
+        }else{
             $_SESSION['flash']['danger'] = "Ce token n'est plus valide";
-            //$this->showLogin();
             header('Location: https://jogu.fr/forteroche/home');
+            //$myView = new View('home');
+            //$myView->render();
         }
     }
-    public function logout($params)
+    public function resetPassword($params){
+        
+        require (MODEL.'Jf_userManager.php');
+        $userManager = new Jf_userManager();
+
+        $userManager->resetPassword($params);
+
+    }
+
+    public function verifAll($userData){
+        require_once (MODEL.'Jf_userManager.php');
+        $userManager = new Jf_userManager();
+        $errors = array();
+
+        if(empty($userData['username']) || !preg_match('/^[a-zA-Z0-9_]+$/', $userData['username'])) {
+            $errors['username'] = "Votre pseudo n'est pas valide";
+        } else {
+            
+            $userManager->verifName($userData);        
+        }
+        if(empty($userData['email']) || !filter_var($userData['email'], FILTER_VALIDATE_EMAIL)) {
+            $errors['email'] = "Votre email n'est pas valide";
+        } else {
+            
+            $userManager->verifEmail($userData);        
+        }
+
+        if(empty($userData['password']) || $userData['password'] != $userData['password_confirm']) {
+            $errors['password'] = "Votre mot de passe n'est pas valide";
+        }
+        if(empty($errors)){
+            
+            $userManager->addMember($userData);
+        }
+    }  
+    public function login($userData){
+
+        require_once (MODEL.'Jf_userManager.php');
+        $userManager = new Jf_userManager();
+        $userManager->login($userData);
+    }
+    public function forgetPassword($userData){
+        
+        require_once (MODEL.'Jf_userManager.php');
+        $userManager = new Jf_userManager();
+        $userManager->forgetPassword($userData);
+
+    }
+    public function logout()
     {
         session_start();
         setcookie('remember', NULL, -1);
         unset($_SESSION['auth']);
         $_SESSION['flash']['success'] = "Vous êtes maintenant déconnecté";
         header('Location: login');
-
-        //$myView = new View('logout');
-        //$myView->render();
     }
-    public function debug($variable){
-        echo '<pre>' . print_r($variable, true) . '</pre>';
-    }
+    
+   //public function debug($variable){
+   //    echo '<pre>' . print_r($variable, true) . '</pre>';
+   //}
 
     public function str_random($length) {
 
@@ -91,27 +126,22 @@ class Member
         if(isset($_COOKIE['remember']) && !isset($_SESSION['auth'])){
     
             require_once (MODEL.'Jf_userManager.php');
-            if(!isset($bdd)){
-                global $bdd;
-            }
+            $userManager = new Jf_userManager();
+            $userManager->reconnect_from_cookie();
+            
+        }
+    }
 
-            $remember_token = $_COOKIE['remember'];
-            $parts = explode('==', $remember_token);
-            $user_id = $parts[0];
-            $req = $bdd->prepare('SELECT * FROM users WHERE id = ?');
-            $req->execute([$user_id]);
-            $user = $req->fetch();
-            if($user){
-                $exepted = $user_id . '==' . $user->remember_token . sha1($user_id . 'clefarbitraire');
-                if($expected == $remember_token){
-                    session_start();
-                    $_SESSION['auth'] = $user;
-                    setcookie('remember', $remember_token, time() + 60 * 60 * 24 * 7);
-                }else{
-                    setcookie('remember', null, -1);
-                }
+    public function changePassword($userData){
+        if(!empty($userData)){
+            if(empty($userData['password']) || $userData['password'] != $userData['password_confirm']){
+                $_SESSION['flash']['danger'] = "Les mots de passes ne correspondent pas";
             }else{
-                setcookie('remember', null, -1);
+                require_once (MODEL.'Jf_userManager.php');
+                $userManager = new Jf_userManager();
+                $userManager->changePassword($userData);
+    
+                $_SESSION['flash']['success'] = "Votre mot de passe a bien été mis à jour";
             }
         }
     }
