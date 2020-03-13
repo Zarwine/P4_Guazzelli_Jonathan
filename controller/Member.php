@@ -17,11 +17,18 @@ class Member
         $myView = new View('forget');
         $myView->render();
     }
-    public function showAccount()
+    public function showAccount($params)
     {
+        $manager = new Jf_articleManager();
+        $jf_articles = $manager->findAll();   
+
         $myView = new View('account');
-        $myView->render();
+
+        $myView->render(array('jf_articles' => $jf_articles));
+
+
     }
+
     public function registerConfirm($params)
     {
         require (MODEL.'Jf_userManager.php');

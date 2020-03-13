@@ -48,6 +48,7 @@ class Home
         $myView->redirect('home');
     }
 
+
     public function addArticle($params)
     {
         //echo '<pre>'; print_r($params); exit;
@@ -73,6 +74,15 @@ class Home
         $myView->redirect('home');
 
     }
+    public function showArticle($params)
+    {   
+        extract($params);
+        $manager = new Jf_articleManager();
+        $jf_article = $manager->find($id);
+        $myView = new View('article');
+        $myView->render(array('jf_article' => $jf_article));
+    }
+    
 }
 
 

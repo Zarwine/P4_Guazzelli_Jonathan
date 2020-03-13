@@ -33,12 +33,12 @@ if(session_status() == PHP_SESSION_NONE){
                     </a>
                 </li>
                 <li class="link_jf">
-                    <a href="account">
+                    <a href="<?php echo HOST;?>account">
                         Mon compte
                     </a>
                 </li>
                 <li class="link_jf">
-                    <a href="logout">
+                    <a href="<?php echo HOST;?>logout">
                         Se déconnecter
                     </a>
                 </li>
@@ -70,6 +70,8 @@ if(session_status() == PHP_SESSION_NONE){
 
 <?php echo $contentPage; ?>
 </div>
-
+<footer>
+    <script src="<?php echo ASSETS;?>js/account.js"></script>
+</footer>
 </body>
 </html>

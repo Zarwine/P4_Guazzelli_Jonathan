@@ -13,8 +13,7 @@ class Jf_userManager
     }
 
     public function verifName($userData) {
-        $bdd = $this->bdd;
-        $req = $bdd->prepare('SELECT id FROM jf_users WHERE username =?');
+        $req = $this->bdd->prepare('SELECT id FROM jf_users WHERE username =?');
         $req->execute([$userData['username']]);
         $user = $req->fetch();
         if($user){
@@ -23,8 +22,7 @@ class Jf_userManager
     }
 
     public function verifEmail($userData) {
-        $bdd = $this->bdd;
-        $req = $bdd->prepare('SELECT id FROM jf_users WHERE email =?');
+        $req = $this->bdd->prepare('SELECT id FROM jf_users WHERE email =?');
         $req->execute([$userData['email']]);
         $user = $req->fetch();
         if($user){
@@ -33,8 +31,7 @@ class Jf_userManager
     }
     
     public function addMember($userData){
-        $bdd = $this->bdd;
-        $req = $bdd->prepare("INSERT INTO jf_users SET username = ?, password = ?, email = ?, confirmation_token = ?");
+        $req = $this->bdd->prepare("INSERT INTO jf_users SET username = ?, password = ?, email = ?, confirmation_token = ?");
         $password = password_hash($userData['password'], PASSWORD_BCRYPT);
 
         $member = new Member();
@@ -43,7 +40,7 @@ class Jf_userManager
 
         $req->execute([$userData['username'], $password, $userData['email'], $token]);
 
-        $user_id = $bdd->lastInsertId();
+        $user_id = $this->bdd->lastInsertId();
 
         mail($userData['email'], 'Confirmation de votre compte', "Afin de valider votre compte, merci de cliquer sur ce lien\n\nhttps://jogu.fr/forteroche/confirm/id/$user_id/token/$token");
         
@@ -54,12 +51,11 @@ class Jf_userManager
     }
 
     public function verifToken($params){
-        $bdd = $this->bdd;
 
         $user_id = $params["id"];
         $token = $params["token"];
 
-        $req = $bdd->prepare('SELECT * FROM jf_users WHERE id = ?');
+        $req = $this->bdd->prepare('SELECT * FROM jf_users WHERE id = ?');
 
         $req->execute([$user_id]);
 
@@ -69,7 +65,7 @@ class Jf_userManager
 
         if($user && $user->confirmation_token == $token) {
                 
-            $bdd->prepare('UPDATE jf_users SET confirmation_token = NULL, confirmed_at = NOW() WHERE id =?')->execute([$user_id]);
+            $this->bdd->prepare('UPDATE jf_users SET confirmation_token = NULL, confirmed_at = NOW() WHERE id =?')->execute([$user_id]);
             $_SESSION['auth'] = $user;
 
             return $validation = true;
@@ -81,9 +77,8 @@ class Jf_userManager
     }
 
     public function login($userData){
-        $bdd = $this->bdd;
         
-        $req = $bdd->prepare('SELECT * FROM jf_users WHERE (username = :username OR email = :username) AND confirmed_at IS NOT NULL');
+        $req = $this->bdd->prepare('SELECT * FROM jf_users WHERE (username = :username OR email = :username) AND confirmed_at IS NOT NULL');
         $req->execute(['username' => $userData['username']]);
         $user = $req->fetch();
 
@@ -96,7 +91,7 @@ class Jf_userManager
                 $mbr = new Member();
                 $remember_token = $mbr->str_random(250);
 
-                $bdd->prepare('UPDATE jf_users SET remember_token = ? WHERE id = ?')->execute([$remember_token, $user->id]);
+                $this->bdd->prepare('UPDATE jf_users SET remember_token = ? WHERE id = ?')->execute([$remember_token, $user->id]);
                 setcookie('remember', $user->id . '==' . $remember_token . sha1($user->id . 'clefarbitraire'), time() + 60 * 60 * 24 * 7);            
             }
             header('Location: account');
@@ -107,10 +102,8 @@ class Jf_userManager
     }
 
     public function forgetPassword($userData){
-        
-        $bdd = $this->bdd;
 
-        $req = $bdd->prepare('SELECT * FROM jf_users WHERE email = ? AND confirmed_at IS NOT NULL');
+        $req = $this->bdd->prepare('SELECT * FROM jf_users WHERE email = ? AND confirmed_at IS NOT NULL');
         $req->execute([$userData['email']]);
         $user = $req->fetch();
 
@@ -121,7 +114,7 @@ class Jf_userManager
             $memberReset= new Member();
             $reset_token = $memberReset->str_random(60);
 
-            $bdd->prepare('UPDATE jf_users SET reset_token = ?, reset_at = NOW() WHERE id = ?')->execute([$reset_token, $user->id]);
+            $this->bdd->prepare('UPDATE jf_users SET reset_token = ?, reset_at = NOW() WHERE id = ?')->execute([$reset_token, $user->id]);
 
             $_SESSION['flash']['success'] = 'Les instructions du rappel de mot de passe vous ont été envoyées par email';
             mail($userData['email'], 'Reinitialisation du mot de passe - Jogu.fr',"Afin de reinitialiser votre mot de passe, merci de cliquer sur ce lien\n\nhttps://jogu.fr/forteroche/reset/id/$user->id/token/$reset_token");
@@ -134,17 +127,17 @@ class Jf_userManager
     }
     public function resetPassword($params){
 
-        $bdd = $this->bdd;
+        
         
         $user_verif_id = $params['id'];
         $user_verif_reset_token = $params['token'];
 
-        $req = $bdd->prepare("SELECT id FROM jf_users WHERE reset_token = '$user_verif_reset_token'");
+        $req = $this->bdd->prepare("SELECT id FROM jf_users WHERE reset_token = '$user_verif_reset_token'");
         $req->execute();
         $user_id = $req->fetch();
  
 
-        $req2 = $bdd->prepare("SELECT reset_token FROM jf_users WHERE id = $user_id->id");
+        $req2 = $this->bdd->prepare("SELECT reset_token FROM jf_users WHERE id = $user_id->id");
         $req2->execute();
         $user_token_reset = $req2->fetch();
 
@@ -156,11 +149,11 @@ class Jf_userManager
             }
 
             $member = new Member();
-            $newpass = $member->str_random(20);
+            $newpass = $member->str_random(10);
             $newpassforuser = $newpass;
             $newpass = password_hash($newpass, PASSWORD_BCRYPT);
                 
-            $req3 = $bdd->prepare('UPDATE jf_users SET password = ?');
+            $req3 = $this->bdd->prepare('UPDATE jf_users SET password = ?');
             $req3->execute([$newpass]);
             
 
@@ -177,21 +170,19 @@ class Jf_userManager
     }
 
     public function changePassword($userData){
-            $bdd = $this->bdd;
-
+        
             $user_id = $_SESSION['auth']->id;
             $password = password_hash($userData['password'], PASSWORD_BCRYPT);
             
-            $req = $bdd->prepare('UPDATE jf_users SET password = ?');
-            $req->execute([$password]);
+            $req = $this->bdd->prepare('UPDATE jf_users SET password = ? WHERE id = ?');
+            $req->execute([$password, $user_id]);
     }
     public function reconnect_from_cookie(){
-        $bdd = $this->bdd;
 
         $remember_token = $_COOKIE['remember'];
         $parts = explode('==', $remember_token);
         $user_id = $parts[0];
-        $req = $bdd->prepare('SELECT * FROM users WHERE id = ?');
+        $req = $this->bdd->prepare('SELECT * FROM users WHERE id = ?');
         $req->execute([$user_id]);
         $user = $req->fetch();
         if($user){

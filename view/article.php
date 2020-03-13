@@ -4,7 +4,6 @@ if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
 ?>
-    <?php foreach($jf_articles as $jf_article): ?>
         <div class="article_content">
             <h3><?php echo $jf_article->getName();?></h3>
             <?php echo $jf_article->getContent();?>
@@ -24,4 +23,3 @@ if(session_status() == PHP_SESSION_NONE){
             </div>
             <?php endif; ?>
         </div>
-    <?php endforeach; ?>

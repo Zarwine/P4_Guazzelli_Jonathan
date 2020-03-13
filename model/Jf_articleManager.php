@@ -87,7 +87,7 @@ class Jf_articleManager
         $bdd = $this->bdd;
         //echo '<pre>'; print_r($bdd); exit;       
       
-        $query = "UPDATE jf_article SET `name` = :name, `content` = :content, `created_at` = :created_at WHERE `jf_article`.`id` = :id;";
+        $query = "UPDATE jf_article SET `name` = :name, `content` = :content WHERE `jf_article`.`id` = :id;";
         //$query = "INSERT INTO jf_article (id, name, content, created_at)
         //VALUES (NULL, :name, :content, CURRENT_TIMESTAMP);";
         //UPDATE `jf_article` SET `content` = 'Le test édition de donné\r\nEdition faites' WHERE `jf_article`.`id` = 19;

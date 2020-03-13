@@ -14,6 +14,6 @@ if(!empty($_POST) && !empty($_POST['email']) ) {
         <label for="">Email</label>
         <input type="email" name="email" required/>
     </div>
-    <button type="submit" class="button_jf">Réinitialiser mon mot de passe</button>
+    <button type="submit" class="button_jf">Réinitialiser mon mot de passeé</button>
 
 </form>
