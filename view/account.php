@@ -67,3 +67,4 @@
         <button class="button_jf">Changer de mot de passe</button>
     </form>
 </div>
+<script src="<?php echo ASSETS;?>js/account.js"></script>

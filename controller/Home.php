@@ -16,7 +16,9 @@ class Home
     public function createArticle($params)
     {        
 
-        extract($params);
+        if(isset($params)){
+            extract($params);
+        }
         
         if(isset($id)) {
 
