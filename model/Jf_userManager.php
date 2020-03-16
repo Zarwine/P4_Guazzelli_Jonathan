@@ -107,27 +107,16 @@ class Jf_userManager
         $req->execute([$userData['email']]);
         $user = $req->fetch();
 
-        if($user){
-            session_start();
-
-            require_once (CONTROLLER.'Member.php');
-            $memberReset= new Member();
-            $reset_token = $memberReset->str_random(60);
-
-            $this->bdd->prepare('UPDATE jf_users SET reset_token = ?, reset_at = NOW() WHERE id = ?')->execute([$reset_token, $user->id]);
-
-            $_SESSION['flash']['success'] = 'Les instructions du rappel de mot de passe vous ont été envoyées par email';
-            mail($userData['email'], 'Reinitialisation du mot de passe - Jogu.fr',"Afin de reinitialiser votre mot de passe, merci de cliquer sur ce lien\n\nhttps://jogu.fr/forteroche/reset/id/$user->id/token/$reset_token");
-
-            header('Location: login');
-            exit();
-        } else {
-            $_SESSION['flash']['danger'] = 'Aucun compte ne correspond à cette adresse';
-        }
+        return $user;
     }
-    public function resetPassword($params){
 
-        
+    public function updateToken($user, $reset_token){
+
+    $this->bdd->prepare('UPDATE jf_users SET reset_token = ?, reset_at = NOW() WHERE id = ?')->execute([$reset_token, $user->id]);
+
+    }
+
+    public function resetPassword($params){        
         
         $user_verif_id = $params['id'];
         $user_verif_reset_token = $params['token'];
@@ -140,7 +129,6 @@ class Jf_userManager
         $req2 = $this->bdd->prepare("SELECT reset_token FROM jf_users WHERE id = $user_id->id");
         $req2->execute();
         $user_token_reset = $req2->fetch();
-
         
         if($user_id->id == $user_verif_id || $user_token_reset == $user_verif_reset_token){
 
@@ -165,8 +153,6 @@ class Jf_userManager
             $_SESSION['flash']['danger'] = "Une erreur est survenue";
             header('Location: https://jogu.fr/forteroche/home');
         }
-
-
     }
 
     public function changePassword($userData){
@@ -177,6 +163,7 @@ class Jf_userManager
             $req = $this->bdd->prepare('UPDATE jf_users SET password = ? WHERE id = ?');
             $req->execute([$password, $user_id]);
     }
+    
     public function reconnect_from_cookie(){
 
         $remember_token = $_COOKIE['remember'];

@@ -4,26 +4,35 @@
     //$member->logged_only();
     $userData = $_POST;
     $member->changePassword($userData);  
+   //if($_SESSION['auth']->admin == 1){
+   //    echo "Salut l'admin";
+   //}else {
+   //    echo "Salut l'utilisateur lambda";
+   //    var_dump($_SESSION);
+   //}
+   //exit();
 ?>
 <div class="account_header">
 <h1>Bonjour <?= $_SESSION['auth']->username; ?></h1>
 <h3>Bienvenue dans votre espace membre</h3>
 </div>
-<div class="account_crud">
-    <h3>Agir sur les articles</h3>
-    <ul>
-        <li class="link_jf">
-            <a href="<?php echo HOST;?>create">
-                Ajouter un article
-            </a>
-        </li>
-        <li class="link_jf">
-            <a class="view_account">
-                Voir les articles existants
-            </a>
-        </li>
-    </ul>
-</div>
+<?php if ($_SESSION['auth']->admin == 1): ?>
+    <div class="account_crud">
+        <h3>Agir sur les articles</h3>
+        <ul>
+            <li class="link_jf">
+                <a href="<?php echo HOST;?>create">
+                    Ajouter un article
+                </a>
+            </li>
+            <li class="link_jf">
+                <a class="view_account">
+                    Voir les articles existants
+                </a>
+            </li>
+        </ul>
+    </div>
+<?php endif; ?>
 <div id="account_view_article" class="article_container container_not_visible">
 <?php foreach($jf_articles as $jf_article): ?>
     <div class="article_content">
@@ -36,12 +45,12 @@
         <div class="button_container">
                 <div class="link_jf">
                     <a href="<?php echo HOST;?>modification/id/<?php echo $jf_article->getId();?>">
-                    éditer
+                    Éditer
                     </a>
                 </div>
                 <div class="link_jf">
                     <a href="<?php echo HOST;?>delete/id/<?php echo $jf_article->getId();?>">
-                    effacer
+                    Effacer
                     </a>
                 </div>
             </div>
@@ -67,4 +76,6 @@
         <button class="button_jf">Changer de mot de passe</button>
     </form>
 </div>
+<?php if ($_SESSION['auth']->admin == 1): ?>
 <script src="<?php echo ASSETS;?>js/account.js"></script>
+<?php endif; ?>

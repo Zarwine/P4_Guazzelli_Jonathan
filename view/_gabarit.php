@@ -27,11 +27,13 @@ if(session_status() == PHP_SESSION_NONE){
         </div>
         <ul class="nav-item end-row">            
             <?php if (isset($_SESSION['auth'])): ?>
+            <?php if ($_SESSION['auth']->admin == 1): ?>
                 <li class="link_jf">
                     <a href="<?php echo HOST;?>create">
                         Ajouter un article 
                     </a>
                 </li>
+            <?php endif; ?>
                 <li class="link_jf">
                     <a href="<?php echo HOST;?>account">
                         Mon compte

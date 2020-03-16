@@ -35,9 +35,7 @@ class Jf_articleManager
 
     public function find($id)
     {
-        $bdd = $this->bdd;
-        
-   
+        $bdd = $this->bdd;      
         
         $query = "SELECT * FROM jf_article WHERE id = :id";
         $bdd = new PDO("mysql:host=jogufrdkog533.mysql.db:3306;dbname=jogufrdkog533;charset=utf8", "jogufrdkog533", "MaBDD550");
@@ -58,48 +56,27 @@ class Jf_articleManager
 
     public function create($values)
     {
-        $bdd = $this->bdd;
-        //echo '<pre>'; print_r($bdd); exit;       
+        $bdd = $this->bdd;    
       
         $query = "INSERT INTO jf_article (id, name, content, created_at)
         VALUES (NULL, :name, :content, CURRENT_TIMESTAMP);";
 
         $req = $bdd->prepare($query);
-        //echo '<pre>'; print_r($query);
-        //echo '<pre>'; print_r($bdd);
-        //echo '<pre>'; print_r($values);
-        //echo '<pre>'; print_r($req);
-        // exit;
         $req->bindValue(':name', $values['name'], PDO::PARAM_STR);
         $req->bindValue(':content', $values['content'], PDO::PARAM_STR);
-        //echo '<pre>'; print_r($req); exit;
-        /*
-        PDOStatement Object
-        (
-            [queryString] => INSERT INTO jf_article (id, name, content, created_at) VALUES (NULL, :name, :content, NULL);
-        )
-        */
-        //INSERT INTO `jf_article` (`id`, `name`, `content`, `created_at`) VALUES (NULL, 'Test req', 'La requete SQL', CURRENT_TIMESTAMP);
         $req->execute();
     }
     public function edit($values)
     {
-        $bdd = $this->bdd;
-        //echo '<pre>'; print_r($bdd); exit;       
+        $bdd = $this->bdd;      
       
         $query = "UPDATE jf_article SET `name` = :name, `content` = :content WHERE `jf_article`.`id` = :id;";
-        //$query = "INSERT INTO jf_article (id, name, content, created_at)
-        //VALUES (NULL, :name, :content, CURRENT_TIMESTAMP);";
-        //UPDATE `jf_article` SET `content` = 'Le test édition de donné\r\nEdition faites' WHERE `jf_article`.`id` = 19;
-        //UPDATE `jf_article` SET `name` = 'Test edition 2', `content` = 'Le test édition de donné\r\nEdition faites 2' WHERE `jf_article`.`id` = 19;
 
         $req = $bdd->prepare($query);
 
         $req->bindValue(':id', $values['id'], PDO::PARAM_INT);
         $req->bindValue(':name', $values['name'], PDO::PARAM_STR);
         $req->bindValue(':content', $values['content'], PDO::PARAM_STR);
-        //$req->bindValue(':created_at', $values['created_at'], PDO::PARAM_STR);
-        //$req->bindValue(':updated_at', $values['updated_at'], PDO::PARAM_STR); <- créer la ligne correspondante dans la base de donné
 
         $req->execute();
     }
