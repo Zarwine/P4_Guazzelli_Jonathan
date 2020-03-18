@@ -11,6 +11,8 @@
    //    var_dump($_SESSION);
    //}
    //exit();
+   //var_dump($_SESSION);
+   //     exit();
 ?>
 <div class="account_header">
 <h1>Bonjour <?= $_SESSION['auth']->username; ?></h1>
