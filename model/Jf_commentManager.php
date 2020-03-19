@@ -35,33 +35,14 @@ class Jf_commentManager
 
     public function find($article_id)
     {
-        $bdd = $this->bdd;
-        $jf_comments = [];
-        
-        $query = "SELECT * FROM jf_comment WHERE article_id = :id ORDER BY id DESC";
+        $bdd = $this->bdd;        
+        $query = "SELECT * FROM jf_comment WHERE article_id = :id";
 
         $req = $bdd->prepare($query);
         $req->bindValue(':id', $article_id, PDO::PARAM_INT);
         $req->execute();
-        while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
-        //array_map ($row = $req->fetch(PDO::FETCH_ASSOC)) {
-
-            $jf_comment = new Jf_comment();
-            $jf_comment->setId($row['id']);
-            $jf_comment->setAuteur($row['auteur']);
-            $jf_comment->setContent($row['content']);
-            $jf_comment->setCreated_at($row['created_at']);            
-
-            $jf_comments[] = $jf_comment;
-        //var_dump($jf_comments);      // -> Ce var_dump affiche correctement $jf_comments
-        //exit();      
-        };      
-        var_dump($jf_comments);       //-> Ce var_dump rend la valeur : NULL
-        exit();        
-        return $jf_comments; //         -> J'ai remarqué que cette ligne s'execute avant la ligne 46.
-
-                                        //Est-ce que tu sais pourquoi stp ?
-    
+        $jf_comments = $req->fetchAll();
+        return $jf_comments;
     }
 
     public function create($comment, $username, $article_id)

@@ -7,6 +7,7 @@ class Jf_comment
     private $auteur;
     private $content;
     private $created_at;
+    private $article_id;
 
     public function getId()
     {
@@ -39,5 +40,13 @@ class Jf_comment
     public function setCreated_at($created_at)
     {
         $this->created_at = $created_at;
+    }
+    public function getArticle_Id()
+    {
+        return $this->article_id;
+    }
+    public function setArticle_Id($article_id)
+    {
+        $this->article_id = $article_id;
     }
 }

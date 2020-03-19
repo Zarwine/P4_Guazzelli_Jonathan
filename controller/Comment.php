@@ -90,7 +90,7 @@ class Comment
         $myView->redirect('home');
     }
 
-    public function delArticle($params)
+    public function delComment($params)
     {
         extract($params);
 

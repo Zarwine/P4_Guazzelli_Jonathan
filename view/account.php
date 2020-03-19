@@ -19,6 +19,7 @@
 <h3>Bienvenue dans votre espace membre</h3>
 </div>
 <?php if ($_SESSION['auth']->admin == 1): ?>
+
     <div class="account_crud">
         <h3>Agir sur les articles</h3>
         <ul>
@@ -34,36 +35,63 @@
             </li>
         </ul>
     </div>
-<?php endif; ?>
-<div id="account_view_article" class="article_container container_not_visible">
-<?php foreach($jf_articles as $jf_article): ?>
-    <div class="article_content">
-        <a href="<?php echo HOST;?>view/id/<?php echo $jf_article->getId();?>" class="titre_article"><h3><?php echo $jf_article->getName();?></h3></a>
-        <div id="<?php echo $jf_article->getId();?>" class="article article_not_visible">
-            <p>id = <?php echo $jf_article->getId();?></p>
-            <?php echo $jf_article->getContent();?>
-            <br/>
-        </div>
-        <div class="button_container">
-                <div class="link_jf">
-                    <a href="<?php echo HOST;?>modification/id/<?php echo $jf_article->getId();?>">
-                    Éditer
-                    </a>
-                </div>
-                <div class="link_jf">
-                    <a href="<?php echo HOST;?>delete/id/<?php echo $jf_article->getId();?>">
-                    Effacer
-                    </a>
-                </div>
+
+    <div id="account_view_article" class="article_container container_not_visible">
+    <?php foreach($jf_articles as $jf_article): ?>
+        <div class="article_content">
+            <a href="<?php echo HOST;?>view/id/<?php echo $jf_article->getId();?>" class="titre_article"><h3><?php echo $jf_article->getName();?></h3></a>
+            <div id="<?php echo $jf_article->getId();?>" class="article article_not_visible">
+                <p>id = <?php echo $jf_article->getId();?></p>
+                <?php echo $jf_article->getContent();?>
+                <br/>
             </div>
+            <div class="button_container">
+                    <div class="link_jf">
+                        <a href="<?php echo HOST;?>modification/id/<?php echo $jf_article->getId();?>">
+                        Éditer
+                        </a>
+                    </div>
+                    <div class="link_jf">
+                        <a href="<?php echo HOST;?>delete/id/<?php echo $jf_article->getId();?>">
+                        Effacer
+                        </a>
+                    </div>
+                </div>
+        </div>
+    <?php endforeach; ?>
     </div>
-<?php endforeach; ?>
-<div class="current_view_article">
-    <?php if(isset($currentArticle)){
-    echo $currentArticle;
-    } ?>
-</div>
-</div>
+<?php endif; ?>
+
+
+<?php if ($_SESSION['auth']->admin == 1): ?>
+    <div class="account_crud">
+        <h3>Agir sur les commentaires</h3>
+        <ul>
+            <li class="link_jf">
+                <a class="view_account">
+                    Voir les commentaires
+                </a>
+            </li>
+            <li class="link_jf">
+                <a class="view_account">
+                    Voir les commentaires signalés
+                </a>
+            </li>
+        </ul>
+    </div>
+<?php endif; ?>
+
+    <div id="account_view_comment" class="comment_container comment_container_not_visible">
+        <div class="comment">
+            L'utilisateur
+            La date
+            Le titre de l'article concerné ( Lien vers l'article )
+            Le contenu du commentaire
+            Bouton pour delete le commentaire
+        </div>
+    </div>
+
+
 <div class="account_gestion">
     <h2>Gestion du compte</h2>
 
@@ -78,6 +106,7 @@
         <button class="button_jf">Changer de mot de passe</button>
     </form>
 </div>
+
 <?php if ($_SESSION['auth']->admin == 1): ?>
 <script src="<?php echo ASSETS;?>js/account.js"></script>
 <?php endif; ?>
