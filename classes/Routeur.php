@@ -22,7 +22,7 @@ class Routeur
                         "logout"           => ["controller" => "Member", "method" => "logout"],             //Fin Espace membre
 
                         "com_create"       => ["controller" => "Comment",   "method" => "createComment"],   //Début Commentaires
-                        "com_modification" => ["controller" => "Comment",   "method" => "createArticle"],
+                        "com_report"       => ["controller" => "Comment",   "method" => "reportComment"],
                         "com_delete"       => ["controller" => "Comment",   "method" => "delComment"],        
                         "com_edition"      => ["controller" => "Comment",   "method" => "editionArticle"],
                         "com_add"          => ["controller" => "Comment",   "method" => "addArticle"],  

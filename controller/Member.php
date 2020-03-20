@@ -24,9 +24,12 @@ class Member
 
         $manager = new Jf_articleManager();
         $jf_articles = $manager->findAll();   
+        $com_manager = new Jf_commentManager();
+        $jf_comments = $com_manager->findAll();   
 
         $myView = new View('account');
-        $myView->render(array('jf_articles' => $jf_articles));
+        $myView->render(array('jf_articles' => $jf_articles, 'jf_comments' => $jf_comments));
+        //$myView->render(array('jf_comments' => $jf_comments));
 
     }
 

@@ -45,6 +45,7 @@ $article_id = $jf_article->getId();
     $jf_comment->setContent($row[$i]['content']);
     $jf_comment->setCreated_at($row[$i]['created_at']);   
     $jf_comment->setArticle_Id($row[$i]['article_id']);
+    $jf_comment->setReported($row[$i]['reported']);
 
     $jf_comments[] = $jf_comment;
 
@@ -82,10 +83,17 @@ $article_id = $jf_article->getId();
                         <br/>
                     </div>                   
                 
-                    <div class="signaler">Signaler</div>
+                    <div class="signaler">
+                        <a href="<?php echo HOST;?>com_report/id/<?php echo $jf_comment->getId();?>">
+                        Signaler
+                        </a>
+                    </div>
 
                     <?php if (isset($_SESSION['auth'])): ?>
-                        <?php if ($_SESSION['auth']->admin == 1): ?>             
+                        <?php if ($_SESSION['auth']->admin == 1): ?>  
+                            <?php if ($jf_comment->getReported() == 1): ?>
+                                <p class="reported">Ce commentaire a été signalé</p>  
+                            <?php endif; ?>    
                             <div class="button_container">
                                 <div class="link_jf">
                                     <a href="<?php echo HOST;?>com_delete/id/<?php echo $jf_comment->getId();?>">

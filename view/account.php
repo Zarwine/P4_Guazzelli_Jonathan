@@ -68,12 +68,12 @@
         <h3>Agir sur les commentaires</h3>
         <ul>
             <li class="link_jf">
-                <a class="view_account">
-                    Voir les commentaires
+                <a class="view_comment">
+                    Voir tous les commentaires
                 </a>
             </li>
             <li class="link_jf">
-                <a class="view_account">
+                <a class="view_comment_reported">
                     Voir les commentaires signalés
                 </a>
             </li>
@@ -81,13 +81,60 @@
     </div>
 <?php endif; ?>
 
-    <div id="account_view_comment" class="comment_container comment_container_not_visible">
-        <div class="comment">
-            L'utilisateur
-            La date
-            Le titre de l'article concerné ( Lien vers l'article )
-            Le contenu du commentaire
-            Bouton pour delete le commentaire
+    <div id="account_view_comment" class="comment_container container_not_visible">
+        <div class="comment_bis">
+        <?php foreach($jf_comments as $jf_comment): ?>
+            <div class="article_comment">
+                <div id="<?php echo $jf_comment->getId();?>" class="comment comment_not_visible">
+                    <p>De <?php echo $jf_comment->getAuteur();?></p>
+                    <p>Date de création : <?php echo $jf_comment->getCreated_at();?></p>
+                    <p>Contenu du commentaire : <?php echo $jf_comment->getContent();?></p>
+                    <br/>
+                </div>
+                <div class="button_container">
+                        <div class="link_jf">
+                            <a href="<?php echo HOST;?>modification/id/<?php echo $jf_comment->getId();?>">
+                            Éditer
+                            </a>
+                        </div>
+                        <div class="link_jf">
+                            <a href="<?php echo HOST;?>delete/id/<?php echo $jf_comment->getId();?>">
+                            Effacer
+                            </a>
+                        </div>
+                    </div>
+            </div>
+        <?php endforeach; ?> 
+
+        </div>
+    </div>
+    <div id="account_view_comment_reported" class="comment_container container_not_visible">
+        <div class="reported_comment">
+            <?php foreach($jf_comments as $jf_comment): ?>
+                <?php if ($jf_comment->getReported() == 1): ?>
+                    <div class="article_comment">
+                        <div id="<?php echo $jf_comment->getId();?>" class="comment comment_not_visible">
+                            <p>De <?php echo $jf_comment->getAuteur();?></p>
+                            <p>Date de création : <?php echo $jf_comment->getCreated_at();?></p>
+                            <p>Contenu du commentaire : <?php echo $jf_comment->getContent();?></p>
+                            <p class="reported">Ce commentaire a été signalé</p>
+                            <br/>
+                        </div>
+                        <div class="button_container">
+                                <div class="link_jf">
+                                    <a href="<?php echo HOST;?>modification/id/<?php echo $jf_comment->getId();?>">
+                                    Éditer
+                                    </a>
+                                </div>
+                                <div class="link_jf">
+                                    <a href="<?php echo HOST;?>delete/id/<?php echo $jf_comment->getId();?>">
+                                    Effacer
+                                    </a>
+                                </div>
+                        </div>
+                    </div>
+                <?php endif; ?> 
+            <?php endforeach; ?> 
         </div>
     </div>
 

@@ -49,4 +49,12 @@ class Jf_comment
     {
         $this->article_id = $article_id;
     }
+    public function getReported()
+    {
+        return $this->reported;
+    }
+    public function setReported($reported)
+    {
+        $this->reported = $reported;
+    }
 }
