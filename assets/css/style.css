@@ -77,6 +77,7 @@ h2 {
 .button_container{
     display: flex;
     justify-content: flex-end;
+    width: 100%;
 }
 .button_jf{
     border: none;
@@ -189,10 +190,15 @@ h2 {
     border: 1px solid white;
     width: 20%;
 }
+.article_content {
+    display: flex;
+    flex-flow: row wrap;
+}
 .article_content h3{
     overflow: hidden;
     text-overflow: ellipsis; 
     word-break: break-word;
+    width: 100%;
 }
 .container_visible {
     display: flex;
@@ -223,11 +229,24 @@ h2 {
 }
 .reported {
     color:red;
+    width: 100%;
+    text-align: end;
 }
 .reported_comment {
     display: flex;
     flex-flow: row wrap;
     margin: 0 2%;
+}
+.com_crud {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    justify-content: flex-end;
+}
+.com_date {    
+    font-size: 0.7em;
+    margin: 0;
+    width: 100%;
 }
 /* ------------------------------------Formulaire account -----------------------------*/
 .account_gestion .jf_form .form-group {

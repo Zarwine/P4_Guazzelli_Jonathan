@@ -8,6 +8,8 @@ class Jf_comment
     private $content;
     private $created_at;
     private $article_id;
+    private $edited_at;
+    private $reported;
 
     public function getId()
     {
@@ -56,5 +58,13 @@ class Jf_comment
     public function setReported($reported)
     {
         $this->reported = $reported;
+    }
+    public function getEdited_at()
+    {
+        return $this->edited_at;
+    }
+    public function setEdited_at($edited_at)
+    {
+        $this->edited_at = $edited_at;
     }
 }

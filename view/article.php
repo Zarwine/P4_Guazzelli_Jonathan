@@ -46,6 +46,7 @@ $article_id = $jf_article->getId();
     $jf_comment->setCreated_at($row[$i]['created_at']);   
     $jf_comment->setArticle_Id($row[$i]['article_id']);
     $jf_comment->setReported($row[$i]['reported']);
+    $jf_comment->setEdited_at($row[$i]['edited_at']);
 
     $jf_comments[] = $jf_comment;
 
@@ -79,14 +80,32 @@ $article_id = $jf_article->getId();
                 <?php foreach($jf_comments as $jf_comment): ?>
                     <div class="article_content">
                         <h3><?php echo $jf_comment->getAuteur();?></h3>
-                        <?php echo $jf_comment->getContent();?>
-                        <br/>
-                    </div>                   
-                
-                    <div class="signaler">
-                        <a href="<?php echo HOST;?>com_report/id/<?php echo $jf_comment->getId();?>">
-                        Signaler
-                        </a>
+                        <p class="com_date">écrit le : <?php echo $jf_comment->getCreated_at();?></p>
+                        
+                            <?php if ($jf_comment->getEdited_at() !== null): ?>
+                                <p class="com_date">édité le : <?php echo $jf_comment->getEdited_at();?></p>
+                            <?php endif; ?>
+                        
+
+                        <p><?php echo $jf_comment->getContent();?></p>
+                    </div> 
+                    
+                    <div class="com_crud">
+                        <?php if (isset($_SESSION['auth'])): ?>
+                            <?php if ($jf_comment->getAuteur() == $_SESSION['auth']->username): ?> 
+                                <div class="editer link_jf">
+                                    <a href="<?php echo HOST;?>com_edit/id/<?php echo $jf_comment->getId();?>">
+                                    éditer
+                                    </a>
+                                </div>
+                            <?php endif; ?>
+                        <?php endif; ?>
+
+                        <div class="signaler link_jf">
+                            <a href="<?php echo HOST;?>com_report/id/<?php echo $jf_comment->getId();?>">
+                            Signaler
+                            </a>
+                        </div>
                     </div>
 
                     <?php if (isset($_SESSION['auth'])): ?>

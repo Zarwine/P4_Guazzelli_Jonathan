@@ -28,6 +28,7 @@ class Jf_commentManager
             $jf_comment->setContent($row['content']);
             $jf_comment->setArticle_id($row['article_id']);
             $jf_comment->setReported($row['reported']);
+            $jf_comment->setEdited_at($row['reported']);
 
             $jf_comments[] = $jf_comment;
         };
@@ -85,6 +86,20 @@ class Jf_commentManager
 
         $req = $bdd->prepare($query);
         $req->bindValue(':id', $id, PDO::PARAM_INT);
+
+        $req->execute();
+    }
+
+    public function edit($values)
+    {
+        $bdd = $this->bdd;      
+      
+        $query = "UPDATE jf_comment SET `content` = :content WHERE `jf_comment`.`id` = :id;";
+
+        $req = $bdd->prepare($query);
+
+        $req->bindValue(':id', $values['id'], PDO::PARAM_INT);
+        $req->bindValue(':content', $values['content'], PDO::PARAM_STR);
 
         $req->execute();
     }

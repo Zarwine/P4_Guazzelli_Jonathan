@@ -50,11 +50,23 @@ class Comment
     }
 
 
-    public function addArticle($params)
+    public function addComment($params)
     {
         $values = $_POST['values'];
         $manager = new Jf_commentManager();
         //$manager->create($values);
+
+        $myView = new View();
+        $myView->redirect('home');
+    }
+
+    public function editionComment($params)
+    {
+
+        $values = $_POST['values'];
+
+        $manager = new Jf_commentManager();
+        $manager->edit($values);
 
         $myView = new View();
         $myView->redirect('home');
