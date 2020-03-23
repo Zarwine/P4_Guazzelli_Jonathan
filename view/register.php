@@ -9,7 +9,7 @@ if(!empty($_POST)){
     $member->verifAll($userData);    
 }
 ?>
-
+<div class="page_container">
 <h2>S'inscrire</h2>
 
 <?php if(!empty($errors)): ?>
@@ -44,3 +44,4 @@ if(!empty($_POST)){
     <button type="submit" class="button_jf">S'inscrire</button>
 
 </form>
+</div>

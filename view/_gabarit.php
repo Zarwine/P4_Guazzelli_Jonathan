@@ -15,7 +15,7 @@ if(session_status() == PHP_SESSION_NONE){
     <link rel="stylesheet" href="<?php echo ASSETS;?>css/style.css">
     <script src="https://cdn.tiny.cloud/1/rhmcwo4c3c04oqicyi140d661xaxcuor848zntmj4er65w6b/tinymce/5/tinymce.min.js"
     referrerpolicy="origin"></script>
-    <link href="https://fonts.googleapis.com/css?family=Amita&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oxygen&display=swap" rel="stylesheet">
 </head>
 <body>
 <header>

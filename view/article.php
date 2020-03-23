@@ -78,7 +78,7 @@ $article_id = $jf_article->getId();
             <?php if (isset($jf_comments)): ?>
 
                 <?php foreach($jf_comments as $jf_comment): ?>
-                    <div class="article_content">
+                    <div class="article_content article_comment">
                         <h3><?php echo $jf_comment->getAuteur();?></h3>
                         <p class="com_date">écrit le : <?php echo $jf_comment->getCreated_at();?></p>
                         
@@ -89,7 +89,7 @@ $article_id = $jf_article->getId();
 
                         <p><?php echo $jf_comment->getContent();?></p>
                     </div> 
-                    
+
                     <div class="com_crud">
                         <?php if (isset($_SESSION['auth'])): ?>
                             <?php if ($jf_comment->getAuteur() == $_SESSION['auth']->username): ?> 

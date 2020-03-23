@@ -1,4 +1,4 @@
-<div id="container">
+<div id="container" class="page_container">
     <h2>écrire un article</h2>
 
     <form class="jf_form" action="<?php echo HOST;?>add" method="post">

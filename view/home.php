@@ -4,6 +4,10 @@ if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
 ?>
+
+<div class="bienvenue">
+    <h1>Bienvenue sur le blog de Jean Forteroche</h1>
+</div>
     <?php foreach($jf_articles as $jf_article): ?>
         <div class="article_content">
             <h3><?php echo $jf_article->getName();?></h3>

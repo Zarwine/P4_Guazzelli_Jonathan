@@ -1,10 +1,10 @@
 body {
     margin: 0;
-    background-image: url("../../assets/img/jf_bg2048.jpg");
+    /*background-image: url("../../assets/img/jf_bg2048.jpg");*/
     background-size: cover;
     background-attachment: fixed;
     color: rgb(230,230,230);
-    font-family: 'Amita', 'sans-serif' ;
+    font-family: 'Oxygen', 'sans-serif' ;
 }
 /* ________________________________________________________________________________________________________________________________*/
 /* ________________________________________________________________________________________________________________________________*/
@@ -14,7 +14,7 @@ body {
 .navbar{
     position: fixed;
     height: 80px;
-    background-color: rgba(0,0,0,1);
+    background-color: rgba(0,40,40,1);
     left: 0;
     top: 0;
     right: 0;
@@ -65,14 +65,17 @@ header .end-row{
 h2 {
     text-align: center;
 }
-.article_container{
-    margin: 80px 5%;
-    background-color: rgba(0,0,0,0.8);
-    padding-bottom: 20px;
+.bienvenue h1{
+    color: rgb(230,230,230);
+    text-shadow: 1px 1px 4px black;
+    margin: 250px auto 200px auto;
+    text-align: center;
+    font-size: 4em;
 }
 .article_content{
-    padding: 20px 20%;
-    margin: 30px 2%;
+    padding: 20px 10%;
+    margin: 0px 10%;
+    background-color: rgba(0,10,10,0.8);
 }
 .button_container{
     display: flex;
@@ -124,6 +127,22 @@ h2 {
     margin: auto;
     border-radius: 10px;
 }
+/* ------------------------------------ Article seul --------------------------------------*/
+.com_crud {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    justify-content: flex-end;
+}
+.com_date {    
+    font-size: 0.7em;
+    margin: 0;
+    width: 100%;
+}
+.article_comment {
+    margin: 0;
+    padding: 0 8% 0 25%;
+}
 /*=================================================================================================================================*/
 /*========================================================FORMULAIRE===============================================================*/
 /*=================================================================================================================================*/
@@ -153,6 +172,9 @@ h2 {
 /* _________________________________________________________ACCOUNT________________________________________________________________*/
 /* ________________________________________________________________________________________________________________________________*/
 /* ________________________________________________________________________________________________________________________________*/
+.page_container {
+    background-color: rgba(0,0,0,1);
+}
 .account_header {
     text-align: center;
 }
@@ -216,13 +238,14 @@ h2 {
     flex-flow: row wrap;
     overflow: hidden;
 }
-.article_comment {
+.article_comment_account {
     width: 30%;
     margin: 8px;
     border: 1px solid white;
     padding: 1%;
     overflow: hidden;
     word-break: break-word;
+    background-color: rgba(0,10,10,0.8);
 }
 .view_comment, .view_comment_reported{
     cursor: pointer;
@@ -237,17 +260,7 @@ h2 {
     flex-flow: row wrap;
     margin: 0 2%;
 }
-.com_crud {
-    display: flex;
-    flex-flow: row wrap;
-    width: 100%;
-    justify-content: flex-end;
-}
-.com_date {    
-    font-size: 0.7em;
-    margin: 0;
-    width: 100%;
-}
+
 /* ------------------------------------Formulaire account -----------------------------*/
 .account_gestion .jf_form .form-group {
     padding: 0;

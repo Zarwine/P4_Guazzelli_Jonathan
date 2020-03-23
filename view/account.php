@@ -14,6 +14,7 @@
    //var_dump($_SESSION);
    //     exit();
 ?>
+<div class="page_container">
 <div class="account_header">
 <h1>Bonjour <?= $_SESSION['auth']->username; ?></h1>
 <h3>Bienvenue dans votre espace membre</h3>
@@ -36,7 +37,7 @@
         </ul>
     </div>
 
-    <div id="account_view_article" class="article_container container_not_visible">
+    <div id="account_view_article" class="container_not_visible">
     <?php foreach($jf_articles as $jf_article): ?>
         <div class="article_content">
             <a href="<?php echo HOST;?>view/id/<?php echo $jf_article->getId();?>" class="titre_article"><h3><?php echo $jf_article->getName();?></h3></a>
@@ -84,7 +85,7 @@
     <div id="account_view_comment" class="comment_container container_not_visible">
         <div class="comment_bis">
         <?php foreach($jf_comments as $jf_comment): ?>
-            <div class="article_comment">
+            <div class="article_comment_account">
                 <div id="<?php echo $jf_comment->getId();?>" class="comment comment_not_visible">
                     <p>De <?php echo $jf_comment->getAuteur();?></p>
                     <p>Date de création : <?php echo $jf_comment->getCreated_at();?></p>
@@ -112,7 +113,7 @@
         <div class="reported_comment">
             <?php foreach($jf_comments as $jf_comment): ?>
                 <?php if ($jf_comment->getReported() == 1): ?>
-                    <div class="article_comment">
+                    <div class="article_comment_account">
                         <div id="<?php echo $jf_comment->getId();?>" class="comment comment_not_visible">
                             <p>De <?php echo $jf_comment->getAuteur();?></p>
                             <p>Date de création : <?php echo $jf_comment->getCreated_at();?></p>
@@ -157,3 +158,5 @@
 <?php if ($_SESSION['auth']->admin == 1): ?>
 <script src="<?php echo ASSETS;?>js/account.js"></script>
 <?php endif; ?>
+
+</div>

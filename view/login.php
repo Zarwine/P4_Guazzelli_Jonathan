@@ -15,6 +15,8 @@ if(!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])) {
     $member->login($userData);   
 }
 ?>
+<div class="page_container">
+
 <h2>Se connecter</h2>
 
 <form class="jf_form" action="" method="POST">
@@ -35,3 +37,5 @@ if(!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])) {
     <button type="submit" class="button_jf">Se connecter</button>
 
 </form>
+
+</div>
