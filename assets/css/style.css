@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    /*background-image: url("../../assets/img/jf_bg2048.jpg");*/
+    background-image: url("../../assets/img/jf_bg2048.jpg");
     background-size: cover;
     background-attachment: fixed;
     color: rgb(230,230,230);
@@ -73,9 +73,12 @@ h2 {
     font-size: 4em;
 }
 .article_content{
-    padding: 20px 10%;
-    margin: 0px 10%;
+    padding: 20px 5%;
+    margin: 10px 15%;
+    border-radius: 20px;
     background-color: rgba(0,10,10,0.8);
+    display: flex;
+    flex-flow: row wrap;
 }
 .button_container{
     display: flex;
@@ -117,6 +120,7 @@ h2 {
     background-color: rgb(39, 144, 10);
     width: fit-content;
     margin: auto;
+    margin-top: 100px;
     border-radius: 10px;
 }
 .alert-danger {
@@ -126,6 +130,7 @@ h2 {
     width: fit-content;
     margin: auto;
     border-radius: 10px;
+    margin-top: 100px;
 }
 /* ------------------------------------ Article seul --------------------------------------*/
 .com_crud {
@@ -147,7 +152,7 @@ h2 {
 /*========================================================FORMULAIRE===============================================================*/
 /*=================================================================================================================================*/
 .jf_form{
-    padding: 30px 4%;
+    padding: 30px 10%;
 }
 .jf_form .form-group {
     padding-left: 300px;
@@ -173,7 +178,9 @@ h2 {
 /* ________________________________________________________________________________________________________________________________*/
 /* ________________________________________________________________________________________________________________________________*/
 .page_container {
-    background-color: rgba(0,0,0,1);
+    border-radius: 20px;
+    margin: 80px 5%;
+    background-color: rgba(0,0,0,0.6);
 }
 .account_header {
     text-align: center;
@@ -212,10 +219,6 @@ h2 {
     border: 1px solid white;
     width: 20%;
 }
-.article_content {
-    display: flex;
-    flex-flow: row wrap;
-}
 .article_content h3{
     overflow: hidden;
     text-overflow: ellipsis; 
@@ -246,6 +249,7 @@ h2 {
     overflow: hidden;
     word-break: break-word;
     background-color: rgba(0,10,10,0.8);
+    border-radius: 20px;
 }
 .view_comment, .view_comment_reported{
     cursor: pointer;

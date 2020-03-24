@@ -15,13 +15,18 @@ class Jf_userManager
     public function verifName($userData) {
         $req = $this->bdd->prepare('SELECT id FROM jf_users WHERE username =?');
         $req->execute([$userData['username']]);
-        $user = $req->fetch();
+        $user = $req->fetch(); 
+        //var_dump($errors);
+        //exit(); 
         if($user){
             $errors['username'] = "Ce pseudo est déja pris";
+            var_dump($errors);                     
         }
+        var_dump($errors);
+        return $errors; 
     }
 
-    public function verifEmail($userData) {
+    public function verifEmail($userData, $errors) {
         $req = $this->bdd->prepare('SELECT id FROM jf_users WHERE email =?');
         $req->execute([$userData['email']]);
         $user = $req->fetch();
@@ -81,23 +86,30 @@ class Jf_userManager
         $req = $this->bdd->prepare('SELECT * FROM jf_users WHERE (username = :username OR email = :username) AND confirmed_at IS NOT NULL');
         $req->execute(['username' => $userData['username']]);
         $user = $req->fetch();
+        if($user !== false){
+            if(password_verify($userData['password'], $user->password)){
+                $_SESSION['auth'] = $user;
+                $_SESSION['flash']['success'] = 'Vous êtes maintenant connecté';
+                if($userData['remember']){
 
-        if(password_verify($userData['password'], $user->password)){
-            $_SESSION['auth'] = $user;
-            $_SESSION['flash']['success'] = 'Vous êtes maintenant connecté';
-            if($userData['remember']){
+                    require_once (CONTROLLER.'Member.php');
+                    $mbr = new Member();
+                    $remember_token = $mbr->str_random(250);
 
-                require_once (CONTROLLER.'Member.php');
-                $mbr = new Member();
-                $remember_token = $mbr->str_random(250);
-
-                $this->bdd->prepare('UPDATE jf_users SET remember_token = ? WHERE id = ?')->execute([$remember_token, $user->id]);
-                setcookie('remember', $user->id . '==' . $remember_token . sha1($user->id . 'clefarbitraire'), time() + 60 * 60 * 24 * 7);            
+                    $this->bdd->prepare('UPDATE jf_users SET remember_token = ? WHERE id = ?')->execute([$remember_token, $user->id]);
+                    setcookie('remember', $user->id . '==' . $remember_token . sha1($user->id . 'clefarbitraire'), time() + 60 * 60 * 24 * 7);            
+                }
+                header('Location: account');
+                exit();
+            } else {
+                $_SESSION['flash']['danger'] = 'Identifiant ou mot de passe incorrecte';
+                header('Location: login');
+                exit();
             }
-            header('Location: account');
-            exit();
         } else {
             $_SESSION['flash']['danger'] = 'Identifiant ou mot de passe incorrecte';
+            header('Location: login');
+                exit();
         }
     }
 

@@ -58,26 +58,32 @@ class Member
     public function verifAll($userData){
         $userManager = new Jf_userManager();
         $errors = array();
+        //$errors['username'] = "Ceci est un test";
 
         if(empty($userData['username']) || !preg_match('/^[a-zA-Z0-9_]+$/', $userData['username'])) {
             $errors['username'] = "Votre pseudo n'est pas valide";
         } else {
-            
-            $userManager->verifName($userData);        
+            $userManager->verifName($userData);  
+            var_dump($errors);
+            exit();  
         }
         if(empty($userData['email']) || !filter_var($userData['email'], FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = "Votre email n'est pas valide";
-        } else {
-            
-            $userManager->verifEmail($userData);        
+        } else {            
+            $userManager->verifEmail($userData, $errors);        
         }
 
         if(empty($userData['password']) || $userData['password'] != $userData['password_confirm']) {
             $errors['password'] = "Votre mot de passe n'est pas valide";
         }
+
         if(empty($errors)){
             
             $userManager->addMember($userData);
+        } else {
+            //var_dump($errors);
+            //exit();
+            $_SESSION['flash']['danger'] = $errors;
         }
     }  
     public function login($userData){

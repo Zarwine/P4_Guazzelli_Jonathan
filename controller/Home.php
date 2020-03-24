@@ -34,7 +34,6 @@ class Home
             $myView = new View('create');
             $myView->render(array('jf_article' => $jf_article));
         }
-
         
     }
 

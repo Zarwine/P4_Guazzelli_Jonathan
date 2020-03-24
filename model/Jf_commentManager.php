@@ -28,7 +28,7 @@ class Jf_commentManager
             $jf_comment->setContent($row['content']);
             $jf_comment->setArticle_id($row['article_id']);
             $jf_comment->setReported($row['reported']);
-            $jf_comment->setEdited_at($row['reported']);
+            $jf_comment->setEdited_at($row['edited_at']);
 
             $jf_comments[] = $jf_comment;
         };
@@ -46,6 +46,30 @@ class Jf_commentManager
         $req->execute();
         $jf_comments = $req->fetchAll();
         return $jf_comments;
+    }
+
+    public function findComment($id)
+    {
+        $bdd = $this->bdd;        
+        $query = "SELECT * FROM jf_comment WHERE id = :id";
+
+        $req = $bdd->prepare($query);
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+        $req->execute();
+        //$jf_comment = $req->fetchAll();
+        while ($row = $req->fetch(PDO::FETCH_ASSOC)){
+        
+            $jf_comment = new Jf_comment();
+            $jf_comment->setId($row['id']);
+            $jf_comment->setAuteur($row['auteur']);
+            $jf_comment->setCreated_at($row['created_at']);
+            $jf_comment->setContent($row['content']);
+            $jf_comment->setArticle_id($row['article_id']);
+            $jf_comment->setReported($row['reported']);
+            $jf_comment->setEdited_at($row['edited_at']);
+        
+        }
+        return $jf_comment;
     }
 
     public function create($comment, $username, $article_id)
@@ -92,7 +116,7 @@ class Jf_commentManager
 
     public function edit($values)
     {
-        $bdd = $this->bdd;      
+        $bdd = $this->bdd; 
       
         $query = "UPDATE jf_comment SET `content` = :content WHERE `jf_comment`.`id` = :id;";
 

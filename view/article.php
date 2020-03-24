@@ -94,8 +94,8 @@ $article_id = $jf_article->getId();
                         <?php if (isset($_SESSION['auth'])): ?>
                             <?php if ($jf_comment->getAuteur() == $_SESSION['auth']->username): ?> 
                                 <div class="editer link_jf">
-                                    <a href="<?php echo HOST;?>com_edit/id/<?php echo $jf_comment->getId();?>">
-                                    éditer
+                                    <a href="<?php echo HOST;?>com_modif/id/<?php echo $jf_comment->getId();?>">
+                                    Éditer
                                     </a>
                                 </div>
                             <?php endif; ?>
