@@ -30,7 +30,7 @@ $article_id = $jf_article->getId();
 //$manager->find($article_id);
 
     $bdd = new PDO("mysql:host=jogufrdkog533.mysql.db:3306;dbname=jogufrdkog533;charset=utf8", "jogufrdkog533", "MaBDD550");     
-    $query = "SELECT * FROM jf_comment WHERE article_id = :id";
+    $query = "SELECT * FROM jf_comment WHERE article_id = :id ORDER BY id DESC";
 
     $req = $bdd->prepare($query);
     $req->bindValue(':id', $article_id, PDO::PARAM_INT);
@@ -75,6 +75,16 @@ $article_id = $jf_article->getId();
                 <?php endif; ?>
             <?php endif; ?>
 
+            <?php if (isset($_SESSION['auth'])): ?>
+            <form class="comment_create" action="" method="POST">
+                <p>écrire un commentaire</p>
+                <textarea name="commentaire" id="comment_textarea" cols="30" rows="10" placeholder="Votre commentaire..."></textarea>
+                <input type="submit" value="Poster mon commentaire" name="submit_commentaire" class="button_jf"/>
+            </form>
+            <?php else: ?>
+                <p>Vous pouvez écrire un commentaire en vous connectant</p>
+            <?php endif; ?>    
+
             <?php if (isset($jf_comments)): ?>
 
                 <?php foreach($jf_comments as $jf_comment): ?>
@@ -99,16 +109,18 @@ $article_id = $jf_article->getId();
                                     </a>
                                 </div>
                             <?php endif; ?>
-                        <?php endif; ?>
-
-                        <div class="signaler link_jf">
+                            <div class="signaler link_jf">
                             <a href="<?php echo HOST;?>com_report/id/<?php echo $jf_comment->getId();?>">
                             Signaler
                             </a>
                         </div>
+                        <?php endif; ?>
+
                     </div>
 
                     <?php if (isset($_SESSION['auth'])): ?>
+
+
                         <?php if ($_SESSION['auth']->admin == 1): ?>  
                             <?php if ($jf_comment->getReported() == 1): ?>
                                 <p class="reported">Ce commentaire a été signalé</p>  
@@ -128,17 +140,7 @@ $article_id = $jf_article->getId();
 
                 <?php endforeach; ?>
 
-            <?php endif; ?>
-
-            <?php if (isset($_SESSION['auth'])): ?>
-            <form class="comment_create" action="" method="POST">
-                <p>écrire un commentaire</p>
-                <textarea name="commentaire" id="comment_textarea" cols="30" rows="10" placeholder="Votre commentaire..."></textarea>
-                <input type="submit" value="Poster mon commentaire" name="submit_commentaire"/>
-            </form>
-            <?php else: ?>
-                <p>Vous devez vous connecter pour écrire un commentaire</p>
-            <?php endif; ?>         
+            <?php endif; ?>     
 
         </div>
 

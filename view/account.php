@@ -144,7 +144,8 @@
     <h2>Gestion du compte</h2>
 
     <form class="jf_form jf_form_article" action="" method="post">
-        <h3>Changer votre mot de passe</h3>
+        <h3>Changement de votre mot de passe</h3>
+        <p class="acc_detail">Si vous le souhaitez, vous pouvez changer votre mot de passe.</p>
         <div class="form-group">
             <input class="form-control" type="password" name="password" placeholder="Changer de mot de passe" />
         </div>

@@ -28,11 +28,11 @@ if(!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])) {
         <label for="">Mot de passe <a href="<?php echo HOST;?>forget">(Mot de passe oublié ?)</a></label>
         <input type="password" name="password" required/>
     </div>
-    <div class="form-group">
+    <!--<div class="form-group">
 
             <input class="remember_me" type="checkbox" name="remember" value="1" />Se souvenir de moi
     
-    </div>
+    </div>-->
 
     <button type="submit" class="button_jf">Se connecter</button>
 

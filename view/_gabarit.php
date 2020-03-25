@@ -61,7 +61,8 @@ if(session_status() == PHP_SESSION_NONE){
 </header>
 <div class="article_container">
 
-    <?php if(isset($_SESSION['flash'])): ?>
+<div class="notif">
+<?php if(isset($_SESSION['flash'])): ?>
         <?php foreach($_SESSION['flash'] as $type => $message): ?>
             <div class="alert alert-<?= $type; ?>">
                 <?= $message; ?>
@@ -69,6 +70,7 @@ if(session_status() == PHP_SESSION_NONE){
         <?php endforeach; ?>
         <?php unset($_SESSION['flash']); ?>
     <?php endif; ?>
+</div>
 
 <?php echo $contentPage; ?>
 </div>

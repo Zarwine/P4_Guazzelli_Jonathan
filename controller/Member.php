@@ -55,35 +55,58 @@ class Member
 
     }
 
-    public function verifAll($userData){
+    public function verifAll(){
+        
+        //if(!empty($_POST)){
+        //    $userData = $_POST;
+        //}
+        
+            session_start();
+
+        $userData = $_POST;
+
+        //var_dump($userData);
+        //exit();
+
         $userManager = new Jf_userManager();
+        //$errors = $userManager->verifName($userData);
         $errors = array();
-        //$errors['username'] = "Ceci est un test";
 
         if(empty($userData['username']) || !preg_match('/^[a-zA-Z0-9_]+$/', $userData['username'])) {
             $errors['username'] = "Votre pseudo n'est pas valide";
-        } else {
-            $userManager->verifName($userData);  
-            var_dump($errors);
-            exit();  
+        } else {            
+            if ($userManager->verifName($userData) == true){
+                $errors['username'] = "Ce pseudo est déja pris";           
+            }       
         }
+
         if(empty($userData['email']) || !filter_var($userData['email'], FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = "Votre email n'est pas valide";
-        } else {            
-            $userManager->verifEmail($userData, $errors);        
+        } else {                        
+            if($userManager->verifEmail($userData) == true){
+                $errors['email'] = "Cet email est déja utilisé pour un autre compte";           
+            }        
         }
 
         if(empty($userData['password']) || $userData['password'] != $userData['password_confirm']) {
             $errors['password'] = "Votre mot de passe n'est pas valide";
         }
-
-        if(empty($errors)){
-            
+        
+        
+        if(empty($errors)) {         
             $userManager->addMember($userData);
         } else {
-            //var_dump($errors);
-            //exit();
-            $_SESSION['flash']['danger'] = $errors;
+            $danger = 'danger danger-register 0';
+           
+            foreach($errors as $error) {            
+            
+            $_SESSION['flash'][$danger] = $error;
+            $danger++;
+            }
+
+        header('Location: register');
+
+        exit();
         }
     }  
     public function login($userData){
@@ -91,6 +114,7 @@ class Member
         $userManager = new Jf_userManager();
         $userManager->login($userData);
     }
+
     public function forgetPassword($userData){
         
         $userManager = new Jf_userManager();

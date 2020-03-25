@@ -146,16 +146,26 @@ h2 {
 }
 .article_comment {
     margin: 0;
-    padding: 0 8% 0 25%;
+    width: 100%;
+    background: none;
 }
 /*=================================================================================================================================*/
 /*========================================================FORMULAIRE===============================================================*/
 /*=================================================================================================================================*/
+/* ------------------------------------ Register  --------------------------------------------------------*/
 .jf_form{
     padding: 30px 10%;
 }
 .jf_form .form-group {
     padding-left: 300px;
+    margin: 10px 0;
+}
+.jf_form .form-group input{
+    background: none;
+    border: 1px solid rgb(100,100,100);
+    height: 25px;
+    color: rgb(230,230,230);
+    padding-left: 10px;
 }
 .jf_form label{
     float: left;
@@ -171,6 +181,31 @@ h2 {
 }
 .remember_me{
     margin-left: -305px;
+}
+.danger-register{
+    margin-top: 0px;
+    margin-bottom: 2px;
+}
+/* ------------------------------------ écrire un commentaire --------------------------------------*/
+#comment_textarea {
+    width: 100%;
+    height: 90px;
+    background-color: rgba(0,0,0,0.1);
+    color: rgb(230,230,230);
+    font-family: Oxygen, sans-serif;
+    padding: 0 7px;
+    border: solid 1px rgb(50, 50, 50);
+}
+#btn_comment{
+    padding: 10px;
+    text-decoration: none;
+    color: rgb(2, 174, 108);
+    margin: 0 4px;
+    border-radius: 3px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin-bottom: 20px;
 }
 /* ________________________________________________________________________________________________________________________________*/
 /* ________________________________________________________________________________________________________________________________*/
@@ -272,6 +307,14 @@ h2 {
 }
 .account_gestion .jf_form .button_jf {
     margin: auto;
+}
+.acc_detail {
+    font-size: 0.7em;
+    text-align: center;
+    width: 100%;
+}
+.account_gestion .form-control {
+    width: 200px;
 }
 
 /* ________________________________________________________________________________________________________________________________*/

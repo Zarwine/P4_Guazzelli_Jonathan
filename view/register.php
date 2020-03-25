@@ -1,13 +1,4 @@
-<?php 
-
-session_start();
-
-if(!empty($_POST)){
-    $userData = $_POST;
-    require_once (CONTROLLER.'Member.php');
-    $member = new Member();
-    $member->verifAll($userData);    
-}
+<?php session_start();
 ?>
 <div class="page_container">
 <h2>S'inscrire</h2>
@@ -23,7 +14,7 @@ if(!empty($_POST)){
     </div>
 <?php endif; ?>
 
-<form class="jf_form" action="" method="POST">
+<form class="jf_form" action="register_confirm" method="POST">
     <div class="form-group">
         <label for="">Pseudo</label>
         <input type="text" name="username" required/>

@@ -16,23 +16,19 @@ class Jf_userManager
         $req = $this->bdd->prepare('SELECT id FROM jf_users WHERE username =?');
         $req->execute([$userData['username']]);
         $user = $req->fetch(); 
-        //var_dump($errors);
-        //exit(); 
         if($user){
-            $errors['username'] = "Ce pseudo est déja pris";
-            var_dump($errors);                     
-        }
-        var_dump($errors);
-        return $errors; 
+            return true;
+        }                         
     }
 
-    public function verifEmail($userData, $errors) {
+    public function verifEmail($userData) {
         $req = $this->bdd->prepare('SELECT id FROM jf_users WHERE email =?');
         $req->execute([$userData['email']]);
         $user = $req->fetch();
         if($user){
-            $errors['email'] = "Cet email est déja utilisé pour un autre compte";
+            return true;
         }
+
     }
     
     public function addMember($userData){

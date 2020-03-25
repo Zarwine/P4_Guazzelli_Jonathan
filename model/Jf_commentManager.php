@@ -15,7 +15,7 @@ class Jf_commentManager
     {
         $bdd = $this->bdd;
         
-        $query = "SELECT * FROM jf_comment";
+        $query = "SELECT * FROM jf_comment  ORDER BY id DESC";
 
         $req = $bdd->prepare($query);
         $req->execute();

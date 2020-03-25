@@ -14,6 +14,7 @@ class Routeur
                         "view"             => ["controller" => "Home",   "method" => "showArticle"],          //Fin CRUD
 
                         "register"         => ["controller" => "Member", "method" => "showRegister"],      //Début Espace membre
+                        "register_confirm" => ["controller" => "Member", "method" => "verifAll"],     
                         "login"            => ["controller" => "Member", "method" => "showLogin"],
                         "forget"           => ["controller" => "Member", "method" => "showForget"],
                         "account"          => ["controller" => "Member", "method" => "showAccount"],
