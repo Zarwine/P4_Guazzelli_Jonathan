@@ -19,6 +19,7 @@ class Routeur
                         "forget"           => ["controller" => "Member", "method" => "showForget"],
                         "account"          => ["controller" => "Member", "method" => "showAccount"],
                         "confirm"          => ["controller" => "Member", "method" => "registerConfirm"],
+                        "changePassword"   => ["controller" => "Member", "method" => "changePassword"],
                         "reset"            => ["controller" => "Member", "method" => "resetPassword"],
                         "logout"           => ["controller" => "Member", "method" => "logout"],             //Fin Espace membre
 

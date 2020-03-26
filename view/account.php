@@ -1,18 +1,4 @@
 <?php session_start();
-    require_once (CONTROLLER.'Member.php');
-    $member = new Member();
-    //$member->logged_only();
-    $userData = $_POST;
-    $member->changePassword($userData);  
-   //if($_SESSION['auth']->admin == 1){
-   //    echo "Salut l'admin";
-   //}else {
-   //    echo "Salut l'utilisateur lambda";
-   //    var_dump($_SESSION);
-   //}
-   //exit();
-   //var_dump($_SESSION);
-   //     exit();
 ?>
 <div class="page_container">
 <div class="account_header">
@@ -143,7 +129,7 @@
 <div class="account_gestion">
     <h2>Gestion du compte</h2>
 
-    <form class="jf_form jf_form_article" action="" method="post">
+    <form class="jf_form jf_form_article" action="changePassword" method="post">
         <h3>Changement de votre mot de passe</h3>
         <p class="acc_detail">Si vous le souhaitez, vous pouvez changer votre mot de passe.</p>
         <div class="form-group">

@@ -177,15 +177,19 @@ class Member
         }
     }
 
-    public function changePassword($userData){
+    public function changePassword(){  
+        session_start();  
+        $userData = $_POST;  
         if(!empty($userData)){
             if(empty($userData['password']) || $userData['password'] != $userData['password_confirm']){
                 $_SESSION['flash']['danger'] = "Les mots de passes ne correspondent pas";
+                header('Location: account');
             }else{
                 $userManager = new Jf_userManager();
                 $userManager->changePassword($userData);
     
                 $_SESSION['flash']['success'] = "Votre mot de passe a bien été mis à jour";
+                header('Location: account');
             }
         }
     }
