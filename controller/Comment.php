@@ -14,23 +14,28 @@ class Comment
     }
 
     public function createComment($params)
-    {     
- 
-        if(!empty($comment)){
+    {    
+        session_start() ;
+        $manager = new Jf_commentManager();
 
-            $manager = new Jf_commentManager();            
-            //$manager->create($comment, $username);  
+       $article_id = explode("/", $_REQUEST['r'])[1];
 
-            $_SESSION['flash']['success'] = 'Votre commentaire a bien été reçu';
-            $myView = new View();
-            $myView->redirect('home');
-        } else {
-            //var_dump($_SESSION);
-            //exit();
-            $_SESSION['flash']['danger'] = 'Vous ne pouvez pas envoyer de commentaire vide';
-            $myView = new View();
-            $myView->redirect('home');
-        }       
+        if(isset($_POST['submit_commentaire'])){
+            if(!empty($_POST['commentaire'])){       
+                
+                $username =  $_SESSION["auth"]->username;
+                $comment = htmlspecialchars($_POST['commentaire']);
+                
+                           
+                $manager->create($comment, $username, $article_id);  
+        
+                $_SESSION['flash']['success'] = 'Votre commentaire a bien été reçu';
+                $myView = new View();
+                $myView->redirect('home');
+            } else {
+                $_SESSION['flash']['alert'] = 'Message vide';
+            }
+        }  
         
     }
 

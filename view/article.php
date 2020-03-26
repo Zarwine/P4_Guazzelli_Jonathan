@@ -1,5 +1,4 @@
-
-    <?php
+<?php
 if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
@@ -7,27 +6,7 @@ require_once (MODEL.'Jf_commentManager.php');
 require_once (MODEL.'Jf_comment.php');
 $manager = new Jf_commentManager(); 
 
-if(isset($_POST['submit_commentaire'])){
-    if(!empty($_POST['commentaire'])){
-       //var_dump($_POST['']);
-       //exit();
-
-        
-        $username =  $_SESSION["auth"]->username;
-        $comment = htmlspecialchars($_POST['commentaire']);
-        $article_id = $jf_article->getId();
-                   
-        $manager->create($comment, $username, $article_id);  
-
-        $_SESSION['flash']['success'] = 'Votre commentaire a bien été reçu';
-        $myView = new View();
-        $myView->redirect('home');
-    } else {
-        $_SESSION['flash']['alert'] = 'Message vide';
-    }
-}
 $article_id = $jf_article->getId();
-//$manager->find($article_id);
 
     $bdd = new PDO("mysql:host=jogufrdkog533.mysql.db:3306;dbname=jogufrdkog533;charset=utf8", "jogufrdkog533", "MaBDD550");     
     $query = "SELECT * FROM jf_comment WHERE article_id = :id ORDER BY id DESC";
@@ -51,7 +30,6 @@ $article_id = $jf_article->getId();
     $jf_comments[] = $jf_comment;
 
 }
-
 ?>
         <div class="article_content">
             <h3><?php echo $jf_article->getName();?></h3>
@@ -76,7 +54,7 @@ $article_id = $jf_article->getId();
             <?php endif; ?>
 
             <?php if (isset($_SESSION['auth'])): ?>
-            <form class="comment_create" action="" method="POST">
+            <form class="comment_create" action="<?php echo HOST;?>com_create/<?php echo $jf_article->getId();?>" method="POST">
                 <p>écrire un commentaire</p>
                 <textarea name="commentaire" id="comment_textarea" cols="30" rows="10" placeholder="Votre commentaire..."></textarea>
                 <input type="submit" value="Poster mon commentaire" name="submit_commentaire" class="button_jf"/>

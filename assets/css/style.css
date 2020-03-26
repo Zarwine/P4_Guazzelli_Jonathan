@@ -114,6 +114,15 @@ h2 {
 .button_jf:hover {
     color: rgb(230,230,230);
 }
+.alert-reset {
+    text-align: center;
+    padding: 20px;
+    background-color: rgb(39, 144, 10);
+    width: fit-content;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 5px;
+}
 .alert-success {
     text-align: center;
     padding: 20px;
@@ -121,7 +130,7 @@ h2 {
     width: fit-content;
     margin: auto;
     margin-top: 100px;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 .alert-danger {
     text-align: center;
@@ -129,7 +138,7 @@ h2 {
     background-color: rgb(144, 10, 10);
     width: fit-content;
     margin: auto;
-    border-radius: 10px;
+    border-radius: 5px;
     margin-top: 100px;
 }
 /* ------------------------------------ Article seul --------------------------------------*/
@@ -188,6 +197,15 @@ h2 {
 }
 /* ------------------------------------ écrire un commentaire --------------------------------------*/
 #comment_textarea {
+    width: 100%;
+    height: 90px;
+    background-color: rgba(0,0,0,0.1);
+    color: rgb(230,230,230);
+    font-family: Oxygen, sans-serif;
+    padding: 0 7px;
+    border: solid 1px rgb(50, 50, 50);
+}
+.comment_textarea {
     width: 100%;
     height: 90px;
     background-color: rgba(0,0,0,0.1);

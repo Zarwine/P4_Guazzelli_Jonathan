@@ -16,11 +16,14 @@ class Routeur
                         "register"         => ["controller" => "Member", "method" => "showRegister"],      //Début Espace membre
                         "register_confirm" => ["controller" => "Member", "method" => "verifAll"],     
                         "login"            => ["controller" => "Member", "method" => "showLogin"],
+                        "login_confirm"    => ["controller" => "Member", "method" => "login"],
                         "forget"           => ["controller" => "Member", "method" => "showForget"],
+                        "forgetPassword"   => ["controller" => "Member", "method" => "forgetPassword"],
                         "account"          => ["controller" => "Member", "method" => "showAccount"],
                         "confirm"          => ["controller" => "Member", "method" => "registerConfirm"],
                         "changePassword"   => ["controller" => "Member", "method" => "changePassword"],
                         "reset"            => ["controller" => "Member", "method" => "resetPassword"],
+                        "reset_confirm"    => ["controller" => "Member", "method" => "resetPasswordConfirm"],
                         "logout"           => ["controller" => "Member", "method" => "logout"],             //Fin Espace membre
 
                         "com_create"       => ["controller" => "Comment",   "method" => "createComment"],   //Début Commentaires
@@ -51,21 +54,23 @@ class Routeur
 
         $elements = explode('/', $this->request);
         unset($elements[0]);
+        
+        //var_dump($elements);
 
         for($i = 1; $i<count($elements); $i++)
         {
             $params[$elements[$i]] = $elements[$i+1];
             $i++;
         }
-
         if($_POST)
         {
-            //echo '<pre>'; print_r($_POST); exit;
             foreach($_POST as $key => $val)
             {
                 $params[$key] = $val;                
             }
         }
+        //var_dump($params);
+     
         return $params;
     }
 
@@ -83,10 +88,7 @@ class Routeur
             $currentController = new $controller();
             $currentController->$method($params);
         } else {
-            echo '404 Page non trouvée';
-            echo '<pre>'; print_r($params); // params = NULL 
-            echo '<pre>'; print_r($route); // = config.php
-            //echo '<pre>'; print_r($_SESSION);             
+            echo '404 Page non trouvée';          
             exit;
         }
     }

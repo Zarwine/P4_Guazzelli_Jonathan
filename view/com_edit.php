@@ -8,7 +8,7 @@
                 <input type="hidden" name="values[id]" value="<?php echo $jf_comment->getId(); ?>" />
             <?php endif; ?>
 
-            Contenu du commentaire : <textarea id="comment_text_area" name="values[content]"><?php echo $jf_comment->getContent(); ?></textarea><br />
+            Contenu du commentaire : <textarea id="comment_text_area" class="comment_text_area" name="values[content]"><?php echo $jf_comment->getContent(); ?></textarea><br />
             <input class="button_jf" type="submit" value="éditer" />
 
         </form>

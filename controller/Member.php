@@ -55,18 +55,15 @@ class Member
 
     }
 
+    public function resetPasswordConfirm(){
+
+    }
+
     public function verifAll(){
-        
-        //if(!empty($_POST)){
-        //    $userData = $_POST;
-        //}
         
             session_start();
 
         $userData = $_POST;
-
-        //var_dump($userData);
-        //exit();
 
         $userManager = new Jf_userManager();
         //$errors = $userManager->verifName($userData);
@@ -109,31 +106,57 @@ class Member
         exit();
         }
     }  
-    public function login($userData){
+    public function login(){
 
-        $userManager = new Jf_userManager();
-        $userManager->login($userData);
+        if(!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])) {
+            session_start();
+            $userData = $_POST;
+            $userManager = new Jf_userManager();
+            $user = $userManager->login($userData);
+
+            if($user !== false){
+                if(password_verify($userData['password'], $user->password)){
+                    $_SESSION['auth'] = $user;
+                    $_SESSION['flash']['success'] = 'Vous êtes maintenant connecté';
+                    header('Location: account');
+                    exit();
+                } else {
+                    $_SESSION['flash']['danger'] = 'Identifiant ou mot de passe incorrecte';
+                    header('Location: login');
+                    exit();
+                }
+            } else {
+                $_SESSION['flash']['danger'] = 'Identifiant ou mot de passe incorrecte';
+                header('Location: login');
+                    exit();
+            }
+        }
+
     }
 
-    public function forgetPassword($userData){
-        
-        $userManager = new Jf_userManager();
-        $userManager->forgetPassword($userData);
-        
-        if(isset($user)){
-            session_start();
-            $reset_token = $this->str_random(60);
-            $user = $this->user;
+    public function forgetPassword(){
 
-            $userManager->updateToken($user, $reset_token);
+        session_start();
 
-            $_SESSION['flash']['success'] = 'Les instructions du rappel de mot de passe vous ont été envoyées par email';
-            mail($userData['email'], 'Reinitialisation du mot de passe - Jogu.fr',"Afin de reinitialiser votre mot de passe, merci de cliquer sur ce lien\n\nhttps://jogu.fr/forteroche/reset/id/$user->id/token/$reset_token");
+        if(!empty($_POST) && !empty($_POST['email']) ) {
+            $userData = $_POST;        
+            $userManager = new Jf_userManager();
+            $user = $userManager->forgetPassword($userData);
 
-            header('Location: login');
-            exit();
-        } else {
-            $_SESSION['flash']['danger'] = 'Aucun compte ne correspond à cette adresse';
+            if($user !== false){
+                session_start();
+                $reset_token = $this->str_random(60);
+                $userManager->updateToken($user, $reset_token);
+
+                $_SESSION['flash']['success'] = 'Les instructions du rappel de mot de passe vous ont été envoyées par email';
+                mail($userData['email'], 'Reinitialisation du mot de passe - Jogu.fr',"Afin de reinitialiser votre mot de passe, merci de cliquer sur ce lien\n\nhttps://jogu.fr/forteroche/reset/id/$user->id/token/$reset_token");
+
+                header('Location: login');
+                exit();
+            } else {
+                $_SESSION['flash']['danger'] = 'Aucun compte ne correspond à cette adresse';
+                header('Location: login');
+            }
         }
 
     }
@@ -163,18 +186,6 @@ class Member
         header('Location: login.php');
         exit();
 
-    }
-
-    public function reconnect_from_cookie(){
-
-        if(session_status() == PHP_SESSION_NONE){
-            session_start();
-        }
-        
-        if(isset($_COOKIE['remember']) && !isset($_SESSION['auth'])){
-            $userManager = new Jf_userManager();
-            $userManager->reconnect_from_cookie();            
-        }
     }
 
     public function changePassword(){  

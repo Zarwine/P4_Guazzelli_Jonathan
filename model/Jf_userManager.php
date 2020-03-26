@@ -82,31 +82,8 @@ class Jf_userManager
         $req = $this->bdd->prepare('SELECT * FROM jf_users WHERE (username = :username OR email = :username) AND confirmed_at IS NOT NULL');
         $req->execute(['username' => $userData['username']]);
         $user = $req->fetch();
-        if($user !== false){
-            if(password_verify($userData['password'], $user->password)){
-                $_SESSION['auth'] = $user;
-                $_SESSION['flash']['success'] = 'Vous êtes maintenant connecté';
-                if($userData['remember']){
 
-                    require_once (CONTROLLER.'Member.php');
-                    $mbr = new Member();
-                    $remember_token = $mbr->str_random(250);
-
-                    $this->bdd->prepare('UPDATE jf_users SET remember_token = ? WHERE id = ?')->execute([$remember_token, $user->id]);
-                    setcookie('remember', $user->id . '==' . $remember_token . sha1($user->id . 'clefarbitraire'), time() + 60 * 60 * 24 * 7);            
-                }
-                header('Location: account');
-                exit();
-            } else {
-                $_SESSION['flash']['danger'] = 'Identifiant ou mot de passe incorrecte';
-                header('Location: login');
-                exit();
-            }
-        } else {
-            $_SESSION['flash']['danger'] = 'Identifiant ou mot de passe incorrecte';
-            header('Location: login');
-                exit();
-        }
+        return $user;
     }
 
     public function forgetPassword($userData){
@@ -125,14 +102,19 @@ class Jf_userManager
     }
 
     public function resetPassword($params){        
-        
+
         $user_verif_id = $params['id'];
         $user_verif_reset_token = $params['token'];
 
         $req = $this->bdd->prepare("SELECT id FROM jf_users WHERE reset_token = '$user_verif_reset_token'");
         $req->execute();
         $user_id = $req->fetch();
- 
+
+        if($user_id == false) {
+            session_start();
+            $_SESSION['flash']['danger'] = "Une erreur est survenue";
+            header('Location: https://jogu.fr/forteroche/home');
+        }
 
         $req2 = $this->bdd->prepare("SELECT reset_token FROM jf_users WHERE id = $user_id->id");
         $req2->execute();
@@ -143,16 +125,18 @@ class Jf_userManager
             if(session_status() == PHP_SESSION_NONE){
                 session_start();
             }
-
+            
             $member = new Member();
             $newpass = $member->str_random(10);
             $newpassforuser = $newpass;
             $newpass = password_hash($newpass, PASSWORD_BCRYPT);
-                
-            $req3 = $this->bdd->prepare('UPDATE jf_users SET password = ?');
-            $req3->execute([$newpass]);
-            
 
+            $req3 = $this->bdd->prepare('UPDATE jf_users SET password = :pwd, reset_at = NULL, reset_token = NULL WHERE id = :id');
+            $req3->bindValue(':id', $user_id->id, PDO::PARAM_INT);
+            $req3->bindValue(':pwd', $newpass, PDO::PARAM_STR);    
+            $req3->execute();
+            
+            $_SESSION['flash']['reset'] = "Votre nouveau mot de passe est : ";
             $_SESSION['flash']['success'] = $newpassforuser;
 
             header('Location: https://jogu.fr/forteroche/login');

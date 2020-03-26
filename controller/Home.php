@@ -52,10 +52,9 @@ class Home
 
     public function addArticle($params)
     {
-        //echo '<pre>'; print_r($params); exit;
+
         $values = $_POST['values'];
 
-        //echo '<pre>'; print_r($values); exit;
 
         $manager = new Jf_articleManager();
         $manager->create($values);
