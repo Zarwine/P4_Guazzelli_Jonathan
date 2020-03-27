@@ -1,3 +1,9 @@
+<?php session_start();
+if($_SESSION['auth']->admin == 0){
+    $_SESSION['alert']['danger'] = "Vous n'avez pas l'autorisation d'accéder à cette page";
+    header('Location: home');
+}
+?>
 <div id="container" class="page_container">
     <h2>écrire un article</h2>
 

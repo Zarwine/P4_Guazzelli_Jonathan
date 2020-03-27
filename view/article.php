@@ -15,6 +15,7 @@ $article_id = $jf_article->getId();
     $req->bindValue(':id', $article_id, PDO::PARAM_INT);
     $req->execute();
     $row = $req->fetchAll();
+    //$row = htmlspecialchars($req->fetchAll());
 
     for($i = 0 ; $i< count($row); $i++){                
 
@@ -28,6 +29,7 @@ $article_id = $jf_article->getId();
     $jf_comment->setEdited_at($row[$i]['edited_at']);
 
     $jf_comments[] = $jf_comment;
+    //$jf_comments[] = htmlspecialchars($jf_comment);
 
 }
 ?>
@@ -75,7 +77,7 @@ $article_id = $jf_article->getId();
                             <?php endif; ?>
                         
 
-                        <p><?php echo $jf_comment->getContent();?></p>
+                        <p><?php echo htmlspecialchars($jf_comment->getContent());?></p>
                     </div> 
 
                     <div class="com_crud">
@@ -86,6 +88,13 @@ $article_id = $jf_article->getId();
                                     Éditer
                                     </a>
                                 </div>
+                                <?php if ($_SESSION['auth']->admin == 1 || $jf_comment->getAuteur() == $_SESSION['auth']->username): ?> 
+                                    <div class="link_jf">
+                                        <a href="<?php echo HOST;?>com_delete/id/<?php echo $jf_comment->getId();?>">
+                                        Supprimer ce commentaire
+                                        </a>
+                                    </div>
+                                <?php endif; ?>
                             <?php endif; ?>
                             <div class="signaler link_jf">
                             <a href="<?php echo HOST;?>com_report/id/<?php echo $jf_comment->getId();?>">
@@ -97,23 +106,12 @@ $article_id = $jf_article->getId();
                     </div>
 
                     <?php if (isset($_SESSION['auth'])): ?>
-
-
                         <?php if ($_SESSION['auth']->admin == 1): ?>  
                             <?php if ($jf_comment->getReported() == 1): ?>
                                 <p class="reported">Ce commentaire a été signalé</p>  
                             <?php endif; ?>    
-                            <div class="button_container">
-                                <div class="link_jf">
-                                    <a href="<?php echo HOST;?>com_delete/id/<?php echo $jf_comment->getId();?>">
-                                    Supprimer le commentaire
-                                    </a>
-                                </div>
-                            </div>
-                            </section>
-                            
-                        <?php endif; ?>
-                        
+                            </section>                            
+                        <?php endif; ?>                        
                     <?php endif; ?>
 
                 <?php endforeach; ?>

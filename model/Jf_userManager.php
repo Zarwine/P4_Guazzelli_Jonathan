@@ -85,6 +85,22 @@ class Jf_userManager
 
         return $user;
     }
+    public function loginFail($ip){
+        // On enregistre la tentative échouée pour cette ip
+			$req = $this->bdd->prepare('INSERT INTO jf_bruteforce SET connexion_ip = :ip');
+            $req->bindValue(':ip', $ip, PDO::PARAM_STR); 
+            $req->execute();
+    }
+    public function loginFailCount($ip){
+                // On regarde s'il est autorisé à se connecter
+            $req = $this->bdd->prepare('SELECT * FROM jf_bruteforce WHERE connexion_ip = :ip');
+            $req->bindValue(':ip', $ip, PDO::PARAM_STR); 
+            $req->execute();
+            $count = $req->rowCount();
+
+            return $count;
+
+    }
 
     public function forgetPassword($userData){
 

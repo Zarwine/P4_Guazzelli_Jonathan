@@ -22,6 +22,7 @@ body {
     flex-flow: row wrap;
     justify-content: space-around;
     align-items: center;
+    z-index: 2;
 }
 header a{
     text-decoration: none;
@@ -197,6 +198,15 @@ h2 {
 }
 /* ------------------------------------ écrire un commentaire --------------------------------------*/
 #comment_textarea {
+    width: 100%;
+    height: 90px;
+    background-color: rgba(0,0,0,0.1);
+    color: rgb(230,230,230);
+    font-family: Oxygen, sans-serif;
+    padding: 0 7px;
+    border: solid 1px rgb(50, 50, 50);
+}
+#edit_comment_text_area {
     width: 100%;
     height: 90px;
     background-color: rgba(0,0,0,0.1);

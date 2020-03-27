@@ -60,10 +60,17 @@ class Comment
         }
         
         if(isset($id)) {
-
+            session_start();
             $manager = new Jf_commentManager();
             $jf_comment = $manager->findComment($id);
 
+            $verif = $jf_comment->getAuteur();
+
+            if($verif != $_SESSION["auth"]->username){
+                $_SESSION['flash']['danger'] = "Vous n'avez pas le droit d'éditer ce commentaire";
+                $myView = new View();
+                $myView->redirect('home');
+            }
            //array(1) { [0]=> array(14) { 
            //    ["id"]=> string(2) "19" [0]=> string(2) "19" 
            //    ["auteur"]=> string(10) "lenycherry" [1]=> string(10) "lenycherry" 

@@ -1,3 +1,9 @@
+<?php session_start();
+if($_SESSION['auth']->admin == 0){
+    $_SESSION['alert']['danger'] = "Vous n'avez pas l'autorisation d'accéder à cette page";
+    header('Location: https://jogu.fr/forteroche');
+}
+?>
 <div id="container" class="page_container">
     <h2>éditer un article</h2>
 
