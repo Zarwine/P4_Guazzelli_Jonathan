@@ -56,7 +56,7 @@ $article_id = $jf_article->getId();
             <?php endif; ?>
 
             <?php if (isset($_SESSION['auth'])): ?>
-            <form class="comment_create" action="<?php echo HOST;?>com_create/<?php echo $jf_article->getId();?>" method="POST">
+            <form class="comment_create" action="<?php echo HOST;?>comment/create/<?php echo $jf_article->getId();?>" method="POST">
                 <p>écrire un commentaire</p>
                 <textarea name="commentaire" id="comment_textarea" cols="30" rows="10" placeholder="Votre commentaire..."></textarea>
                 <input type="submit" value="Poster mon commentaire" name="submit_commentaire" class="button_jf"/>
@@ -81,32 +81,39 @@ $article_id = $jf_article->getId();
                     </div> 
 
                     <div class="com_crud">
+
                         <?php if (isset($_SESSION['auth'])): ?>
+
                             <?php if ($jf_comment->getAuteur() == $_SESSION['auth']->username): ?> 
                                 <div class="editer link_jf">
-                                    <a href="<?php echo HOST;?>com_modif/id/<?php echo $jf_comment->getId();?>">
+                                    <a href="<?php echo HOST;?>commentmodification/id/<?php echo $jf_comment->getId();?>">
                                     Éditer
                                     </a>
-                                </div>
-                                <?php if ($_SESSION['auth']->admin == 1 || $jf_comment->getAuteur() == $_SESSION['auth']->username): ?> 
-                                    <div class="link_jf">
-                                        <a href="<?php echo HOST;?>com_delete/id/<?php echo $jf_comment->getId();?>">
-                                        Supprimer ce commentaire
-                                        </a>
-                                    </div>
-                                <?php endif; ?>
+                                </div>                                
                             <?php endif; ?>
+
+                            <?php if ($_SESSION['auth']->admin == "1" || $jf_comment->getAuteur() == $_SESSION['auth']->username): ?> 
+                     
+                                <div class="link_jf">
+                                    <a href="<?php echo HOST;?>com_delete/id/<?php echo $jf_comment->getId();?>">
+                                    Supprimer ce commentaire
+                                    </a>
+                                </div>
+
+                            <?php endif; ?>
+
                             <div class="signaler link_jf">
-                            <a href="<?php echo HOST;?>com_report/id/<?php echo $jf_comment->getId();?>">
-                            Signaler
-                            </a>
-                        </div>
+                                <a href="<?php echo HOST;?>com_report/id/<?php echo $jf_comment->getId();?>">
+                                Signaler
+                                </a>
+                            </div>
+
                         <?php endif; ?>
 
                     </div>
 
                     <?php if (isset($_SESSION['auth'])): ?>
-                        <?php if ($_SESSION['auth']->admin == 1): ?>  
+                        <?php if ($_SESSION['auth']->admin == '1'): ?>  
                             <?php if ($jf_comment->getReported() == 1): ?>
                                 <p class="reported">Ce commentaire a été signalé</p>  
                             <?php endif; ?>    

@@ -17,8 +17,13 @@ class Comment
     {    
         session_start() ;
         $manager = new Jf_commentManager();
+        //var_dump($params["create"]);
 
-       $article_id = explode("/", $_REQUEST['r'])[1];
+
+
+       //$article_id = explode("/", $_REQUEST['r'])[1];
+       if(isset($params["modification"])) {$this->modifComment($params);}
+       if(isset($params["create"])) {$article_id = $params["create"];}
 
         if(isset($_POST['submit_commentaire'])){
             if(!empty($_POST['commentaire'])){       
@@ -41,8 +46,6 @@ class Comment
 
     public function reportComment($params)
     {
-        //var_dump($params); --> array(1) { ["id"]=> string(2) "10" }
-        //exit();
         $id = $params["id"];
         $manager = new Jf_commentManager();
         $manager->report($id);
@@ -55,6 +58,8 @@ class Comment
 
     public function modifComment($params) 
     {
+        //var_dump($params);
+        //exit();
         if(isset($params)){
             extract($params);
         }

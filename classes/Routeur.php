@@ -5,34 +5,34 @@ class Routeur
     private $request;
 
     private $routes = [
-                        "home"             => ["controller" => "Home",   "method" => "showHome"],        //Rediction vers la HomePage
-                        "create"           => ["controller" => "Home",   "method" => "createArticle"],   //Début des redirections CRUD
-                        "modification"     => ["controller" => "Home",   "method" => "createArticle"],
-                        "delete"           => ["controller" => "Home",   "method" => "delArticle"],        
-                        "edition"          => ["controller" => "Home",   "method" => "editionArticle"],
-                        "add"              => ["controller" => "Home",   "method" => "addArticle"],  
-                        "view"             => ["controller" => "Home",   "method" => "showArticle"],          //Fin CRUD
-
-                        "register"         => ["controller" => "Member", "method" => "showRegister"],      //Début Espace membre
-                        "register_confirm" => ["controller" => "Member", "method" => "verifAll"],     
-                        "login"            => ["controller" => "Member", "method" => "showLogin"],
-                        "login_confirm"    => ["controller" => "Member", "method" => "login"],
-                        "forget"           => ["controller" => "Member", "method" => "showForget"],
-                        "forgetPassword"   => ["controller" => "Member", "method" => "forgetPassword"],
-                        "account"          => ["controller" => "Member", "method" => "showAccount"],
-                        "confirm"          => ["controller" => "Member", "method" => "registerConfirm"],
-                        "changePassword"   => ["controller" => "Member", "method" => "changePassword"],
-                        "reset"            => ["controller" => "Member", "method" => "resetPassword"],
-                        "reset_confirm"    => ["controller" => "Member", "method" => "resetPasswordConfirm"],
-                        "logout"           => ["controller" => "Member", "method" => "logout"],             //Fin Espace membre
-
-                        "com_create"       => ["controller" => "Comment",   "method" => "createComment"],   //Début Commentaires
-                        "com_report"       => ["controller" => "Comment",   "method" => "reportComment"],
-                        "com_delete"       => ["controller" => "Comment",   "method" => "delComment"],        
-                        "com_modif"        => ["controller" => "Comment",   "method" => "modifComment"],        
-                        "com_edit"         => ["controller" => "Comment",   "method" => "editionComment"],
-                        "com_add"          => ["controller" => "Comment",   "method" => "addArticle"],  
-                        "com_view"         => ["controller" => "Comment",   "method" => "showArticle"],          //Fin Commentaires
+                        "home"                => ["controller" => "Home",   "method" => "showHome"],        //Rediction vers la HomePage
+                        "create"              => ["controller" => "Home",   "method" => "createArticle"],   //Début des redirections CRUD
+                        "modification"        => ["controller" => "Home",   "method" => "createArticle"],
+                        "delete"              => ["controller" => "Home",   "method" => "delArticle"],        
+                        "edition"             => ["controller" => "Home",   "method" => "editionArticle"],
+                        "add"                 => ["controller" => "Home",   "method" => "addArticle"],  
+                        "view"                => ["controller" => "Home",   "method" => "showArticle"],          //Fin CRUD
+   
+                        "register"            => ["controller" => "Member", "method" => "showRegister"],      //Début Espace membre
+                        "register_confirm"    => ["controller" => "Member", "method" => "verifAll"],     
+                        "login"               => ["controller" => "Member", "method" => "showLogin"],
+                        "login_confirm"       => ["controller" => "Member", "method" => "login"],
+                        "forget"              => ["controller" => "Member", "method" => "showForget"],
+                        "forgetPassword"      => ["controller" => "Member", "method" => "forgetPassword"],
+                        "account"             => ["controller" => "Member", "method" => "showAccount"],
+                        "confirm"             => ["controller" => "Member", "method" => "registerConfirm"],
+                        "changePassword"      => ["controller" => "Member", "method" => "changePassword"],
+                        "reset"               => ["controller" => "Member", "method" => "resetPassword"],
+                        "reset_confirm"       => ["controller" => "Member", "method" => "resetPasswordConfirm"],
+                        "logout"              => ["controller" => "Member", "method" => "logout"],             //Fin Espace membre
+   
+                        "comment"             => ["controller" => "Comment",   "method" => "createComment"],   //Début Commentaires
+                        "com_report"          => ["controller" => "Comment",   "method" => "reportComment"],
+                        "com_delete"          => ["controller" => "Comment",   "method" => "delComment"],        
+                        "commentmodification" => ["controller" => "Comment",   "method" => "modifComment"],        
+                        "com_edit"            => ["controller" => "Comment",   "method" => "editionComment"],
+                        "com_add"             => ["controller" => "Comment",   "method" => "addArticle"],  
+                        "com_view"            => ["controller" => "Comment",   "method" => "showArticle"],          //Fin Commentaires
 
                       ];
 
