@@ -12,8 +12,17 @@ class Home
         $myView->render(array('jf_articles' => $jf_articles));
         
     }
+    public function showArticle($params)
+    {   
+        extract($params);
+        $art_manager = new Jf_articleManager();
+        $jf_article = $art_manager->find($id);
 
-    public function createArticle($params)
+        $myView = new View('article');
+        $myView->render(array('jf_article' => $jf_article));
+    }
+
+    public function createArticle($params) //Permet de créer ou éditer un article
     {        
 
         if(isset($params)){
@@ -73,17 +82,7 @@ class Home
         $myView = new View();
         $myView->redirect('home');
 
-    }
-    public function showArticle($params)
-    {   
-        extract($params);
-        $art_manager = new Jf_articleManager();
-        $jf_article = $art_manager->find($id);
-
-        $myView = new View('article');
-        $myView->render(array('jf_article' => $jf_article));
-    }
-    
+    }    
 }
 
 

@@ -36,7 +36,7 @@ class Jf_commentManager
         return $jf_comments;
     }
 
-    public function find($article_id)
+    public function find($article_id) //Trouve a quel article correspond le commentaire
     {
         $bdd = $this->bdd;        
         $query = "SELECT * FROM jf_comment WHERE article_id = :id";
@@ -48,7 +48,7 @@ class Jf_commentManager
         return $jf_comments;
     }
 
-    public function findComment($id)
+    public function findComment($id) //Trouve le commentaire
     {
         $bdd = $this->bdd;        
         $query = "SELECT * FROM jf_comment WHERE id = :id";
@@ -56,7 +56,7 @@ class Jf_commentManager
         $req = $bdd->prepare($query);
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
-        //$jf_comment = $req->fetchAll();
+
         while ($row = $req->fetch(PDO::FETCH_ASSOC)){
         
             $jf_comment = new Jf_comment();
@@ -75,11 +75,6 @@ class Jf_commentManager
     public function create($comment, $username, $article_id)
     {
         $bdd = $this->bdd; 
-        
-        //var_dump($comment);
-        //var_dump($username);
-        //var_dump($article_id);
-        //exit();
       
         $query = "INSERT INTO jf_comment (id, auteur, created_at, content, article_id)
         VALUES (NULL, :auteur, CURRENT_TIMESTAMP, :content, :article_id);";
@@ -90,6 +85,21 @@ class Jf_commentManager
         $req->bindValue(':article_id', $article_id, PDO::PARAM_INT);
         $req->execute();
     }
+    
+    public function edit($values)
+    {
+        $bdd = $this->bdd; 
+      
+        $query = "UPDATE jf_comment SET `content` = :content WHERE `jf_comment`.`id` = :id;";
+
+        $req = $bdd->prepare($query);
+
+        $req->bindValue(':id', $values['id'], PDO::PARAM_INT);
+        $req->bindValue(':content', $values['content'], PDO::PARAM_STR);
+
+        $req->execute();
+    }
+    
     public function report($id)
     {
         $bdd = $this->bdd;      
@@ -114,17 +124,4 @@ class Jf_commentManager
         $req->execute();
     }
 
-    public function edit($values)
-    {
-        $bdd = $this->bdd; 
-      
-        $query = "UPDATE jf_comment SET `content` = :content WHERE `jf_comment`.`id` = :id;";
-
-        $req = $bdd->prepare($query);
-
-        $req->bindValue(':id', $values['id'], PDO::PARAM_INT);
-        $req->bindValue(':content', $values['content'], PDO::PARAM_STR);
-
-        $req->execute();
-    }
 }

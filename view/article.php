@@ -15,7 +15,6 @@ $article_id = $jf_article->getId();
     $req->bindValue(':id', $article_id, PDO::PARAM_INT);
     $req->execute();
     $row = $req->fetchAll();
-    //$row = htmlspecialchars($req->fetchAll());
 
     for($i = 0 ; $i< count($row); $i++){                
 
@@ -29,7 +28,6 @@ $article_id = $jf_article->getId();
     $jf_comment->setEdited_at($row[$i]['edited_at']);
 
     $jf_comments[] = $jf_comment;
-    //$jf_comments[] = htmlspecialchars($jf_comment);
 
 }
 ?>

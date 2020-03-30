@@ -54,8 +54,6 @@ class Routeur
 
         $elements = explode('/', $this->request);
         unset($elements[0]);
-        
-        //var_dump($elements);
 
         for($i = 1; $i<count($elements); $i++)
         {
@@ -69,7 +67,6 @@ class Routeur
                 $params[$key] = $val;                
             }
         }
-        //var_dump($params);
      
         return $params;
     }

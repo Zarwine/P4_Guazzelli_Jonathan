@@ -30,7 +30,6 @@ class Member
 
         $myView = new View('account');
         $myView->render(array('jf_articles' => $jf_articles, 'jf_comments' => $jf_comments));
-        //$myView->render(array('jf_comments' => $jf_comments));
 
     }
 
@@ -49,15 +48,8 @@ class Member
             header('Location: https://jogu.fr/forteroche/home');
         }
     }
-    public function resetPassword($params)
-    {
 
-        $userManager = new Jf_userManager();
-
-        $userManager->resetPassword($params);
-    }
-
-    public function verifAll()
+    public function verifAll()  //vérifications sur le formulaire d'incription
     {
 
         session_start();
@@ -65,7 +57,6 @@ class Member
         $userData = $_POST;
 
         $userManager = new Jf_userManager();
-        //$errors = $userManager->verifName($userData);
         $errors = array();
 
         if (empty($userData['username']) || !preg_match('/^[a-zA-Z0-9_]+$/', $userData['username'])) {
@@ -143,7 +134,7 @@ class Member
         }
     }
 
-    public function forgetPassword()
+    public function forgetPassword() //Envoie un mail a l'utilisateur avec un lien de confirmation pour nouveau mdp
     {
 
         session_start();
@@ -170,35 +161,16 @@ class Member
             }
         }
     }
-    public function logout()
+    
+    public function resetPassword($params) //UPDATE le mdp de l'utilisateur après qu'il ait cliqué sur le lien du mail "mdp oublié"
     {
 
-        session_start();
-        setcookie('remember', NULL, -1);
-        unset($_SESSION['auth']);
-        $_SESSION['flash']['success'] = "Vous êtes maintenant déconnecté";
-        header('Location: login');
+        $userManager = new Jf_userManager();
+
+        $userManager->resetPassword($params);
     }
-
-    public function str_random($length)
-    {
-
-        $alphabet = "0123456789azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN";
-        return substr(str_shuffle(str_repeat($alphabet, $length)), 0, $length);
-    }
-
-    public function logged_only()
-    {
-
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-        $_SESSION['flash']['danger'] = "Vous n'avez pas le droit d'accéder à cette page";
-        header('Location: login.php');
-        exit();
-    }
-
-    public function changePassword()
+    
+    public function changePassword() 
     {
         session_start();
         $userData = $_POST;
@@ -215,4 +187,33 @@ class Member
             }
         }
     }
+
+    public function logout()
+    {
+
+        session_start();
+        setcookie('remember', NULL, -1);
+        unset($_SESSION['auth']);
+        $_SESSION['flash']['success'] = "Vous êtes maintenant déconnecté";
+        header('Location: login');
+    }
+
+    public function str_random($length) //créer une chaine de caractère aléatoire
+    {
+
+        $alphabet = "0123456789azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN";
+        return substr(str_shuffle(str_repeat($alphabet, $length)), 0, $length);
+    }
+
+    public function logged_only() //Vérifie que l'utilisateur est connecté
+    {
+
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        $_SESSION['flash']['danger'] = "Vous n'avez pas le droit d'accéder à cette page";
+        header('Location: login.php');
+        exit();
+    }
+
 }

@@ -86,6 +86,7 @@ class Jf_userManager
         return $user;
     }
     public function loginFail($ip){
+        //Loginfail et loginFaillCount servent à vérifier si l'utilisateur spam le formulaire de connection
         // On enregistre la tentative échouée pour cette ip
 			$req = $this->bdd->prepare('INSERT INTO jf_bruteforce SET connexion_ip = :ip');
             $req->bindValue(':ip', $ip, PDO::PARAM_STR); 
