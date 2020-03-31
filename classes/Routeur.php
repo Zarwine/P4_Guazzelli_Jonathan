@@ -5,15 +5,16 @@ class Routeur
     private $request;
 
     private $routes = [
-                        "home"                => ["controller" => "Home",   "method" => "showHome"],        //Rediction vers la HomePage
-                        "create"              => ["controller" => "Home",   "method" => "createArticle"],   //Début des redirections CRUD
+                        "home"                => ["controller" => "Home",   "method" => "showHome"],                //Rediction vers la HomePage
+
+                        "create"              => ["controller" => "Home",   "method" => "createArticle"],           //Début des redirections CRUD
                         "modification"        => ["controller" => "Home",   "method" => "createArticle"],
                         "delete"              => ["controller" => "Home",   "method" => "delArticle"],        
                         "edition"             => ["controller" => "Home",   "method" => "editionArticle"],
                         "add"                 => ["controller" => "Home",   "method" => "addArticle"],  
-                        "view"                => ["controller" => "Home",   "method" => "showArticle"],          //Fin CRUD
+                        "view"                => ["controller" => "Home",   "method" => "showArticle"],             //Fin CRUD
    
-                        "register"            => ["controller" => "Member", "method" => "showRegister"],      //Début Espace membre
+                        "register"            => ["controller" => "Member", "method" => "showRegister"],            //Début Espace membre
                         "register_confirm"    => ["controller" => "Member", "method" => "verifAll"],     
                         "login"               => ["controller" => "Member", "method" => "showLogin"],
                         "login_confirm"       => ["controller" => "Member", "method" => "login"],
@@ -24,12 +25,12 @@ class Routeur
                         "changePassword"      => ["controller" => "Member", "method" => "changePassword"],
                         "reset"               => ["controller" => "Member", "method" => "resetPassword"],
                         "reset_confirm"       => ["controller" => "Member", "method" => "resetPasswordConfirm"],
-                        "logout"              => ["controller" => "Member", "method" => "logout"],             //Fin Espace membre
+                        "logout"              => ["controller" => "Member", "method" => "logout"],                  //Fin Espace membre
    
-                        "comment"             => ["controller" => "Comment",   "method" => "createComment"],   //Début Commentaires
-                        "com_report"          => ["controller" => "Comment",   "method" => "reportComment"],
-                        "com_delete"          => ["controller" => "Comment",   "method" => "delComment"],        
-                        "commentmodification" => ["controller" => "Comment",   "method" => "modifComment"],        
+                        "comCreate"           => ["controller" => "Comment",   "method" => "createComment"],        //Début Commentaires
+                        "comReport"           => ["controller" => "Comment",   "method" => "reportComment"],
+                        "comDelete"           => ["controller" => "Comment",   "method" => "delComment"],        
+                        "comModif"            => ["controller" => "Comment",   "method" => "modifComment"],        
                         "com_edit"            => ["controller" => "Comment",   "method" => "editionComment"],
                         "com_add"             => ["controller" => "Comment",   "method" => "addArticle"],  
                         "com_view"            => ["controller" => "Comment",   "method" => "showArticle"],          //Fin Commentaires
@@ -45,7 +46,6 @@ class Routeur
     {
         $elements = explode('/', $this->request);
         return $elements[0];
-
     }
 
     public function getParams()
@@ -75,7 +75,10 @@ class Routeur
     {
 
         $route = $this->getRoute();
-        $params = $this->getParams();
+        $params = $this->getParams(); 
+        // -> methode getAction() prend l'element[1] qui vérifi s'il y a une action à faire dans le but de configurer le routeur autrement genre home/create 
+        // ou bien encore comment/modif/id
+        // revoir le routeur.
 
         if(key_exists($route, $this->routes))
         {

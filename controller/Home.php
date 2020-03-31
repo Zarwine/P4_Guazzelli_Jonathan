@@ -18,8 +18,19 @@ class Home
         $art_manager = new Jf_articleManager();
         $jf_article = $art_manager->find($id);
 
+        $comment_manager = new Jf_commentManager();
+        $jf_comments = $comment_manager->findForOneArticle($jf_article->getId());
+
         $myView = new View('article');
-        $myView->render(array('jf_article' => $jf_article));
+        if($jf_comments == NULL){
+            $myView->render(array('jf_article' => $jf_article));
+        }else {
+            $myView->render(array(
+            'jf_article' => $jf_article,
+            'jf_comments' => $jf_comments,
+        ));
+        }
+        
     }
 
     public function createArticle($params) //Permet de créer ou éditer un article
@@ -54,6 +65,9 @@ class Home
         $manager = new Jf_articleManager();
         $manager->edit($values);
 
+        session_start();
+        $_SESSION['flash']['success'] = "L'article a correctement été édité";
+
         $myView = new View();
         $myView->redirect('home');
     }
@@ -68,6 +82,9 @@ class Home
         $manager = new Jf_articleManager();
         $manager->create($values);
 
+        session_start();
+        $_SESSION['flash']['success'] = "Création d'article réussie";
+
         $myView = new View();
         $myView->redirect('home');
     }
@@ -78,6 +95,9 @@ class Home
 
         $manager = new Jf_articleManager();
         $manager->delete($id);
+
+        session_start();
+        $_SESSION['flash']['success'] = "Article correctement supprimé";
 
         $myView = new View();
         $myView->redirect('home');

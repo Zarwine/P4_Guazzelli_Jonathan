@@ -11,7 +11,7 @@ class Jf_commentManager
         $this->bdd = new PDO("mysql:host=jogufrdkog533.mysql.db:3306;dbname=jogufrdkog533;charset=utf8", "jogufrdkog533", "MaBDD550");
     }
 
-    public function findAll()
+    public function findAll() //Trouve tous les comment pour le menu d'admin
     {
         $bdd = $this->bdd;
         
@@ -34,6 +34,36 @@ class Jf_commentManager
         };
 
         return $jf_comments;
+    }
+    public function findForOneArticle($article_id)  //Trouve tous les comment pour un article défini
+    {
+        $bdd = $this->bdd;  
+        $query = "SELECT * FROM jf_comment WHERE article_id = :id ORDER BY id DESC";
+
+        $req = $bdd->prepare($query);
+        $req->bindValue(':id', $article_id, PDO::PARAM_INT);
+        $req->execute();
+        $row = $req->fetchAll();
+
+        for($i = 0 ; $i< count($row); $i++){                
+
+        $jf_comment = new Jf_comment();
+        $jf_comment->setId($row[$i]['id']);
+        $jf_comment->setAuteur($row[$i]['auteur']);
+        $jf_comment->setContent($row[$i]['content']);
+        $jf_comment->setCreated_at($row[$i]['created_at']);   
+        $jf_comment->setArticle_Id($row[$i]['article_id']);
+        $jf_comment->setReported($row[$i]['reported']);
+        $jf_comment->setEdited_at($row[$i]['edited_at']);
+
+        $jf_comments[] = $jf_comment;
+
+        }
+        //var_dump($jf_comments);
+        if(isset($jf_comments)) { 
+        return $jf_comments;
+        }
+        //exit();
     }
 
     public function find($article_id) //Trouve a quel article correspond le commentaire

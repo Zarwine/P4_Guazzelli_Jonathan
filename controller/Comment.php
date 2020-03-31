@@ -25,10 +25,7 @@ class Comment
         session_start() ;
         $manager = new Jf_commentManager();
 
-       //$article_id = explode("/", $_REQUEST['r'])[1];
-       //if(isset($params["modification"])) {$this->modifComment($params);}
-       //if(isset($params["create"])) {$article_id = $params["create"];}
-       $article_id = $params["create"];
+       $article_id = explode("/", $_REQUEST['r'])[1];
 
         if(isset($_POST['submit_commentaire'])){
             if(!empty($_POST['commentaire'])){       
@@ -95,6 +92,9 @@ class Comment
         $manager = new Jf_commentManager();
         $manager->edit($values);
 
+        session_start();
+        $_SESSION['flash']['success'] = 'Le commentaire a bien été édité';
+
         $myView = new View();
         $myView->redirect('home');
     }
@@ -104,7 +104,7 @@ class Comment
         $id = $params["id"];
         $manager = new Jf_commentManager();
         $manager->report($id);
-
+        session_start();
         $_SESSION['flash']['success'] = 'Le commentaire a bien été signalé';
 
         $myView = new View();
@@ -118,6 +118,9 @@ class Comment
 
         $manager = new Jf_commentManager();
         $manager->delete($id);
+
+        session_start();
+        $_SESSION['flash']['success'] = 'Le commentaire a bien été supprimé';
 
         $myView = new View();
         $myView->redirect('home');

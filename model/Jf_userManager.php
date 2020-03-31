@@ -83,6 +83,8 @@ class Jf_userManager
         $req->execute(['username' => $userData['username']]);
         $user = $req->fetch();
 
+        //var_dump($user); -> à tester pour savoir la valeur de admin si c'est un int ou string
+
         return $user;
     }
     public function loginFail($ip){

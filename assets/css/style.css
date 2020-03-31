@@ -34,6 +34,9 @@ header .end-row li{
 header .end-row{
     display: inherit;
 }
+header .menu-burger-main{
+    display: none;
+}
 .link_jf a::after, .button_jf::after{
     height: 3px;
     content: "";
@@ -75,11 +78,16 @@ h2 {
 }
 .article_content{
     padding: 20px 5%;
-    margin: 10px 15%;
+    margin: 115px 15%;
     border-radius: 20px;
     background-color: rgba(0,10,10,0.8);
-    display: flex;
+    /*display: flex;*/
     flex-flow: row wrap;
+    word-break: break-word;
+}
+.article_content img{
+    max-width: 100%;
+    height: auto;
 }
 .button_container{
     display: flex;
@@ -309,7 +317,7 @@ h2 {
     overflow: hidden;
 }
 .article_comment_account {
-    width: 30%;
+   /* width: 30%;*/
     margin: 8px;
     border: 1px solid white;
     padding: 1%;
@@ -362,3 +370,74 @@ h2 {
 /* _________________________________________________________FOOTER_________________________________________________________________*/
 /* ________________________________________________________________________________________________________________________________*/
 /* ________________________________________________________________________________________________________________________________*/
+/* ________________________________________________________________________________________________________________________________*/
+/* ________________________________________________________________________________________________________________________________*/
+/* _________________________________________________________MEDIA QUERY____________________________________________________________*/
+/* ________________________________________________________________________________________________________________________________*/
+/* ________________________________________________________________________________________________________________________________*/
+@media screen and (max-width: 768px) {
+    .article_content {
+        margin: 115px 5%;
+    }
+    header .end-row {
+        display: none;
+    }
+    header .navbar {
+        align-items: inherit;
+        justify-content: space-between;
+    }
+    header .navbar .nav-item{
+        margin-left: 4%;
+    }
+    header .menu-burger-main{
+        display: block;
+    }
+    header .nav-wrapper{
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+    }
+    header .menu_checkbox{
+        opacity: 0;
+        position: absolute;
+    }
+    header .menu-burger{
+        overflow: hidden;
+        max-height: 0;
+        flex-basis: 100%;
+        margin: 0;
+        list-style: none;
+    }
+    header .menu-burger li{
+        background-color: rgb(230,230,230);
+    }
+    header .menu-toggle {
+        display: block;
+    }
+    header .icon-burger {
+        height: 50px;
+        padding: 15px;
+    }
+    .menu_checkbox:checked~.menu-burger {
+        max-height: 1000px;
+    }
+    .article_comment {
+        margin: 0;
+    }
+}
+@media screen and (max-width: 425px) {
+    header .navbar .nav-item{
+        margin-left: 0;
+        left: 4%;
+        position: absolute;
+    }
+    header .navbar {
+        justify-content: flex-end;
+    }
+    header .navbar .menu-toggle{
+        margin-right: -100px;
+    }
+    .article_content {
+        margin: 15px 5%;
+    }
+}

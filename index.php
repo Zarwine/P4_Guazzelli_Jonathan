@@ -9,11 +9,6 @@ if(!isset($_GET['r'])){
 
 $request = $_GET['r'];
 
-
-//echo '<pre>'; var_dump($_SERVER);
-//echo '<pre>'; print_r($request);
-//exit();
-
 $routeur = new Routeur($request);
 $routeur->renderController();
 

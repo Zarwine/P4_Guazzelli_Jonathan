@@ -83,13 +83,15 @@ if($_SESSION['auth']->username == NULL){
                     <br/>
                 </div>
                 <div class="button_container">
+                <?php if ($jf_comment->getAuteur() == $_SESSION['auth']->username): ?> 
+                                <div class="editer link_jf">
+                                    <a href="<?php echo HOST;?>comModif/id/<?php echo $jf_comment->getId();?>">
+                                    Éditer
+                                    </a>
+                                </div>                                
+                            <?php endif; ?>
                         <div class="link_jf">
-                            <a href="<?php echo HOST;?>modification/id/<?php echo $jf_comment->getId();?>">
-                            Éditer
-                            </a>
-                        </div>
-                        <div class="link_jf">
-                            <a href="<?php echo HOST;?>delete/id/<?php echo $jf_comment->getId();?>">
+                            <a href="<?php echo HOST;?>comDelete/id/<?php echo $jf_comment->getId();?>">
                             Effacer
                             </a>
                         </div>

@@ -57,6 +57,46 @@ if(session_status() == PHP_SESSION_NONE){
                 </li>
             <?php endif; ?>
         </ul>
+        <div class="menu-burger-main">  
+            <div class="nav-wrapper">
+                <input type="checkbox" id="menu_checkbox" class="menu_checkbox">
+                <label for="menu_checkbox" class="menu-toggle">
+                    <img class="icon-burger" src="<?php echo ASSETS;?>img/bars-solid.svg">
+                </label>
+                <ul class="menu-burger">
+                    <?php if (isset($_SESSION['auth'])): ?>
+                    <?php if ($_SESSION['auth']->admin == 1): ?>
+                        <li class="link_jf">
+                            <a href="<?php echo HOST;?>create">
+                                Ajouter un article 
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                        <li class="link_jf">
+                            <a href="<?php echo HOST;?>account">
+                                Mon compte
+                            </a>
+                        </li>
+                        <li class="link_jf">
+                            <a href="<?php echo HOST;?>logout">
+                                Se déconnecter
+                            </a>
+                        </li>
+                    <?php else: ?>
+                        <li class="link_jf">
+                            <a href="<?php echo HOST;?>register">
+                                S'inscrire
+                            </a>
+                        </li>
+                        <li class="link_jf">
+                            <a href="<?php echo HOST;?>login">
+                                Se connecter
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </div> 
+        </ul>
     </nav>
 </header>
 <div class="article_container">

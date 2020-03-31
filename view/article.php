@@ -2,34 +2,6 @@
 if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
-require_once (MODEL.'Jf_commentManager.php');
-require_once (MODEL.'Jf_comment.php');
-$manager = new Jf_commentManager(); 
-
-$article_id = $jf_article->getId();
-
-    $bdd = new PDO("mysql:host=jogufrdkog533.mysql.db:3306;dbname=jogufrdkog533;charset=utf8", "jogufrdkog533", "MaBDD550");     
-    $query = "SELECT * FROM jf_comment WHERE article_id = :id ORDER BY id DESC";
-
-    $req = $bdd->prepare($query);
-    $req->bindValue(':id', $article_id, PDO::PARAM_INT);
-    $req->execute();
-    $row = $req->fetchAll();
-
-    for($i = 0 ; $i< count($row); $i++){                
-
-    $jf_comment = new Jf_comment();
-    $jf_comment->setId($row[$i]['id']);
-    $jf_comment->setAuteur($row[$i]['auteur']);
-    $jf_comment->setContent($row[$i]['content']);
-    $jf_comment->setCreated_at($row[$i]['created_at']);   
-    $jf_comment->setArticle_Id($row[$i]['article_id']);
-    $jf_comment->setReported($row[$i]['reported']);
-    $jf_comment->setEdited_at($row[$i]['edited_at']);
-
-    $jf_comments[] = $jf_comment;
-
-}
 ?>
         <div class="article_content">
             <h3><?php echo $jf_article->getName();?></h3>
@@ -52,9 +24,11 @@ $article_id = $jf_article->getId();
                 </div>
                 <?php endif; ?>
             <?php endif; ?>
+            
+            <br/>
 
             <?php if (isset($_SESSION['auth'])): ?>
-            <form class="comment_create" action="<?php echo HOST;?>comment/create/<?php echo $jf_article->getId();?>" method="POST">
+            <form class="comment_create" action="<?php echo HOST;?>comCreate/<?php echo $jf_article->getId();?>" method="POST">
                 <p>écrire un commentaire</p>
                 <textarea name="commentaire" id="comment_textarea" cols="30" rows="10" placeholder="Votre commentaire..."></textarea>
                 <input type="submit" value="Poster mon commentaire" name="submit_commentaire" class="button_jf"/>
@@ -84,27 +58,27 @@ $article_id = $jf_article->getId();
 
                             <?php if ($jf_comment->getAuteur() == $_SESSION['auth']->username): ?> 
                                 <div class="editer link_jf">
-                                    <a href="<?php echo HOST;?>commentmodification/id/<?php echo $jf_comment->getId();?>">
+                                    <a href="<?php echo HOST;?>comModif/id/<?php echo $jf_comment->getId();?>">
                                     Éditer
                                     </a>
                                 </div>                                
                             <?php endif; ?>
 
-                            <?php if ($_SESSION['auth']->admin == "1" || $jf_comment->getAuteur() == $_SESSION['auth']->username): ?> 
-                     
+                            <?php if ($_SESSION['auth']->admin == "1" || $jf_comment->getAuteur() == $_SESSION['auth']->username): ?>                      
                                 <div class="link_jf">
-                                    <a href="<?php echo HOST;?>com_delete/id/<?php echo $jf_comment->getId();?>">
+                                    <a href="<?php echo HOST;?>comDelete/id/<?php echo $jf_comment->getId();?>">
                                     Supprimer ce commentaire
                                     </a>
                                 </div>
-
                             <?php endif; ?>
 
+                            <?php if ($jf_comment->getAuteur() != $_SESSION['auth']->username): ?> 
                             <div class="signaler link_jf">
-                                <a href="<?php echo HOST;?>com_report/id/<?php echo $jf_comment->getId();?>">
+                                <a href="<?php echo HOST;?>comReport/id/<?php echo $jf_comment->getId();?>">
                                 Signaler
                                 </a>
                             </div>
+                            <?php endif; ?>
 
                         <?php endif; ?>
 
