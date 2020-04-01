@@ -37,8 +37,9 @@ class Comment
                 $manager->create($comment, $username, $article_id);  
         
                 $_SESSION['flash']['success'] = 'Votre commentaire a bien été reçu';
-                $myView = new View();
-                $myView->redirect('home');
+
+                header("Location: https://jogu.fr/forteroche/view/id/".$article_id);
+
             } else {
                 $_SESSION['flash']['alert'] = 'Message vide';
             }
@@ -95,8 +96,11 @@ class Comment
         session_start();
         $_SESSION['flash']['success'] = 'Le commentaire a bien été édité';
 
-        $myView = new View();
-        $myView->redirect('home');
+        $jf_comments = $manager->findArticle($values['id']);
+        $id = $jf_comments[0]["id"];
+
+
+        header("Location: https://jogu.fr/forteroche/view/id/".$id);
     }
     
     public function reportComment($params)
@@ -107,8 +111,12 @@ class Comment
         session_start();
         $_SESSION['flash']['success'] = 'Le commentaire a bien été signalé';
 
-        $myView = new View();
-        $myView->redirect('home');
+
+        $jf_comments = $manager->findArticle($id);
+        $id_url = $jf_comments[0]["id"];
+
+
+        header("Location: https://jogu.fr/forteroche/view/id/".$id_url);
     }
 
 
@@ -117,13 +125,31 @@ class Comment
         extract($params);
 
         $manager = new Jf_commentManager();
+
+        $jf_comments = $manager->findArticle($id);
+        $id_url = $jf_comments[0]["id"];
+
+        
         $manager->delete($id);
 
         session_start();
         $_SESSION['flash']['success'] = 'Le commentaire a bien été supprimé';
 
-        $myView = new View();
-        $myView->redirect('home');
+        header("Location: https://jogu.fr/forteroche/view/id/".$id_url);
+    }
+
+    public function delCommentAdmin($params)
+    {
+        extract($params);
+
+        $manager = new Jf_commentManager();
+        
+        $manager->delete($id);
+
+        session_start();
+        $_SESSION['flash']['success'] = 'Le commentaire a bien été supprimé';
+
+        header ("Location : https://jogu.fr/forteroche/account");
 
     }
     

@@ -30,6 +30,7 @@ class Routeur
                         "comCreate"           => ["controller" => "Comment",   "method" => "createComment"],        //Début Commentaires
                         "comReport"           => ["controller" => "Comment",   "method" => "reportComment"],
                         "comDelete"           => ["controller" => "Comment",   "method" => "delComment"],        
+                        "comDeleteAd"         => ["controller" => "Comment",   "method" => "delCommentAdmin"],        
                         "comModif"            => ["controller" => "Comment",   "method" => "modifComment"],        
                         "com_edit"            => ["controller" => "Comment",   "method" => "editionComment"],
                         "com_add"             => ["controller" => "Comment",   "method" => "addArticle"],  

@@ -10,7 +10,7 @@ if(session_status() == PHP_SESSION_NONE){
 </div>
     <?php foreach($jf_articles as $jf_article): ?>
         <div class="article_content">
-            <h3 class="titre_article"><?php echo $jf_article->getName();?></h3>
+            <h3 class="titre_article"><?php echo htmlspecialchars($jf_article->getName());?></h3>
             <?php echo $jf_article->getContent();?>
             <br/>
            

@@ -3,17 +3,6 @@
 <div class="page_container">
 <h2>S'inscrire</h2>
 
-<?php if(!empty($errors)): ?>
-    <div class="alert alert-danger">
-        <p>Vous n'avez pas rempli le formulaire correctement</p>
-        <ul>
-            <?php foreach($errors as $error): ?>
-                <li><?= $error; ?></li>
-            <?php endforeach ?>
-        </ul>
-    </div>
-<?php endif; ?>
-
 <form class="jf_form" action="register_confirm" method="POST">
     <div class="form-group">
         <label for="">Pseudo</label>

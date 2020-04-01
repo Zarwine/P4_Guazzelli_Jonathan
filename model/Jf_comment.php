@@ -37,6 +37,13 @@ class Jf_comment
     } 
     public function getCreated_at()
     {
+
+        setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
+        
+        $com_date = ucfirst(strftime("%A %d ", strtotime($this->created_at)));
+        $com_date .= ucfirst(strftime("%B %Y à %T", strtotime($this->created_at)));
+        
+        $this->created_at = $com_date;
         return $this->created_at;
     }
     public function setCreated_at($created_at)

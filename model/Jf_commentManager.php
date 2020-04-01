@@ -66,7 +66,7 @@ class Jf_commentManager
         //exit();
     }
 
-    public function find($article_id) //Trouve a quel article correspond le commentaire
+    public function find($article_id) //Trouve quel commenaitre correspond a quel article
     {
         $bdd = $this->bdd;        
         $query = "SELECT * FROM jf_comment WHERE article_id = :id";
@@ -75,7 +75,32 @@ class Jf_commentManager
         $req->bindValue(':id', $article_id, PDO::PARAM_INT);
         $req->execute();
         $jf_comments = $req->fetchAll();
+
         return $jf_comments;
+
+    }
+    public function findArticle($comment_id) //Trouve a quel article correspond le commentaire grace aux infos du commentaires
+    {
+        $bdd = $this->bdd;        
+        $query = "SELECT * FROM jf_comment WHERE id = :id";
+
+        $req = $bdd->prepare($query);
+        $req->bindValue(':id', $comment_id, PDO::PARAM_INT);
+        $req->execute();
+        $jf_comment = $req->fetchAll();
+
+        $article_id = $jf_comment[0]["article_id"];
+
+        $query2 = "SELECT * FROM jf_article WHERE id = :id";
+
+        $req2 = $bdd->prepare($query2);
+        $req2->bindValue(':id', $article_id, PDO::PARAM_INT);
+        $req2->execute();
+
+        $jf_comments = $req2->fetchAll();
+
+        return $jf_comments;
+
     }
 
     public function findComment($id) //Trouve le commentaire

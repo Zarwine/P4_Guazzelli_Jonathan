@@ -30,7 +30,7 @@ if($_SESSION['auth']->username == NULL){
     <div id="account_view_article" class="container_not_visible">
     <?php foreach($jf_articles as $jf_article): ?>
         <div class="article_content">
-            <a href="<?php echo HOST;?>view/id/<?php echo $jf_article->getId();?>" class="titre_article"><h3><?php echo $jf_article->getName();?></h3></a>
+            <a href="<?php echo HOST;?>view/id/<?php echo $jf_article->getId();?>" class="titre_article"><h3><?php echo htmlspecialchars($jf_article->getName());?></h3></a>
             <div id="<?php echo $jf_article->getId();?>" class="article article_not_visible">
                 <p>id = <?php echo $jf_article->getId();?></p>
                 <?php echo $jf_article->getContent();?>
@@ -79,19 +79,19 @@ if($_SESSION['auth']->username == NULL){
                 <div id="<?php echo $jf_comment->getId();?>" class="comment comment_not_visible">
                     <p>De <?php echo $jf_comment->getAuteur();?></p>
                     <p>Date de création : <?php echo $jf_comment->getCreated_at();?></p>
-                    <p>Contenu du commentaire : <?php echo $jf_comment->getContent();?></p>
+                    <p>Contenu du commentaire : <?php echo htmlspecialchars($jf_comment->getContent());?></p>
                     <br/>
                 </div>
                 <div class="button_container">
-                <?php if ($jf_comment->getAuteur() == $_SESSION['auth']->username): ?> 
+                        <?php if ($jf_comment->getAuteur() == $_SESSION['auth']->username): ?> 
                                 <div class="editer link_jf">
                                     <a href="<?php echo HOST;?>comModif/id/<?php echo $jf_comment->getId();?>">
                                     Éditer
                                     </a>
                                 </div>                                
-                            <?php endif; ?>
+                        <?php endif; ?>
                         <div class="link_jf">
-                            <a href="<?php echo HOST;?>comDelete/id/<?php echo $jf_comment->getId();?>">
+                            <a href="<?php echo HOST;?>comDeleteAd/id/<?php echo $jf_comment->getId();?>">
                             Effacer
                             </a>
                         </div>
@@ -109,18 +109,20 @@ if($_SESSION['auth']->username == NULL){
                         <div id="<?php echo $jf_comment->getId();?>" class="comment comment_not_visible">
                             <p>De <?php echo $jf_comment->getAuteur();?></p>
                             <p>Date de création : <?php echo $jf_comment->getCreated_at();?></p>
-                            <p>Contenu du commentaire : <?php echo $jf_comment->getContent();?></p>
-                            <p class="reported">Ce commentaire a été signalé</p>
+                            <p>Contenu du commentaire : <?php echo htmlspecialchars($jf_comment->getContent());?></p>
+                            <p class="reported">Commentaire signalé</p>
                             <br/>
                         </div>
                         <div class="button_container">
-                                <div class="link_jf">
-                                    <a href="<?php echo HOST;?>modification/id/<?php echo $jf_comment->getId();?>">
+                        <?php if ($jf_comment->getAuteur() == $_SESSION['auth']->username): ?> 
+                                <div class="editer link_jf">
+                                    <a href="<?php echo HOST;?>comModif/id/<?php echo $jf_comment->getId();?>">
                                     Éditer
                                     </a>
-                                </div>
+                                </div>                                
+                        <?php endif; ?>
                                 <div class="link_jf">
-                                    <a href="<?php echo HOST;?>delete/id/<?php echo $jf_comment->getId();?>">
+                                    <a href="<?php echo HOST;?>comDeleteAd/id/<?php echo $jf_comment->getId();?>">
                                     Effacer
                                     </a>
                                 </div>

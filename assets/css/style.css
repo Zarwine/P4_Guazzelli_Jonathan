@@ -208,6 +208,9 @@ h2 {
     margin-top: 0px;
     margin-bottom: 2px;
 }
+.notif :first-child {
+    margin-top: 110 px;
+}
 /* ------------------------------------ écrire un commentaire --------------------------------------*/
 #comment_textarea {
     width: 100%;
