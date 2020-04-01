@@ -3,6 +3,7 @@ if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
 ?>
+
         <div class="article_content">
             <h3><?php echo htmlspecialchars($jf_article->getName());?></h3>
             <?php echo $jf_article->getContent();?>
