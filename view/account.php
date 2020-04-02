@@ -30,7 +30,7 @@ if($_SESSION['auth']->username == NULL){
     <div id="account_view_article" class="container_not_visible">
     <?php foreach($jf_articles as $jf_article): ?>
         <div class="article_content">
-            <a href="<?php echo HOST;?>view/id/<?php echo $jf_article->getId();?>" class="titre_article"><h3><?php echo htmlspecialchars($jf_article->getName());?></h3></a>
+            <a href="<?php echo HOST;?>view/id/<?php echo $jf_article->getId();?>" class="titre_article_admin"><h3><?php echo htmlspecialchars($jf_article->getName());?></h3></a>
             <div id="<?php echo $jf_article->getId();?>" class="article article_not_visible">
                 <p>id = <?php echo $jf_article->getId();?></p>
                 <?php echo $jf_article->getContent();?>
@@ -94,7 +94,7 @@ if($_SESSION['auth']->username == NULL){
                             <a href="<?php echo HOST;?>comDeleteAd/id/<?php echo $jf_comment->getId();?>">
                             Effacer
                             </a>
-                        </div>
+                        </div>                        
                     </div>
             </div>
         <?php endforeach; ?> 
@@ -121,6 +121,11 @@ if($_SESSION['auth']->username == NULL){
                                     </a>
                                 </div>                                
                         <?php endif; ?>
+                                <div class="link_jf">
+                                    <a href="<?php echo HOST;?>comAcquit/id/<?php echo $jf_comment->getId();?>">
+                                    Acquitter
+                                    </a>
+                                </div>
                                 <div class="link_jf">
                                     <a href="<?php echo HOST;?>comDeleteAd/id/<?php echo $jf_comment->getId();?>">
                                     Effacer

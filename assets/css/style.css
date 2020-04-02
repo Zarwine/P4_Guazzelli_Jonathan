@@ -6,6 +6,9 @@ body {
     color: rgb(230,230,230);
     font-family: 'Oxygen', 'sans-serif' ;
 }
+textarea {
+    resize:none;
+}
 /* ________________________________________________________________________________________________________________________________*/
 /* ________________________________________________________________________________________________________________________________*/
 /* _________________________________________________________HEADER_________________________________________________________________*/
@@ -178,6 +181,38 @@ h2 {
 .sidebar ul li {
     list-style: none;
 }
+/* ------------------------------------ Diaporama    --------------------------------------*/
+.btn_container {
+    background-color: rgba(0,10,10,0.8);
+    height: 40px;
+    width: 120px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    margin-bottom: -115px;
+}
+#slider_next, #slider_prev{
+    height: 30px;
+    width: 30px;
+    background-color: rgb(2, 174, 108);
+    cursor: pointer;
+    border-radius: 50%;
+    margin: 5px 10px;
+}
+.titre_livre{
+    background-color: rgba(0,10,10,0.8);
+    text-align: center;
+    padding: 20px;
+}
+.diapo_visible {
+    display: block;
+}
+.diapo_invisible{
+    display: none;
+}
+
 /* ------------------------------------ Article seul --------------------------------------*/
 .com_crud {
     display: flex;
@@ -195,9 +230,10 @@ h2 {
     width: 100%;
     background: none;
 }
-#article_content .titre_article {
+.article_content .titre_article {
+    color: rgb(2, 174, 108);
     text-align: center;
-    font-size: 3em;
+    font-size: 2em;
 }
 /*=================================================================================================================================*/
 /*========================================================FORMULAIRE===============================================================*/
@@ -237,7 +273,7 @@ h2 {
     margin-bottom: 2px;
 }
 .notif :first-child {
-    margin-top: 110 px;
+    margin-top: 110px !important;
 }
 /* ------------------------------------ écrire un commentaire --------------------------------------*/
 #comment_textarea {
@@ -315,7 +351,7 @@ h2 {
 #account_view_article{
     margin: 0 5%;
 }
-#account_view_article .titre_article{
+#account_view_article .titre_article_admin{
     text-decoration: none;
     color: inherit;
 }
@@ -348,7 +384,7 @@ h2 {
     overflow: hidden;
 }
 .article_comment_account {
-   /* width: 30%;*/
+    width: 29%;
     margin: 8px;
     border: 1px solid white;
     padding: 1%;
@@ -471,6 +507,10 @@ h2 {
     .article_content {
         margin: 15px 5%;
     }
+    .article_content .titre_article{
+        padding:0;
+        margin-left:0;
+    }
     .sidebar {
         padding: 0px;
         transform: translateX(-240px);
@@ -482,6 +522,9 @@ h2 {
     }
     .sidebar ul {
         padding-left: 10px;
+    }
+    .btn_container {
+        margin-bottom: -15px;
     }
         
 }

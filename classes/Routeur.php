@@ -32,8 +32,8 @@ class Routeur
                         "comDelete"           => ["controller" => "Comment",   "method" => "delComment"],        
                         "comDeleteAd"         => ["controller" => "Comment",   "method" => "delCommentAdmin"],        
                         "comModif"            => ["controller" => "Comment",   "method" => "modifComment"],        
-                        "com_edit"            => ["controller" => "Comment",   "method" => "editionComment"],
-                        "com_add"             => ["controller" => "Comment",   "method" => "addArticle"],  
+                        "com_edit"            => ["controller" => "Comment",   "method" => "editionComment"], 
+                        "comAcquit"           => ["controller" => "Comment",   "method" => "acquitComment"],  
                         "com_view"            => ["controller" => "Comment",   "method" => "showArticle"],          //Fin Commentaires
 
                       ];

@@ -15,7 +15,7 @@ class Jf_articleManager
     {
         $bdd = $this->bdd;
         
-        $query = "SELECT * FROM jf_article ORDER BY id DESC";
+        $query = "SELECT * FROM jf_article ORDER BY id";
 
         $req = $bdd->prepare($query);
         $req->execute();

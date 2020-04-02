@@ -118,6 +118,17 @@ class Comment
 
         header("Location: https://jogu.fr/forteroche/view/id/".$id_url);
     }
+    public function acquitComment($params)
+    {
+        $id = $params["id"];
+        $manager = new Jf_commentManager();
+        $manager->acquit($id);
+        session_start();
+        $_SESSION['flash']['success'] = 'Le commentaire a bien été aquité';
+
+
+        header("Location: https://jogu.fr/forteroche/account");
+    }
 
 
     public function delComment($params)

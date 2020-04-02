@@ -168,6 +168,19 @@ class Jf_commentManager
         $req->execute();
     }
 
+    public function acquit($id)
+    {
+        $bdd = $this->bdd;      
+      
+        $query = "UPDATE jf_comment SET `reported` = '0' WHERE `jf_comment`.`id` = :id;";
+
+        $req = $bdd->prepare($query);
+
+        $req->bindValue(':id', $id, PDO::PARAM_INT);
+
+        $req->execute();
+    }
+
     public function delete($id)
     {
         $bdd = $this->bdd;
