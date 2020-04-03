@@ -17,7 +17,7 @@ if(session_status() == PHP_SESSION_NONE){
                         Éditer
                         </a>
                     </div>
-                    <div class="link_jf">
+                    <div class="link_jf link_jf_alert">
                         <a href="<?php echo HOST;?>delete/id/<?php echo $jf_article->getId();?>">
                         Effacer
                         </a>
@@ -66,7 +66,7 @@ if(session_status() == PHP_SESSION_NONE){
                             <?php endif; ?>
 
                             <?php if ($_SESSION['auth']->admin == "1" || $jf_comment->getAuteur() == $_SESSION['auth']->username): ?>                      
-                                <div class="link_jf">
+                                <div class="link_jf link_jf_alert">
                                     <a href="<?php echo HOST;?>comDelete/id/<?php echo $jf_comment->getId();?>">
                                     Supprimer ce commentaire
                                     </a>
@@ -74,7 +74,7 @@ if(session_status() == PHP_SESSION_NONE){
                             <?php endif; ?>
 
                             <?php if ($jf_comment->getAuteur() != $_SESSION['auth']->username): ?> 
-                            <div class="signaler link_jf">
+                            <div class="signaler link_jf link_jf_alert">
                                 <a href="<?php echo HOST;?>comReport/id/<?php echo $jf_comment->getId();?>">
                                 Signaler
                                 </a>

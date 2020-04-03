@@ -145,7 +145,7 @@ class Jf_commentManager
     {
         $bdd = $this->bdd; 
       
-        $query = "UPDATE jf_comment SET `content` = :content WHERE `jf_comment`.`id` = :id;";
+        $query = "UPDATE jf_comment SET `content` = :content , `edited_at` = NOW() WHERE `jf_comment`.`id` = :id;";
 
         $req = $bdd->prepare($query);
 

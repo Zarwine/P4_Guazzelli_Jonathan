@@ -177,5 +177,6 @@ if(session_status() == PHP_SESSION_NONE){
  });
 
   </script>
+  <script src="<?php echo ASSETS;?>js/alert.js"></script>
 </body>
 </html>

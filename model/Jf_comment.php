@@ -68,6 +68,12 @@ class Jf_comment
     }
     public function getEdited_at()
     {
+        setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
+        
+        $com_date = ucfirst(strftime("%A %d ", strtotime($this->edited_at)));
+        $com_date .= ucfirst(strftime("%B %Y à %T", strtotime($this->edited_at)));
+        
+        $this->edited_at = $com_date;
         return $this->edited_at;
     }
     public function setEdited_at($edited_at)

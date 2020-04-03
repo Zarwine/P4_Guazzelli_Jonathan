@@ -50,7 +50,7 @@ Ce roman est un cadeau pour vous, la communauté de lecteurs qui s'est constitu�
                     Éditer
                     </a>
                 </div>
-                <div class="link_jf">
+                <div class="link_jf link_jf_alert">
                     <a href="<?php echo HOST;?>delete/id/<?php echo $jf_article->getId();?>">
                     Effacer
                     </a>

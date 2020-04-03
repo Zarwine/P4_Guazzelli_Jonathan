@@ -42,7 +42,7 @@ if($_SESSION['auth']->username == NULL){
                         Éditer
                         </a>
                     </div>
-                    <div class="link_jf">
+                    <div class="link_jf link_jf_alert">
                         <a href="<?php echo HOST;?>delete/id/<?php echo $jf_article->getId();?>">
                         Effacer
                         </a>
@@ -90,7 +90,7 @@ if($_SESSION['auth']->username == NULL){
                                     </a>
                                 </div>                                
                         <?php endif; ?>
-                        <div class="link_jf">
+                        <div class="link_jf link_jf_alert">
                             <a href="<?php echo HOST;?>comDeleteAd/id/<?php echo $jf_comment->getId();?>">
                             Effacer
                             </a>
@@ -121,12 +121,12 @@ if($_SESSION['auth']->username == NULL){
                                     </a>
                                 </div>                                
                         <?php endif; ?>
-                                <div class="link_jf">
+                                <div class="link_jf link_jf_alert">
                                     <a href="<?php echo HOST;?>comAcquit/id/<?php echo $jf_comment->getId();?>">
                                     Acquitter
                                     </a>
                                 </div>
-                                <div class="link_jf">
+                                <div class="link_jf link_jf_alert">
                                     <a href="<?php echo HOST;?>comDeleteAd/id/<?php echo $jf_comment->getId();?>">
                                     Effacer
                                     </a>
@@ -142,7 +142,7 @@ if($_SESSION['auth']->username == NULL){
 <div class="account_gestion">
     <h2>Gestion du compte</h2>
 
-    <form class="jf_form jf_form_article" action="changePassword" method="post">
+    <form class="jf_form jf_form_article link_jf_alert" action="changePassword" method="post">
         <h3>Changement de votre mot de passe</h3>
         <p class="acc_detail">Si vous le souhaitez, vous pouvez changer votre mot de passe.</p>
         <div class="form-group">
