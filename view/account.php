@@ -75,11 +75,16 @@ if($_SESSION['auth']->username == NULL){
     <div id="account_view_comment" class="comment_container container_not_visible">
         <div class="comment_bis">
         <?php foreach($jf_comments as $jf_comment): ?>
+            
             <div class="article_comment_account">
                 <div id="<?php echo $jf_comment->getId();?>" class="comment comment_not_visible">
                     <p>De <?php echo $jf_comment->getAuteur();?></p>
-                    <p>Date de création : <?php echo $jf_comment->getCreated_at();?></p>
-                    <p>Contenu du commentaire : <?php echo htmlspecialchars($jf_comment->getContent());?></p>
+                    <p>Date de création : <?php echo $createdAt = $jf_comment->getCreated_at();?></p>
+                    <?php $editedAt = $jf_comment->getEdited_at();?>
+                    <?php if($editedAt !== "Jeudi 01 Janvier 1970 à 01:00:00") : ?>                                                        
+                            <p>Édité le : <?php echo $editedAt ;?></p>    
+                    <?php endif ?>
+                    <p><?php echo htmlspecialchars($jf_comment->getContent());?></p>
                     <br/>
                 </div>
                 <div class="button_container">
@@ -105,11 +110,20 @@ if($_SESSION['auth']->username == NULL){
         <div class="reported_comment">
             <?php foreach($jf_comments as $jf_comment): ?>
                 <?php if ($jf_comment->getReported() == 1): ?>
+                    
                     <div class="article_comment_account">
                         <div id="<?php echo $jf_comment->getId();?>" class="comment comment_not_visible">
+                        
+                       
                             <p>De <?php echo $jf_comment->getAuteur();?></p>
-                            <p>Date de création : <?php echo $jf_comment->getCreated_at();?></p>
-                            <p>Contenu du commentaire : <?php echo htmlspecialchars($jf_comment->getContent());?></p>
+                            <p>Date de création : <?php echo $createdAt = $jf_comment->getCreated_at();?></p>
+                        
+                            
+                            <?php $editedAt = $jf_comment->getEdited_at() ; ?>
+                            <?php if($editedAt !== "Jeudi 01 Janvier 1970 à 01:00:00") : ?>                                                        
+                                    <p>Édité le : <?php echo $editedAt ;?></p>    
+                            <?php endif ?>
+                            <p><?php echo htmlspecialchars($jf_comment->getContent());?></p>
                             <p class="reported">Commentaire signalé</p>
                             <br/>
                         </div>

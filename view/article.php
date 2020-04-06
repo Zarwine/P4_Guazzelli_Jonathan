@@ -44,10 +44,11 @@ if(session_status() == PHP_SESSION_NONE){
                     <div class="article_content article_comment">
                         <h3><?php echo $jf_comment->getAuteur();?></h3>
                         <p class="com_date">écrit le : <?php echo $jf_comment->getCreated_at();?></p>
-                        
-                            <?php if ($jf_comment->getEdited_at() !== null): ?>
-                                <p class="com_date">édité le : <?php echo $jf_comment->getEdited_at();?></p>
-                            <?php endif; ?>
+
+                        <?php $editedAt = $jf_comment->getEdited_at();?>
+                        <?php if($editedAt !== "Jeudi 01 Janvier 1970 à 01:00:00") : ?>                                                        
+                                <p class="com_date">Édité le : <?php echo $editedAt ;?></p>    
+                        <?php endif ?>                       
                         
 
                         <p><?php echo htmlspecialchars($jf_comment->getContent());?></p>
