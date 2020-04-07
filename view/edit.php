@@ -5,7 +5,7 @@ if($_SESSION['auth']->admin == 0){
 }
 ?>
 <div id="container" class="page_container">
-    <h2>éditer un article</h2>
+    <h2>Éditer un article</h2>
 
     <form class="jf_form" action="<?php echo HOST;?>edition" method="post">
 

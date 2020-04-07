@@ -21,7 +21,7 @@ if(session_status() == PHP_SESSION_NONE){
 <div class="btn_container">
         <div id="slider_prev"><img class="icon-burger" src="<?php echo ASSETS;?>img/arrow-circle-left-solid.svg"></div>
         <div id="slider_next"><img class="icon-burger" src="<?php echo ASSETS;?>img/arrow-circle-right-solid.svg"></div>
-    </div>
+</div>
 <div class="titre_livre article_content diapo_visible">
     <h1>Billet simple pour l'Alaska</h1>
     <p>À l'heure du tout connecté et de l'omniprésence des réseaux sociaux, nous (Jean Forteroche et les personnes concernées par le projet) avons décidé de transposer le nouveau récit de Jean Forteroche en ligne, sous la forme de chapitres périodiques et interactifs, afin d'établir une communication bilatérale qu'empêche le support papier.
@@ -61,5 +61,9 @@ Ce roman est un cadeau pour vous, la communauté de lecteurs qui s'est constitu�
         </div>
     <?php endforeach; ?>
     
+</div>
+<div class="btn_container btn_container_bottom">
+        <a href="#" id="slider_prev_bottom"><img class="icon-burger" src="<?php echo ASSETS;?>img/arrow-circle-left-solid.svg"></a>
+        <a href="#" id="slider_next_bottom"><img class="icon-burger" src="<?php echo ASSETS;?>img/arrow-circle-right-solid.svg"></a>
 </div>
 <script src="<?php echo ASSETS;?>js/diaporama.js"></script>

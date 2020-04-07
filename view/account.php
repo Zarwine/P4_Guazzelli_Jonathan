@@ -1,176 +1,174 @@
 <?php session_start();
-if($_SESSION['auth']->username == NULL){
+if ($_SESSION['auth']->username == NULL) {
     $_SESSION['alert']['danger'] = "Il faut vous connecter";
     header('Location: login');
 }
 ?>
 <div class="page_container">
-<div class="account_header">
-<h1>Bonjour <?= $_SESSION['auth']->username; ?></h1>
-<h3>Bienvenue dans votre espace membre</h3>
-</div>
-<?php if ($_SESSION['auth']->admin == 1): ?>
-
-    <div class="account_crud">
-        <h3>Agir sur les articles</h3>
-        <ul>
-            <li class="link_jf">
-                <a href="<?php echo HOST;?>create">
-                    Ajouter un article
-                </a>
-            </li>
-            <li class="link_jf">
-                <a class="view_account">
-                    Voir les articles existants
-                </a>
-            </li>
-        </ul>
+    <div class="account_header">
+        <h1>Bonjour <?= $_SESSION['auth']->username; ?></h1>
+        <h3>Bienvenue dans votre espace membre</h3>
     </div>
+    <?php if ($_SESSION['auth']->admin == 1) : ?>
 
-    <div id="account_view_article" class="container_not_visible">
-    <?php foreach($jf_articles as $jf_article): ?>
-        <div class="article_content">
-            <a href="<?php echo HOST;?>view/id/<?php echo $jf_article->getId();?>" class="titre_article_admin"><h3><?php echo htmlspecialchars($jf_article->getName());?></h3></a>
-            <div id="<?php echo $jf_article->getId();?>" class="article article_not_visible">
-                <p>id = <?php echo $jf_article->getId();?></p>
-                <?php echo $jf_article->getContent();?>
-                <br/>
-            </div>
-            <div class="button_container">
-                    <div class="link_jf">
-                        <a href="<?php echo HOST;?>modification/id/<?php echo $jf_article->getId();?>">
-                        Éditer
-                        </a>
+        <div class="account_crud">
+            <h3>Agir sur les articles</h3>
+            <ul>
+                <li class="link_jf">
+                    <a href="<?php echo HOST; ?>create">
+                        Ajouter un article
+                    </a>
+                </li>
+                <li class="link_jf">
+                    <a class="view_account">
+                        Voir les articles existants
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="account_view_article" class="container_not_visible">
+            <?php foreach ($jf_articles as $jf_article) : ?>
+                <div class="article_content">
+                    <a href="<?php echo HOST; ?>view/id/<?php echo $jf_article->getId(); ?>" class="titre_article_admin">
+                        <h3><?php echo htmlspecialchars($jf_article->getName()); ?></h3>
+                    </a>
+                    <div id="<?php echo $jf_article->getId(); ?>" class="article article_not_visible">
+                        <p>id = <?php echo $jf_article->getId(); ?></p>
+                        <?php echo $jf_article->getContent(); ?>
+                        <br />
                     </div>
-                    <div class="link_jf link_jf_alert">
-                        <a href="<?php echo HOST;?>delete/id/<?php echo $jf_article->getId();?>">
-                        Effacer
-                        </a>
+                    <div class="button_container">
+                        <div class="link_jf">
+                            <a href="<?php echo HOST; ?>modification/id/<?php echo $jf_article->getId(); ?>">
+                                Éditer
+                            </a>
+                        </div>
+                        <div class="link_jf link_jf_alert">
+                            <a href="<?php echo HOST; ?>delete/id/<?php echo $jf_article->getId(); ?>">
+                                Effacer
+                            </a>
+                        </div>
                     </div>
                 </div>
+            <?php endforeach; ?>
         </div>
-    <?php endforeach; ?>
-    </div>
-<?php endif; ?>
+    <?php endif; ?>
 
 
-<?php if ($_SESSION['auth']->admin == 1): ?>
-    <div class="account_crud">
-        <h3>Agir sur les commentaires</h3>
-        <ul>
-            <li class="link_jf">
-                <a class="view_comment">
-                    Voir tous les commentaires
-                </a>
-            </li>
-            <li class="link_jf">
-                <a class="view_comment_reported">
-                    Voir les commentaires signalés
-                </a>
-            </li>
-        </ul>
-    </div>
-<?php endif; ?>
+    <?php if ($_SESSION['auth']->admin == 1) : ?>
+        <div class="account_crud">
+            <h3>Agir sur les commentaires</h3>
+            <ul>
+                <li class="link_jf">
+                    <a class="view_comment">
+                        Voir tous les commentaires
+                    </a>
+                </li>
+                <li class="link_jf">
+                    <a class="view_comment_reported">
+                        Voir les commentaires signalés
+                    </a>
+                </li>
+            </ul>
+        </div>
+    <?php endif; ?>
 
     <div id="account_view_comment" class="comment_container container_not_visible">
         <div class="comment_bis">
-        <?php foreach($jf_comments as $jf_comment): ?>
-            
-            <div class="article_comment_account">
-                <div id="<?php echo $jf_comment->getId();?>" class="comment comment_not_visible">
-                    <p>De <?php echo $jf_comment->getAuteur();?></p>
-                    <p>Date de création : <?php echo $createdAt = $jf_comment->getCreated_at();?></p>
-                    <?php $editedAt = $jf_comment->getEdited_at();?>
-                    <?php if($editedAt !== "Jeudi 01 Janvier 1970 à 01:00:00") : ?>                                                        
-                            <p>Édité le : <?php echo $editedAt ;?></p>    
-                    <?php endif ?>
-                    <p><?php echo htmlspecialchars($jf_comment->getContent());?></p>
-                    <br/>
-                </div>
-                <div class="button_container">
-                        <?php if ($jf_comment->getAuteur() == $_SESSION['auth']->username): ?> 
-                                <div class="editer link_jf">
-                                    <a href="<?php echo HOST;?>comModif/id/<?php echo $jf_comment->getId();?>">
+            <?php foreach ($jf_comments as $jf_comment) : ?>
+
+                <div class="article_comment_account">
+                    <div id="<?php echo $jf_comment->getId(); ?>" class="comment comment_not_visible">
+                        <p>De <?php echo $jf_comment->getAuteur(); ?></p>
+                        <p class="com_date">Écrit le : <?php echo dateFormat($jf_comment->getCreated_at()); ?></p>
+
+                        <?php if ($jf_comment->getEdited_at() !== NULL) : ?>
+                            <p class="com_date">Édité le : <?php echo dateFormat($jf_comment->getEdited_at()); ?></p>
+                        <?php endif ?>
+                        <p><?php echo htmlspecialchars($jf_comment->getContent()); ?></p>
+                        <br />
+                    </div>
+                    <div class="button_container">
+                        <?php if ($jf_comment->getAuteur() == $_SESSION['auth']->username) : ?>
+                            <div class="editer link_jf">
+                                <a href="<?php echo HOST; ?>comModif/id/<?php echo $jf_comment->getId(); ?>">
                                     Éditer
-                                    </a>
-                                </div>                                
+                                </a>
+                            </div>
                         <?php endif; ?>
                         <div class="link_jf link_jf_alert">
-                            <a href="<?php echo HOST;?>comDeleteAd/id/<?php echo $jf_comment->getId();?>">
-                            Effacer
+                            <a href="<?php echo HOST; ?>comDeleteAd/id/<?php echo $jf_comment->getId(); ?>">
+                                Effacer
                             </a>
-                        </div>                        
+                        </div>
                     </div>
-            </div>
-        <?php endforeach; ?> 
+                </div>
+            <?php endforeach; ?>
 
         </div>
     </div>
     <div id="account_view_comment_reported" class="comment_container container_not_visible">
         <div class="reported_comment">
-            <?php foreach($jf_comments as $jf_comment): ?>
-                <?php if ($jf_comment->getReported() == 1): ?>
-                    
+            <?php foreach ($jf_comments as $jf_comment) : ?>
+                <?php if ($jf_comment->getReported() == 1) : ?>
+
                     <div class="article_comment_account">
-                        <div id="<?php echo $jf_comment->getId();?>" class="comment comment_not_visible">
-                        
-                       
-                            <p>De <?php echo $jf_comment->getAuteur();?></p>
-                            <p>Date de création : <?php echo $createdAt = $jf_comment->getCreated_at();?></p>
-                        
-                            
-                            <?php $editedAt = $jf_comment->getEdited_at() ; ?>
-                            <?php if($editedAt !== "Jeudi 01 Janvier 1970 à 01:00:00") : ?>                                                        
-                                    <p>Édité le : <?php echo $editedAt ;?></p>    
+                        <div id="<?php echo $jf_comment->getId(); ?>" class="comment comment_not_visible">
+                            <p>De <?php echo $jf_comment->getAuteur(); ?></p>
+                            <p class="com_date">Écrit le : <?php echo dateFormat($jf_comment->getCreated_at()); ?></p>
+
+                            <?php if ($jf_comment->getEdited_at() !== NULL) : ?>
+                                <p class="com_date">Édité le : <?php echo dateFormat($jf_comment->getEdited_at()); ?></p>
                             <?php endif ?>
-                            <p><?php echo htmlspecialchars($jf_comment->getContent());?></p>
+                            <p><?php echo htmlspecialchars($jf_comment->getContent()); ?></p>
                             <p class="reported">Commentaire signalé</p>
-                            <br/>
+                            <br />
                         </div>
                         <div class="button_container">
-                        <?php if ($jf_comment->getAuteur() == $_SESSION['auth']->username): ?> 
+                            <?php if ($jf_comment->getAuteur() == $_SESSION['auth']->username) : ?>
                                 <div class="editer link_jf">
-                                    <a href="<?php echo HOST;?>comModif/id/<?php echo $jf_comment->getId();?>">
-                                    Éditer
+                                    <a href="<?php echo HOST; ?>comModif/id/<?php echo $jf_comment->getId(); ?>">
+                                        Éditer
                                     </a>
-                                </div>                                
-                        <?php endif; ?>
-                                <div class="link_jf link_jf_alert">
-                                    <a href="<?php echo HOST;?>comAcquit/id/<?php echo $jf_comment->getId();?>">
+                                </div>
+                            <?php endif; ?>
+                            <div class="link_jf link_jf_alert">
+                                <a href="<?php echo HOST; ?>comAcquit/id/<?php echo $jf_comment->getId(); ?>">
                                     Acquitter
-                                    </a>
-                                </div>
-                                <div class="link_jf link_jf_alert">
-                                    <a href="<?php echo HOST;?>comDeleteAd/id/<?php echo $jf_comment->getId();?>">
+                                </a>
+                            </div>
+                            <div class="link_jf link_jf_alert">
+                                <a href="<?php echo HOST; ?>comDeleteAd/id/<?php echo $jf_comment->getId(); ?>">
                                     Effacer
-                                    </a>
-                                </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                <?php endif; ?> 
-            <?php endforeach; ?> 
+                <?php endif; ?>
+            <?php endforeach; ?>
         </div>
     </div>
 
 
-<div class="account_gestion">
-    <h2>Gestion du compte</h2>
+    <div class="account_gestion">
+        <h2>Gestion du compte</h2>
 
-    <form class="jf_form jf_form_article link_jf_alert" action="changePassword" method="post">
-        <h3>Changement de votre mot de passe</h3>
-        <p class="acc_detail">Si vous le souhaitez, vous pouvez changer votre mot de passe.</p>
-        <div class="form-group">
-            <input class="form-control" type="password" name="password" placeholder="Changer de mot de passe" />
-        </div>
-        <div class="form-group">
-            <input class="form-control" type="password" name="password_confirm" placeholder="Confirmation du mot de passe" />
-        </div>
-        <button class="button_jf">Changer de mot de passe</button>
-    </form>
-</div>
+        <form class="jf_form jf_form_article link_jf_alert" action="changePassword" method="post">
+            <h3>Changement de votre mot de passe</h3>
+            <p class="acc_detail">Si vous le souhaitez, vous pouvez changer votre mot de passe.</p>
+            <div class="form-group">
+                <input class="form-control" type="password" name="password" placeholder="Changer de mot de passe" />
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="password_confirm" placeholder="Confirmation du mot de passe" />
+            </div>
+            <button class="button_jf">Changer de mot de passe</button>
+        </form>
+    </div>
 
-<?php if ($_SESSION['auth']->admin == 1): ?>
-<script src="<?php echo ASSETS;?>js/account.js"></script>
-<?php endif; ?>
+    <?php if ($_SESSION['auth']->admin == 1) : ?>
+        <script src="<?php echo ASSETS; ?>js/account.js"></script>
+    <?php endif; ?>
 
 </div>

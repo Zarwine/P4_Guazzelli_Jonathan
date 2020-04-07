@@ -115,6 +115,9 @@ if(session_status() == PHP_SESSION_NONE){
 <?php echo $contentPage; ?>
 </div>
 <footer>
+    <div class="btn_up">
+        <a id="cRetour" href="#"><img class="icon-btn_up" src="<?php echo ASSETS;?>img/arrow-circle-up-solid.svg"></a>
+    </div>
 </footer>
 <script>
     tinymce.init({

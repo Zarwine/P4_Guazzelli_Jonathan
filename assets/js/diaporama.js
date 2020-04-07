@@ -1,9 +1,11 @@
 class Diaporama {
-    constructor(chapitre, slider_prev, slider_next) {
+    constructor(chapitre, slider_prev, slider_next, slider_prev_bottom, slider_next_bottom) {
 
         this.chapitre = document.getElementsByClassName(chapitre);
         this.sliderPrev = document.getElementById(slider_prev);
         this.sliderNext = document.getElementById(slider_next);
+        this.sliderPrev_bottom = document.getElementById(slider_prev_bottom);
+        this.sliderNext_bottom = document.getElementById(slider_next_bottom);
         this.index = 0
         let chapitresDiapo = this.chapitre
         let bvn_text = document.getElementsByClassName("bienvenue")[0]
@@ -15,17 +17,29 @@ class Diaporama {
                 this.bvn_text.classList.replace("bienvenue","invisible")
             }
 
-        }
-        );
+        });
         this.sliderPrev.addEventListener('click', e => {
             this.slidePrev(chapitresDiapo)
             if (this.bvn_text.classList.contains("bienvenue")) {
                 this.bvn_text.classList.replace("bienvenue","invisible")
             }
 
+        });
 
-        }
-        );
+        this.sliderNext_bottom.addEventListener('click', e => {
+            this.slideNext(chapitresDiapo)
+            if (this.bvn_text.classList.contains("bienvenue")) {
+                this.bvn_text.classList.replace("bienvenue","invisible")
+            }
+
+        });
+        this.sliderPrev_bottom.addEventListener('click', e => {
+            this.slidePrev(chapitresDiapo)
+            if (this.bvn_text.classList.contains("bienvenue")) {
+                this.bvn_text.classList.replace("bienvenue","invisible")
+            }
+
+        });
 
     }
 
@@ -71,4 +85,4 @@ class Diaporama {
         }
     }
 }
-let diaporama = new Diaporama('article_content', 'slider_prev', 'slider_next');
+let diaporama = new Diaporama('article_content', 'slider_prev', 'slider_next', 'slider_prev_bottom', 'slider_next_bottom');

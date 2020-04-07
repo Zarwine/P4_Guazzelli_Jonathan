@@ -19,13 +19,13 @@ class Home
         $jf_article = $art_manager->find($id);
 
         $comment_manager = new Jf_commentManager();
-        $jf_comments = $comment_manager->findForOneArticle($jf_article->getId());
+        $jf_comments = $comment_manager->findForOneArticle($jf_article->getId());  
 
         $myView = new View('article');
         if($jf_comments == NULL){
             $myView->render(array('jf_article' => $jf_article));
         }else {
-            $myView->render(array(
+            $myView->render(array(            
             'jf_article' => $jf_article,
             'jf_comments' => $jf_comments,
         ));

@@ -2,6 +2,7 @@
 if(session_status() == PHP_SESSION_NONE){
     session_start();
 }
+ 
 ?>
 
         <div class="article_content">
@@ -43,11 +44,10 @@ if(session_status() == PHP_SESSION_NONE){
                 <?php foreach($jf_comments as $jf_comment): ?>
                     <div class="article_content article_comment">
                         <h3><?php echo $jf_comment->getAuteur();?></h3>
-                        <p class="com_date">écrit le : <?php echo $jf_comment->getCreated_at();?></p>
+                        <p class="com_date">Écrit le : <?php echo dateFormat($jf_comment->getCreated_at());?></p>
 
-                        <?php $editedAt = $jf_comment->getEdited_at();?>
-                        <?php if($editedAt !== "Jeudi 01 Janvier 1970 à 01:00:00") : ?>                                                        
-                                <p class="com_date">Édité le : <?php echo $editedAt ;?></p>    
+                        <?php if($jf_comment->getEdited_at() !== NULL): ?>                                                        
+                                <p class="com_date">Édité le : <?php echo dateFormat($jf_comment->getEdited_at());?></p>    
                         <?php endif ?>                       
                         
 

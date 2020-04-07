@@ -10,18 +10,20 @@ class View
         $this->template = $template;
     }
 
-    public function render($params = array())
+    public function render($params = array()) //ajoute le contenu de la page à la variable $contentPage
     {   
         extract($params);
 
-
         $template = $this->template;
-
+        include_once (CLASSES.'DateFormat.php');
         ob_start();
+
         include (VIEW.$template.'.php');
         $contentPage = ob_get_clean();
         
         include_once (VIEW.'_gabarit.php');
+        
+        
     
     }
 
@@ -30,5 +32,4 @@ class View
         header("Location: ".HOST.$route);
         exit;
     }
-
 }

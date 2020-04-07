@@ -1,5 +1,5 @@
 <?php
-
+// Permet de resynchroniser les informations des articles
 
 class Jf_article
 {

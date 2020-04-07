@@ -9,6 +9,9 @@ body {
 textarea {
     resize:none;
 }
+html {
+    scroll-behavior: smooth;
+  }
 /* ________________________________________________________________________________________________________________________________*/
 /* ________________________________________________________________________________________________________________________________*/
 /* _________________________________________________________HEADER_________________________________________________________________*/
@@ -43,6 +46,8 @@ header .menu-burger-main{
 }
 header h1 {
     text-shadow: 2px 2px 2px black;
+    font-size: 2em;
+    margin-top: 10px;
 }
 .link_jf a::after, .button_jf::after{
     height: 3px;
@@ -84,6 +89,9 @@ h2 {
     margin: 250px auto 200px auto;
     text-align: center;
     font-size: 4em;
+}
+.article_container {
+    margin-top: 80px;
 }
 .article_content{
     padding: 20px 5%;
@@ -207,7 +215,23 @@ h2 {
     border-top-right-radius: 20px;
     margin-bottom: -115px;
 }
+.btn_container_bottom {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    margin-top: -115px;
+}
 #slider_next, #slider_prev{
+    height: 30px;
+    width: 30px;
+    background-color: rgb(2, 174, 108);
+    cursor: pointer;
+    border-radius: 50%;
+    margin: 5px 10px;
+    box-shadow: 1px 1px 5px black;
+}
+#slider_next_bottom, #slider_prev_bottom{
     height: 30px;
     width: 30px;
     background-color: rgb(2, 174, 108);
@@ -226,6 +250,9 @@ h2 {
     box-shadow: 5px 5px 10px 0px black;
 }
 .diapo_invisible{
+    display: none;
+}
+.invisible {
     display: none;
 }
 
@@ -250,6 +277,16 @@ h2 {
     color: rgb(2, 174, 108);
     text-align: center;
     font-size: 2em;
+}
+/* ------------------------------------ Footer        --------------------------------------*/
+.btn_up {
+    position: fixed;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: rgb(230,230,230);
+    right: 10px;
+    bottom: 10px;
 }
 /*=================================================================================================================================*/
 /*========================================================FORMULAIRE===============================================================*/
@@ -459,6 +496,9 @@ h2 {
 /* ________________________________________________________________________________________________________________________________*/
 /* ________________________________________________________________________________________________________________________________*/
 @media screen and (max-width: 768px) {
+    .article_container {
+        margin-top:80px;
+    }
     .article_content {
         margin: 115px 5%;
     }
@@ -492,7 +532,7 @@ h2 {
         list-style: none;
     }
     header .menu-burger li{
-        background-color: rgb(230,230,230);
+        background-color: rgba(0,0,0,0.8)
     }
     header .menu-toggle {
         display: block;
@@ -506,6 +546,22 @@ h2 {
     }
     .article_comment {
         margin: 0;
+        width: auto;
+    }
+    /* ------------------------------------Création d'article       -----------------------------*/
+    #container .jf_form {
+        padding: 0;
+    }
+    /* ------------------------------------Formulaire Account Admin -----------------------------*/
+    #account_view_article .article_content {
+        width: 100%;
+    }
+    .article_comment_account {
+        width: 100%
+    }
+    .page_container {
+        margin: 0;
+        margin-top: 80px;
     }
 }
 @media screen and (max-width: 425px) {
@@ -521,7 +577,8 @@ h2 {
         margin-right: -100px;
     }
     .article_content {
-        margin: 15px 5%;
+        margin: 0;
+        margin-top: 80px;
     }
     .article_content .titre_article{
         padding:0;
@@ -540,7 +597,25 @@ h2 {
         padding-left: 10px;
     }
     .btn_container {
-        margin-bottom: -15px;
+        margin-bottom: -80px;
+    }
+    .btn_container_bottom {
+        margin-top: -80px;
+    }
+    #comment_textarea {
+        width: auto;
+    }
+    /* ------------------------------------Formulaire Register -----------------------------*/
+    .jf_form .form-group {
+        padding-left: 0;
+    }
+    .jf_form label {
+        width: 100%;
+        margin-left: 0px;
+        margin-bottom: 5px;
+    }
+    .jf_form .button_jf{
+        margin-left: 0;
     }
         
 }

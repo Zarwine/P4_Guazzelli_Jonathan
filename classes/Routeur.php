@@ -72,14 +72,12 @@ class Routeur
         return $params;
     }
 
+
     public function renderController()
     {
 
-        $route = $this->getRoute();
-        $params = $this->getParams(); 
-        // -> methode getAction() prend l'element[1] qui vérifi s'il y a une action à faire dans le but de configurer le routeur autrement genre home/create 
-        // ou bien encore comment/modif/id
-        // revoir le routeur.
+        $route = $this->getRoute();    //Explose l'url et récupère le premier élément
+        $params = $this->getParams();  //Récupère l'élement après $route pour le passer en paramettre 
 
         if(key_exists($route, $this->routes))
         {
