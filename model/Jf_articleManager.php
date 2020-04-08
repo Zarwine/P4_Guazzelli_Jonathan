@@ -4,13 +4,10 @@ require_once (MODEL.'Jf_article.php');
 
 class Jf_articleManager
 {
-
     private $bdd;
-    //private $article;
-
+    
     public function __construct()
     {
-        $this->article = new Jf_article();
         $this->bdd = new PDO("mysql:host=jogufrdkog533.mysql.db:3306;dbname=jogufrdkog533;charset=utf8", "jogufrdkog533", "MaBDD550");
     }
 

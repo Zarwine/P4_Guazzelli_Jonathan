@@ -154,7 +154,7 @@ if ($_SESSION['auth']->username == NULL) {
     <div class="account_gestion">
         <h2>Gestion du compte</h2>
 
-        <form class="jf_form jf_form_article link_jf_alert" action="changePassword" method="post">
+        <form class="jf_form jf_form_article" action="changePassword" method="post">
             <h3>Changement de votre mot de passe</h3>
             <p class="acc_detail">Si vous le souhaitez, vous pouvez changer votre mot de passe.</p>
             <div class="form-group">
@@ -163,7 +163,7 @@ if ($_SESSION['auth']->username == NULL) {
             <div class="form-group">
                 <input class="form-control" type="password" name="password_confirm" placeholder="Confirmation du mot de passe" />
             </div>
-            <button class="button_jf">Changer de mot de passe</button>
+            <button class="button_jf link_jf_alert">Changer de mot de passe</button>
         </form>
     </div>
 
