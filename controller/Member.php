@@ -2,7 +2,7 @@
 require_once(MODEL . 'Jf_userManager.php');
 class Member
 {
-    public function showRegister($params)
+    public function showRegister($params) //Register,Login,Forget == simple redirection
     {
 
         $myView = new View('register');
@@ -20,7 +20,7 @@ class Member
         $myView = new View('forget');
         $myView->render();
     }
-    public function showAccount($params)
+    public function showAccount($params) //prépare les informations de compte, rendu visible sous condition dans la vue
     {
 
         $manager = new Jf_articleManager();
@@ -38,7 +38,7 @@ class Member
 
     }
 
-    public function registerConfirm($params)
+    public function registerConfirm($params) //Etape après mail de confirmation lors de l'inscription
     {
 
         $userManager = new Jf_userManager();
@@ -54,7 +54,7 @@ class Member
         }
     }
 
-    public function verifAll()  //vérifications sur le formulaire d'incription
+    public function verifAll()  //vérifications sur le formulaire d'incription regex ^[a-zA-Z0-9_]+$
     {
 
         session_start();
@@ -101,37 +101,37 @@ class Member
             exit();
         }
     }
-    public function login()
+    public function login() 
     {
 
         if (!empty($_POST) && !empty($_POST['username']) && !empty($_POST['password'])) {
 
-            sleep(1);
+            sleep(1); //empèche le spam, impose 1 seconde de pause
             session_start();
-            $ip = $_SERVER['REMOTE_ADDR'];
+            $ip = $_SERVER['REMOTE_ADDR']; //récupère l'ip de l'utilisateur
             $userData = $_POST;
             $userManager = new Jf_userManager();
-            $user = $userManager->login($userData);
-            $count = $userManager->loginFailCount($ip);
+            $user = $userManager->login($userData); //vérifie que l'utilisateur existe dans la bdd
+            $count = $userManager->loginFailCount($ip); //Compte le nombre d'essaie de connection 
 
             if ($user !== false) {
-                if ($count >= 10) {
+                if ($count >= 10) { //sécurité Bruteforce
                     $_SESSION['flash']['danger'] = 'Nombre de tentatives autorisées dépassé, vous êtes banni pour une heure';
                     header('Location: login');
                     exit();
-                } else if (password_verify($userData['password'], $user->password)) {
+                } else if (password_verify($userData['password'], $user->password)) { //success
                     $_SESSION['auth'] = $user;
                     $_SESSION['flash']['success'] = 'Vous êtes maintenant connecté';
                     header('Location: account');
                     exit();
-                } else {
+                } else { 
 
-                    $userManager->loginFail($ip);
+                    $userManager->loginFail($ip); // cas échec , ajoute +1 au compteur bruteforce
                     $_SESSION['flash']['danger'] = 'Identifiant ou mot de passe incorrecte';
                     header('Location: login');
                     exit();
                 }
-            } else {
+            } else { // nom d'utilisateur n'existe pas, on ne le signal volontairement pas a l'utilisateur.
                 $_SESSION['flash']['danger'] = 'Identifiant ou mot de passe incorrecte';
                 header('Location: login');
                 exit();
@@ -146,13 +146,13 @@ class Member
 
         if (!empty($_POST) && !empty($_POST['email'])) {
             $userData = $_POST;
-            $userData = str_replace(array("\n", "\r", PHP_EOL), '', $userData);
+            $userData = str_replace(array("\n", "\r", PHP_EOL), '', $userData); //Empèche la faille CRLF
             $userManager = new Jf_userManager();
             $user = $userManager->forgetPassword($userData);
 
             if ($user !== false) {
                 session_start();
-                $reset_token = $this->str_random(60);
+                $reset_token = $this->str_random(60);//genère un token aleaoitre de 60 caractères
                 $userManager->updateToken($user, $reset_token);
 
                 $_SESSION['flash']['success'] = 'Les instructions du rappel de mot de passe vous ont été envoyées par email';

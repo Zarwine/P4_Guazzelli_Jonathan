@@ -1,8 +1,8 @@
 <?php
-
+//Gère tout ce qu'il se passe en homepage mais aussi les articles
 class Home 
 {
-    public function showHome($params)
+    public function showHome($params) //HomePage avec tout les articles
     {
 
         $manager = new Jf_articleManager();
@@ -12,7 +12,7 @@ class Home
         $myView->render(array('jf_articles' => $jf_articles));
         
     }
-    public function showArticle($params)
+    public function showArticle($params) //Article seul avec com
     {   
         extract($params);
         $art_manager = new Jf_articleManager();
@@ -33,7 +33,7 @@ class Home
         
     }
 
-    public function createArticle($params) //Permet de créer ou éditer un article
+    public function createArticle($params) //Créer ou éditer un article
     {        
 
         if(isset($params)){
@@ -57,7 +57,7 @@ class Home
         
     }
 
-    public function editionArticle($params)
+    public function editionArticle($params) //edition article en bdd
     {
 
         $values = $_POST['values'];
@@ -73,7 +73,7 @@ class Home
     }
 
 
-    public function addArticle($params)
+    public function addArticle($params) //ajout d'article en bdd
     {
 
         $values = $_POST['values'];
@@ -89,7 +89,7 @@ class Home
         $myView->redirect('home');
     }
 
-    public function delArticle($params)
+    public function delArticle($params) //suppression d'article en bdd
     {
         extract($params);
 

@@ -1,7 +1,7 @@
 <?php
 
 
-class Jf_commentManager
+class Jf_commentManager //Traite toute la partie Commentaire du site
 {
     private $bdd;
     
@@ -10,7 +10,7 @@ class Jf_commentManager
         $this->bdd = new PDO("mysql:host=jogufrdkog533.mysql.db:3306;dbname=jogufrdkog533;charset=utf8", "jogufrdkog533", "MaBDD550");
     }
 
-    public function findAll() //Trouve tous les comment pour le menu d'admin
+    public function findAll() //Trouve tous les com pour le menu d'admin
     {
         $bdd = $this->bdd;
         
@@ -34,7 +34,7 @@ class Jf_commentManager
 
         return $jf_comments;
     }
-    public function findForOneArticle($article_id)  //Trouve tous les comment pour un article défini
+    public function findForOneArticle($article_id)  //Trouve tous les com pour un article défini
     {
         $bdd = $this->bdd;  
         $query = "SELECT * FROM jf_comment WHERE article_id = :id ORDER BY id DESC";
@@ -58,11 +58,9 @@ class Jf_commentManager
         $jf_comments[] = $jf_comment;
 
         }
-        //var_dump($jf_comments);
         if(isset($jf_comments)) { 
         return $jf_comments;
         }
-        //exit();
     }
 
     public function find($article_id) //Trouve quel commenaitre correspond a quel article
@@ -102,7 +100,7 @@ class Jf_commentManager
 
     }
 
-    public function findComment($id) //Trouve le commentaire
+    public function findComment($id) //Trouve le commentaire seul
     {
         $bdd = $this->bdd;        
         $query = "SELECT * FROM jf_comment WHERE id = :id";
@@ -167,7 +165,7 @@ class Jf_commentManager
         $req->execute();
     }
 
-    public function acquit($id)
+    public function acquit($id) //Remet la valeur de "reported" à 0 pour supprimer le signalement d'un com
     {
         $bdd = $this->bdd;      
       

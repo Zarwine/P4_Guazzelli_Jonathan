@@ -1,8 +1,8 @@
 <?php
-//require_once "jf_article.php";
+
 require_once (MODEL.'Jf_article.php');
 
-class Jf_articleManager
+class Jf_articleManager //Traite toute la partie BDD des articles du site
 {
     private $bdd;
     
@@ -11,7 +11,7 @@ class Jf_articleManager
         $this->bdd = new PDO("mysql:host=jogufrdkog533.mysql.db:3306;dbname=jogufrdkog533;charset=utf8", "jogufrdkog533", "MaBDD550");
     }
 
-    public function findAll()
+    public function findAll() //Trouve tous les articles
     {
         $bdd = $this->bdd;
         
@@ -27,20 +27,14 @@ class Jf_articleManager
             $jf_article->setContent($row['content']);
             $jf_article->setCreated_at($row['created_at']);
 
-            
-            //$this->article->setId($row['id']);
-            //$this->article->setName($row['name']);
-            //$this->article->setContent($row['content']);
-            //$this->article->setCreated_at($row['created_at']);
-//
             $jf_articles[] = $jf_article;
-            //$jf_articles[] = $this->article;
+
         };
 
         return $jf_articles;
     }
 
-    public function find($id)
+    public function find($id) //Trouve un article choisi
     {
         $bdd = $this->bdd;      
         

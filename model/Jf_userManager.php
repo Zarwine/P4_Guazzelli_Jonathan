@@ -1,6 +1,6 @@
 <?php
 
-class Jf_userManager extends Database
+class Jf_userManager extends Database //Traite toute la partie utilisateur du site.
 {
 
     public function verifName($userData) {
@@ -22,7 +22,7 @@ class Jf_userManager extends Database
 
     }
     
-    public function addMember($userData){
+    public function addMember($userData){ //Ajoute l'utilisateur a la BDD et attend confirmation mail
         $req = $this->bdd->prepare("INSERT INTO jf_users SET username = ?, password = ?, email = ?, confirmation_token = ?");
         $password = password_hash($userData['password'], PASSWORD_BCRYPT);
 
@@ -42,7 +42,7 @@ class Jf_userManager extends Database
         exit();
     }
 
-    public function verifToken($params){
+    public function verifToken($params){ //vérifie token mail = token de BDD
 
         $user_id = $params["id"];
         $token = $params["token"];
@@ -73,8 +73,6 @@ class Jf_userManager extends Database
         $req = $this->bdd->prepare('SELECT * FROM jf_users WHERE (username = :username OR email = :username) AND confirmed_at IS NOT NULL');
         $req->execute(['username' => $userData['username']]);
         $user = $req->fetch();
-
-        //var_dump($user); -> à tester pour savoir la valeur de admin si c'est un int ou string
 
         return $user;
     }
@@ -111,7 +109,7 @@ class Jf_userManager extends Database
 
     }
 
-    public function resetPassword($params){        
+    public function resetPassword($params){      //génère un nouveau MDP pour l'accés au compte utilisateur  
 
         $user_verif_id = $params['id'];
         $user_verif_reset_token = $params['token'];
@@ -164,27 +162,5 @@ class Jf_userManager extends Database
             
             $req = $this->bdd->prepare('UPDATE jf_users SET password = ? WHERE id = ?');
             $req->execute([$password, $user_id]);
-    }
-    
-    public function reconnect_from_cookie(){
-
-        $remember_token = $_COOKIE['remember'];
-        $parts = explode('==', $remember_token);
-        $user_id = $parts[0];
-        $req = $this->bdd->prepare('SELECT * FROM users WHERE id = ?');
-        $req->execute([$user_id]);
-        $user = $req->fetch();
-        if($user){
-            $excepted = $user_id . '==' . $user->remember_token . sha1($user_id . 'clefarbitraire');
-            if($excepted == $remember_token){
-                session_start();
-                $_SESSION['auth'] = $user;
-                setcookie('remember', $remember_token, time() + 60 * 60 * 24 * 7);
-            }else{
-                setcookie('remember', null, -1);
-            }
-        }else{
-            setcookie('remember', null, -1);
-        }
     }
 }

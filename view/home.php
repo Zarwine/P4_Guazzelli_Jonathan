@@ -13,14 +13,16 @@ if(session_status() == PHP_SESSION_NONE){
     <br/>
     <ul>
         <?php foreach($jf_articles as $jf_article): ?>
-                <a href="<?php echo HOST;?>view/id/<?php echo $jf_article->getId();?>" class="titre_article"><li><?php echo htmlspecialchars($jf_article->getName());?></li></a>
+            <li>
+                <a href="<?php echo HOST;?>view/id/<?php echo $jf_article->getId();?>" class="titre_article"><?php echo htmlspecialchars($jf_article->getName());?></a>
                 <br/>
+            </li>
         <?php endforeach; ?>
     </ul>
 </div>
 <div class="btn_container">
-        <div id="slider_prev"><img class="icon-burger" src="<?php echo ASSETS;?>img/arrow-circle-left-solid.svg"></div>
-        <div id="slider_next"><img class="icon-burger" src="<?php echo ASSETS;?>img/arrow-circle-right-solid.svg"></div>
+        <div id="slider_prev"><img class="icon-burger" src="<?php echo ASSETS;?>img/arrow-circle-left-solid.svg" alt="fleche precedente"></div>
+        <div id="slider_next"><img class="icon-burger" src="<?php echo ASSETS;?>img/arrow-circle-right-solid.svg" alt="fleche suivante"></div>
 </div>
 <div class="titre_livre article_content diapo_visible">
     <h1>Billet simple pour l'Alaska</h1>
@@ -63,7 +65,7 @@ Ce roman est un cadeau pour vous, la communaut√© de lecteurs qui s'est constitu√
     
 </div>
 <div class="btn_container btn_container_bottom">
-        <a href="#" id="slider_prev_bottom"><img class="icon-burger" src="<?php echo ASSETS;?>img/arrow-circle-left-solid.svg"></a>
-        <a href="#" id="slider_next_bottom"><img class="icon-burger" src="<?php echo ASSETS;?>img/arrow-circle-right-solid.svg"></a>
+        <a href="#" id="slider_prev_bottom"><img class="icon-burger" src="<?php echo ASSETS;?>img/arrow-circle-left-solid.svg" alt="fleche precedente"></a>
+        <a href="#" id="slider_next_bottom"><img class="icon-burger" src="<?php echo ASSETS;?>img/arrow-circle-right-solid.svg" alt="fleche suivante"></a>
 </div>
 <script src="<?php echo ASSETS;?>js/diaporama.js"></script>

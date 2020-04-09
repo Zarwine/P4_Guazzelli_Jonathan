@@ -2,17 +2,8 @@
 
 class Comment
 {
-    public function showHome($params)
-    {
 
-        $manager = new Jf_commentManager();
-        $jf_comments = $manager->findAll();        
-
-        $myView = new View('home');
-        $myView->render(array('jf_comments' => $jf_comments));
-        
-    }
-    public function showArticle($params)
+    public function showArticle($params) //Montre 1 article avec ses com
     {   
         extract($params);
         $manager = new Jf_commentManager();
@@ -20,7 +11,8 @@ class Comment
         $myView = new View('article');
         $myView->render(array('jf_comment' => $jf_comment));
     }
-    public function createComment($params)
+
+    public function createComment($params) //Ajoute le com en BDD, redirige là où se trouvait l'utilisateur
     {    
         session_start() ;
         $manager = new Jf_commentManager();
@@ -46,17 +38,8 @@ class Comment
         }  
         
     }
-    
-    public function addComment($params)
-    {
-        $values = $_POST['values'];
-        $manager = new Jf_commentManager();
 
-        $myView = new View();
-        $myView->redirect('home');
-    }
-
-    public function modifComment($params) //Récupère les informations et redirige l'utilisateur vers la page d'édition d'article
+    public function modifComment($params) //Récupère les informations, redirige l'utilisateur vers la page d'édition d'article
     {
         if(isset($params)){
             extract($params);
@@ -86,7 +69,7 @@ class Comment
         
     }
 
-    public function editionComment($params)
+    public function editionComment($params) //édit le com dans la BDD, redirige l'utilisateur vers l'article correspondant au commentaire
     {
         $values = $_POST['values'];
 
@@ -103,7 +86,7 @@ class Comment
         header("Location: https://jogu.fr/forteroche/view/id/".$id);
     }
     
-    public function reportComment($params)
+    public function reportComment($params) //change la valeur de "reported" en bdd == 1 et redirige l'utilisateur vers la page ou il se trouvait
     {
         $id = $params["id"];
         $manager = new Jf_commentManager();
@@ -118,7 +101,7 @@ class Comment
 
         header("Location: https://jogu.fr/forteroche/view/id/".$id_url);
     }
-    public function acquitComment($params)
+    public function acquitComment($params) //change la valeur de "reported" en bdd == 0
     {
         $id = $params["id"];
         $manager = new Jf_commentManager();
@@ -131,7 +114,7 @@ class Comment
     }
 
 
-    public function delComment($params)
+    public function delComment($params) //supprime le com en bdd, redirige utilisateur là ou il se trouvait
     {
         extract($params);
 
@@ -149,7 +132,7 @@ class Comment
         header("Location: https://jogu.fr/forteroche/view/id/".$id_url);
     }
 
-    public function delCommentAdmin($params)
+    public function delCommentAdmin($params) //supprime le com en bdd, redirige panneau admin
     {
         extract($params);
 

@@ -43,13 +43,13 @@ class Routeur
         $this->request = $request;
     }
 
-    public function getRoute()
+    public function getRoute() //défini une route en selection le 1er parametre d'url
     {
         $elements = explode('/', $this->request);
         return $elements[0];
     }
 
-    public function getParams()
+    public function getParams() //recupère les parametres suivants la route pour les redirections d'article défini par exemple
     {        
         $params = null;
 

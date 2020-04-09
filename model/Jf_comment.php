@@ -38,23 +38,7 @@ class Jf_comment
     } 
     public function getCreated_at() 
     {
-        if(!preg_match('/^\d/', $this->created_at)){  //Traduit la date en FR si celle ci n'a pas déja été traduite en FR.
-
-        setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
-        
-        $com_date = ucfirst(strftime("%A %d ", strtotime($this->created_at)));
-        $com_date .= ucfirst(strftime("%B %Y à %T", strtotime($this->created_at)));
-        
-        $this->created_at = $com_date;
-       
-        return $this->created_at;
-        } else if ($this->created_at == "Jeudi 01 Janvier 1970 à 01:00:00"){  //Verifie que la date ne comprenne pas d'erreurs
-            $this->created_at = NULL;
             return $this->created_at;
-        } else {
-            return $this->created_at;
-        }
-
     }
     public function setCreated_at($created_at)
     {
@@ -78,22 +62,9 @@ class Jf_comment
     }
     public function getEdited_at()
     {
-        //if(!preg_match('/^\d/', $this->edited_at)){  //Traduit la date en FR si celle ci n'a pas déja été traduite en FR.
-        // setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
-        // 
-        // $com_date = ucfirst(strftime("%A %d ", strtotime($this->edited_at)));
-        // $com_date .= ucfirst(strftime("%B %Y à %T", strtotime($this->edited_at)));
-        // 
-        // $this->edited_at = $com_date;
-        //
-        // return $this->edited_at;
-        // } else if ($this->edited_at == "Jeudi 01 Janvier 1970 à 01:00:00"){ //Verifie que la date ne comprenne pas d'erreurs
-        //     $this->edited_at = NULL;
-        //     return $this->edited_at;
-        // } else 
-        // {
-                return $this->edited_at;
-           // }
+
+        return $this->edited_at;
+
     }
     public function setEdited_at($edited_at)
     {
