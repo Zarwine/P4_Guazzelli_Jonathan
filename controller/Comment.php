@@ -62,6 +62,7 @@ class Comment
         
 
         } else {
+            $_SESSION['flash']['danger'] = "Une erreur est survenue";
             $jf_comment = new Jf_article();
             $myView = new View('home');
             $myView->render(array('jf_comment' => $jf_comment));
@@ -107,7 +108,7 @@ class Comment
         $manager = new Jf_commentManager();
         $manager->acquit($id);
         session_start();
-        $_SESSION['flash']['success'] = 'Le commentaire a bien été aquité';
+        $_SESSION['flash']['success'] = 'Le commentaire a bien été acquitté';
 
 
         header("Location: https://jogu.fr/forteroche/account");
