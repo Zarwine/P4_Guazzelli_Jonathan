@@ -45,7 +45,7 @@ class Member
 
         $validation = $userManager->verifToken($params);
 
-        if ($validation === true) {
+        if ($validation == true) {
             $_SESSION['flash']['success'] = 'Votre compte a bien été validé';
             header('Location: https://jogu.fr/forteroche/home');
         } else {

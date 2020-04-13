@@ -51,20 +51,22 @@ class Jf_userManager extends Database //Traite toute la partie utilisateur du si
 
         $req->execute([$user_id]);
 
-        $user = $req->fetch();
+        $user = $req->fetch();        
                 
         session_start(); 
 
-        if($user && $user->confirmation_token == $token) {
+        if($user->confirmation_token !== $token) {
+
+            return $validation = false;
+
+
+        } else {
+
                 
             $this->bdd->prepare('UPDATE jf_users SET confirmation_token = NULL, confirmed_at = NOW() WHERE id =?')->execute([$user_id]);
             $_SESSION['auth'] = $user;
 
             return $validation = true;
-
-        } else {
-            
-            return $validation = false;
         }
     }
 

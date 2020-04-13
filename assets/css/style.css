@@ -602,7 +602,7 @@ h2 {
         margin-bottom: -80px;
     }
     .btn_container_bottom {
-        margin-top: -80px;
+        margin-top: 0px;
     }
     #comment_textarea {
         width: auto;
