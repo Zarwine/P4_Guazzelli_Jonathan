@@ -8,7 +8,7 @@ class Jf_articleManager //Traite toute la partie BDD des articles du site
     
     public function __construct()
     {
-        $this->bdd = new PDO("mysql:host=jogufrdkog533.mysql.db:3306;dbname=jogufrdkog533;charset=utf8", "jogufrdkog533", "MaBDD550");
+        $this->bdd = new PDO("mysql:host=jogufrdkog533.mysql.db:3306;dbname=" . BDDNAMEJOGU . ";charset=utf8", BDDNAMEJOGU, BDDPWDJOGU);
     }
 
     public function findAll() //Trouve tous les articles
@@ -39,7 +39,7 @@ class Jf_articleManager //Traite toute la partie BDD des articles du site
         $bdd = $this->bdd;      
         
         $query = "SELECT * FROM jf_article WHERE id = :id";
-        $bdd = new PDO("mysql:host=jogufrdkog533.mysql.db:3306;dbname=jogufrdkog533;charset=utf8", "jogufrdkog533", "MaBDD550");
+        $bdd = new PDO("mysql:host=jogufrdkog533.mysql.db:3306;dbname=" . BDDNAMEJOGU . ";charset=utf8", BDDNAMEJOGU, BDDPWDJOGU);
         $req = $bdd->prepare($query);
         $req->bindValue(':id', $id, PDO::PARAM_INT);
         $req->execute();
