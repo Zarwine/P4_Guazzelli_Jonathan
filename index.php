@@ -1,4 +1,5 @@
 <?php 
+include_once('DBinfo.php');
 include_once('_config.php');
 
 MyAutoLoad::start();

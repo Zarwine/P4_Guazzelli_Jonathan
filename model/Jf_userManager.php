@@ -55,9 +55,10 @@ class Jf_userManager extends Database //Traite toute la partie utilisateur du si
                 
         session_start(); 
 
-        if($user->confirmation_token !== $token) {
+        if($user->confirmation_token != $token) {
 
             return $validation = false;
+            exit();
 
 
         } else {
